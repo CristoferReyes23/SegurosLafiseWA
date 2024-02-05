@@ -6,7 +6,7 @@ import {
 } from "react-router-dom";
 import { CreatePolicy } from "@modules/Policy/pages";
 import { QuotePage } from "@modules/Quote/pages";
-import Dashboard from "@modules/Dashboard/views";
+import { Dashboard } from "@modules/Dashboard/views";
 import Unauthorized from "@/views/Unauthorized";
 import { RootLayout } from "@/components/layouts";
 import ProtectedLayout from "@/components/layouts/ProtectedLayout";
