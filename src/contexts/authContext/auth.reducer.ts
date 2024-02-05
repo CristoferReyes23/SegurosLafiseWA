@@ -13,6 +13,18 @@ export function authReducer(
         isLogged: true,
       };
 
+    case "logout":
+      return {
+        isLogged: false,
+        tokenBackend: "",
+        tokenLafise: "",
+        userName: "",
+      };
+    case "load":
+      return {
+        ...action.payload,
+      };
+
     default:
       return state;
   }

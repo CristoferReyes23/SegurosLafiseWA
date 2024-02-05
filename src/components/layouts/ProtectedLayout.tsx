@@ -1,13 +1,12 @@
+import { useAuthStateContext } from "@/contexts/authContext/auth.context";
 import { Navigate, Outlet } from "react-router-dom";
 
 const ProtectedLayout = () => {
-  const session = { isLogged: false };
+  const { isLogged } = useAuthStateContext();
 
-  return session.isLogged ? (
-    <Outlet />
-  ) : (
-    <Navigate to={"unauthorized"} replace />
-  );
+  console.log("isLogged", isLogged);
+
+  return isLogged ? <Outlet /> : <Navigate to={"unauthorized"} replace />;
 };
 
 export default ProtectedLayout;

@@ -1,4 +1,4 @@
-import useAuthentication from "@/hooks/useAuthentication";
+import { useAuthentication } from "@/hooks/useAuthentication";
 import { Navigate } from "react-router-dom";
 
 const RootLayout = () => {

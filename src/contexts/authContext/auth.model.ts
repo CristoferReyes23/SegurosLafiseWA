@@ -6,7 +6,7 @@ export interface AuthContextModel {
 }
 
 export const initialModelValues: AuthContextModel = {
-  isLogged: true,
+  isLogged: false,
   userName: "",
   tokenBackend: "",
   tokenLafise: "",

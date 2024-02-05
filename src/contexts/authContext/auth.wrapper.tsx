@@ -1,3 +1,4 @@
+import { AuthSessionService } from "@/services/AuthSession.service";
 import {
   AuthDispatchContext,
   AuthenticationModelContext,
@@ -7,9 +8,10 @@ import { authReducer } from "./auth.reducer";
 import { useReducer } from "react";
 
 const AuthWrapper = ({ children }: any) => {
-  const [state, dispatch] = useReducer(authReducer, {
-    ...initialModelValues,
-  });
+  const [state, dispatch] = useReducer(
+    authReducer,
+    AuthSessionService.getSession() ?? { ...initialModelValues }
+  );
 
   return (
     <AuthenticationModelContext.Provider value={state}>

@@ -1,11 +1,11 @@
-import AuthWrapper from "@/hooks/authContext/auth.wrapper";
+import AuthWrapper from "@/contexts/authContext/auth.wrapper";
 import router from "@/routes/routes";
 import { RouterProvider } from "react-router-dom";
 
 function App() {
   return (
     <AuthWrapper>
-      <RouterProvider router={router} />;
+      <RouterProvider router={router} />
     </AuthWrapper>
   );
 }
