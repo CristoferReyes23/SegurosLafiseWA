@@ -1,6 +1,5 @@
-import { AuthApi } from "@/apis/auth.api";
-import { useAuthDispatchContext } from "@/contexts/authContext/auth.context";
-import { AuthSessionService } from "@/services/AuthSession.service";
+import { AuthApi } from "@/shared/apis/auth.api";
+import { AuthSessionService } from "../services/AuthSession.service";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 
@@ -8,7 +7,6 @@ export const useAuthentication = () => {
   const [isFetching, setIsFetching] = useState(true);
   const [isLogged, setIsLogged] = useState(false);
   const [searchParams] = useSearchParams();
-  const dispatch = useAuthDispatchContext();
 
   useEffect(() => {
     const a = searchParams.get("a");
@@ -29,19 +27,13 @@ export const useAuthentication = () => {
       .then((resp) => {
         const isAuthenticated = resp.isValid % 2 == 0;
 
-        if (isAuthenticated) {
-          dispatch({
-            type: "login",
-            payload: { tokenBackend: "", tokenLafise: "" },
+        if (isAuthenticated)
+          AuthSessionService.saveSession({
+            isLogged: isAuthenticated,
+            tokenBackend: "",
+            tokenLafise: "",
+            userName: "",
           });
-        }
-
-        AuthSessionService.saveSession({
-          isLogged: isAuthenticated,
-          tokenBackend: "",
-          tokenLafise: "",
-          userName: "",
-        });
         setIsLogged(isAuthenticated);
       })
       .finally(() => setIsFetching(false));

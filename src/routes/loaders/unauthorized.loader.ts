@@ -1,4 +1,4 @@
-import { AuthSessionService } from "@/services/AuthSession.service";
+import { AuthSessionService } from "@/modules/Authentication/services/AuthSession.service";
 import { redirect } from "react-router-dom";
 
 export function unauthorizedLoader() {

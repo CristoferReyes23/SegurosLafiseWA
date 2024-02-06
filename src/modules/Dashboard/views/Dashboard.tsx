@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-const index = () => {
+const Dashboard = () => {
   return (
     <div>
       <h2>Dashboard</h2>
@@ -15,4 +15,4 @@ const index = () => {
   );
 };
 
-export default index;
+export default Dashboard;
