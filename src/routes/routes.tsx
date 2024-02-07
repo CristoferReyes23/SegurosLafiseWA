@@ -7,7 +7,7 @@ import {
 import { protectedLayoutLoader, unauthorizedLoader } from "@/routes/loaders";
 
 import Unauthorized from "@/views/Unauthorized";
-import ProtectedLayout from "@/views/ProtectedLayout";
+import ProtectedLayout from "@/views/ProtectedLayout/ProtectedLayout";
 import RootView from "modules/Root/views/RootView";
 import { Dashboard } from "modules/Dashboard/views";
 import { CreatePolicy } from "modules/Policy/pages";
