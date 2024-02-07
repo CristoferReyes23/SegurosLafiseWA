@@ -1,4 +1,4 @@
-import { AuthSessionModel } from "../models/AuthSession.model";
+import { AuthSessionModel } from "@/shared/models/AuthSession.model";
 
 export class AuthSessionService {
   static saveSession(user: AuthSessionModel) {

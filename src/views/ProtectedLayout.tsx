@@ -1,11 +1,7 @@
-import { AuthSessionService } from "@/modules/Authentication/services/AuthSession.service";
-import { Navigate, Outlet } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 
 const ProtectedLayout = () => {
-  const session = AuthSessionService.getSession();
-
-  if (!session || !session.isLogged)
-    return <Navigate to={"unauthorized"} replace />;
+  console.log("paint here");
 
   return <Outlet />;
 };

@@ -1,7 +1,10 @@
-import { AuthSessionService } from "@/modules/Authentication/services/AuthSession.service";
+import { AuthSessionService } from "@/shared/services/AuthSession.service";
 import { redirect } from "react-router-dom";
 
 export async function protectedLayoutLoader() {
+  console.log("pasa algo aqui");
+
+  ("protected layout is running");
   const session = AuthSessionService.getSession();
   if (!session || !session.isLogged) return redirect("unauthorized");
 

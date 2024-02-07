@@ -4,14 +4,14 @@ import {
   createBrowserRouter,
   createRoutesFromElements,
 } from "react-router-dom";
-import { CreatePolicy } from "@modules/Policy/pages";
-import { QuotePage } from "@modules/Quote/pages";
-import { Dashboard } from "@modules/Dashboard/views";
+import { protectedLayoutLoader, unauthorizedLoader } from "@/routes/loaders";
+
 import Unauthorized from "@/views/Unauthorized";
-import { unauthorizedLoader } from "@/routes/loaders/unauthorized.loader";
-import RootView from "@modules/Authentication/views/RootView";
 import ProtectedLayout from "@/views/ProtectedLayout";
-import { protectedLayoutLoader } from "@/routes/loaders/protectedLayout.loader";
+import RootView from "modules/Root/views/RootView";
+import { Dashboard } from "modules/Dashboard/views";
+import { CreatePolicy } from "modules/Policy/pages";
+import { QuotePage } from "modules/Quote/pages";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
