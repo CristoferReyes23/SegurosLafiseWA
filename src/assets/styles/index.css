@@ -1,13 +1,9 @@
 :root {
-  --bs-blue: rgb(42, 106, 170);
+  --bs-blue: #10369a;
 }
 
 body {
   font-family: Arial, Helvetica, sans-serif;
-}
-
-.navbar {
-  box-shadow: 0 1px 2px 0 #0000001a;
 }
 
 .bg-blue {
