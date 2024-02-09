@@ -1,5 +1,1 @@
-import { useEffect } from "react";
-
-export const useCreatePolicy = () => {
-  useEffect(() => {}, []);
-};
+export const useCreatePolicy = () => {};

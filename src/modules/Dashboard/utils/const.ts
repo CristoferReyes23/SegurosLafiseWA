@@ -3,7 +3,7 @@ export const cardValues = [
     title: "Cotizar",
     image:
       "https://images.pexels.com/photos/170811/pexels-photo-170811.jpeg?cs=srgb&dl=pexels-mike-bird-170811.jpg&fm=jpg",
-    to: "/quote",
+    to: "/quote/create",
     titleButton: "Cotizar",
   },
   {

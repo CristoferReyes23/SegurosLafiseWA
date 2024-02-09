@@ -22,18 +22,19 @@ const ProtectedLayout = () => {
         </Navbar>
 
         <main className="main-container">
-          <div className="px-4">
+          <div className="px-4 py-4">
             <Outlet />
           </div>
         </main>
-        <section className="sidebar bg-blue">
-          <Card className="card">
+
+        <section className="sidebar bg-blue d-none d-md-block">
+          <Card className="card w-auto">
             <Card.Body>
               <Card.Title>Servicio solicitado </Card.Title>
               <Card.Img
                 className="my-4"
                 src={getImageURL("lafiseSponsor.png")}
-                width={100}
+                style={{ width: "300px" }}
               ></Card.Img>
             </Card.Body>
           </Card>

@@ -11,7 +11,7 @@ import ProtectedLayout from "@/views/ProtectedLayout/ProtectedLayout";
 import RootView from "modules/Root/views/RootView";
 import { Dashboard } from "modules/Dashboard/views";
 import { CreatePolicy } from "modules/Policy/pages";
-import { QuotePage } from "modules/Quote/pages";
+import CreateQuote from "modules/Quote/views/Create/CreateQuote";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -21,7 +21,7 @@ const router = createBrowserRouter(
       <Route element={<ProtectedLayout />} loader={protectedLayoutLoader}>
         <Route path="dashboard" element={<Dashboard />} />
         <Route path="policy" element={<CreatePolicy />} />
-        <Route path="quote" element={<QuotePage />} />
+        <Route path="quote/create" element={<CreateQuote />} />
       </Route>
 
       <Route
