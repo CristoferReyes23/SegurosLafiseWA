@@ -1,5 +1,5 @@
 import FormCard from "@/shared/components/FormCard";
-import FormSelectApi from "@/shared/components/FormSelectApi";
+import FormSelectApi from "@/modules/Quote/components/FormSelectApi";
 import Col from "react-bootstrap/esm/Col";
 import FloatingLabel from "react-bootstrap/esm/FloatingLabel";
 import Form from "react-bootstrap/esm/Form";

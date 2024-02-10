@@ -7,8 +7,6 @@ import Card from "react-bootstrap/esm/Card";
 import { getImageURL } from "@/shared/utils/getImageUrl";
 
 const ProtectedLayout = () => {
-  console.log(import.meta.env.VITE_SOME_KEY);
-
   return (
     <>
       <div className="main-wrapper">

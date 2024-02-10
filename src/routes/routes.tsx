@@ -16,7 +16,7 @@ import CreateQuote from "modules/Quote/views/Create/CreateQuote";
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
-      <Route id="root" path="/" element={<RootView />} />
+      <Route id="root" index element={<RootView />} />
 
       <Route element={<ProtectedLayout />} loader={protectedLayoutLoader}>
         <Route path="dashboard" element={<Dashboard />} />
