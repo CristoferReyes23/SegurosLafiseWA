@@ -11,7 +11,7 @@ const CreateQuote = () => {
       <FormCard title={"Obtener planes"}>
         <Row>
           <Col>
-            <FloatingLabel controlId="floatingSelect" label="Marca">
+            <FloatingLabel controlId="floatingSelect" label="Planes">
               <FormSelectApi
                 size="sm"
                 style={{ paddingLeft: ".75rem" }}
