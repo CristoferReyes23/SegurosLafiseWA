@@ -1,4 +1,5 @@
 import FormCard from "@/shared/components/FormCard";
+import FormSelectApi from "@/shared/components/FormSelectApi";
 import Col from "react-bootstrap/esm/Col";
 import FloatingLabel from "react-bootstrap/esm/FloatingLabel";
 import Form from "react-bootstrap/esm/Form";
@@ -11,15 +12,12 @@ const CreateQuote = () => {
         <Row>
           <Col>
             <FloatingLabel controlId="floatingSelect" label="Marca">
-              <Form.Select size="sm" style={{ paddingLeft: ".75rem" }}>
-                <option>Seleccione una opción</option>
-                <option value={477}>
-                  SEGURO OBLIGATORIO DE AUTOMOVIL (SOA)
-                </option>
-                <option value={477}>
-                  SEGURO OBLIGATORIO DE AUTOMOVIL (SOA)
-                </option>
-              </Form.Select>
+              <FormSelectApi
+                size="sm"
+                style={{ paddingLeft: ".75rem" }}
+                to="LAFISE"
+                urlPath="catalogs/plans"
+              />
             </FloatingLabel>
           </Col>
 
