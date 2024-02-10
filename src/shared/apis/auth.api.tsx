@@ -2,11 +2,13 @@ export class AuthApi {
   static ValidateQueryParams(
     _a: string,
     _b: string
-  ): Promise<{ isValid: number }> {
+  ): Promise<{ isValid: boolean }> {
+    console.log(import.meta.env.VITE_API_LAFISE_SERVICE);
+
     return new Promise((res) => {
-      setTimeout(() => {
-        res({ isValid: Math.floor(Math.random() * 10) });
-      }, 3000);
+      res({
+        isValid: true,
+      });
     });
   }
 }
