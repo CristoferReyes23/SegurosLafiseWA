@@ -6,15 +6,13 @@ import { getImageURL } from "@/shared/utils/getImageUrl";
 interface Props {
   title: string;
   children: any;
+  classNames?: string;
 }
 
-const FormCard = ({ children, title }: Props) => {
+const FormCard = ({ children, title, classNames }: Props) => {
   return (
-    <Card className="w-auto rounded-0 m-0">
-      <Stack
-        direction="horizontal"
-        className="mt-3 mb-3 align-content-center mb-2 "
-      >
+    <Card className={`w-auto rounded-0 m-0 ${classNames}`}>
+      <Stack direction="horizontal" className="mt-3 align-content-center mb-2 ">
         <Image
           src={getImageURL("profile.svg")}
           className="icon-image"
