@@ -3,7 +3,7 @@ import {
   TypeStep,
   generateInitialValues,
 } from "@/shared/utils/multiStepFormUtils";
-import { FormikProps, FormikValues } from "formik";
+import { FormikValues } from "formik";
 import { useState } from "react";
 
 const CreatePolicyHelper = () => {
@@ -13,8 +13,6 @@ const CreatePolicyHelper = () => {
   const [stepNumber, setStepNumber] = useState(0);
 
   const goNext = () => {
-    console.log("this si it");
-
     setCurrentIndex((pre) => pre + 1);
 
     setStepNumber((pre) => {
@@ -24,17 +22,6 @@ const CreatePolicyHelper = () => {
 
   const goBack = () => setCurrentIndex((pre) => pre - 1);
   const onClickTab = (index: number) => setCurrentIndex(index);
-
-  const renderCurrentStep = (form: FormikProps<FormikValues>) => {
-    const step = steps[currentIndex];
-    const commonProps = {
-      name: step.name,
-      form,
-    };
-
-    const StepComponent = step.component;
-    return <StepComponent {...commonProps} />;
-  };
 
   const handleSubmit = (values: FormikValues) => {
     console.log("submit from formik", values);
@@ -49,7 +36,6 @@ const CreatePolicyHelper = () => {
     currentIndex,
     handleSubmit,
     initialValues,
-    renderCurrentStep,
   };
 };
 

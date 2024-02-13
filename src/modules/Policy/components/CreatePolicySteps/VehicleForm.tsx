@@ -1,14 +1,12 @@
+import GroupInputForm from "@/shared/components/Forms/GroupInputForm";
+import { GroupSelectForm } from "@/shared/components/Forms/GroupSelectForm";
 import FormCard from "@/shared/components/FormCard";
-import { getInputProps } from "@/shared/utils/formikFields";
 import { FormikProps, FormikValues } from "formik/dist/types";
 import Col from "react-bootstrap/esm/Col";
-import FloatingLabel from "react-bootstrap/esm/FloatingLabel";
-import FormControl from "react-bootstrap/esm/FormControl";
-import FormGroup from "react-bootstrap/esm/FormGroup";
-import FormLabel from "react-bootstrap/esm/FormLabel";
-import FormSelect from "react-bootstrap/esm/FormSelect";
 import Row from "react-bootstrap/esm/Row";
 import Stack from "react-bootstrap/esm/Stack";
+import BrandSelect from "@/modules/Policy/components/BrandSelect";
+import ModelSelect from "@/modules/Policy/components/ModelSelect";
 
 interface Props {
   form: FormikProps<FormikValues>;
@@ -21,23 +19,11 @@ const VehicleForm = ({ form }: Props) => {
         <FormCard title="Modelo del vehículo">
           <Row>
             <Col>
-              <FloatingLabel label="Marca">
-                <FormSelect {...getInputProps("brandId", form)}>
-                  <option value="">Seleccione</option>
-                  <option value="2">Test 1</option>
-                  <option value="3">Text 2</option>
-                </FormSelect>
-              </FloatingLabel>
+              <BrandSelect form={form} name={"marcaId"} />
             </Col>
 
             <Col>
-              <FloatingLabel label="Modelo">
-                <FormSelect>
-                  <option value="">Seleccione</option>
-                  <option value="2">Test 1</option>
-                  <option value="3">Text 2</option>
-                </FormSelect>
-              </FloatingLabel>
+              <ModelSelect form={form} name="modeloId" />
             </Col>
           </Row>
         </FormCard>
@@ -45,51 +31,62 @@ const VehicleForm = ({ form }: Props) => {
         <FormCard title="Datos del vehículo">
           <Row>
             <Col>
-              <FormGroup className="mb-3">
-                <FormLabel>Número de placa</FormLabel>
-                <FormControl required />
-              </FormGroup>
+              <GroupInputForm
+                form={form}
+                label="Número de placa"
+                name="placa"
+              />
             </Col>
             <Col>
-              <FormGroup className="mb-3">
-                <FormLabel>Número de motor</FormLabel>
-                <FormControl required />
-              </FormGroup>
+              <GroupInputForm
+                form={form}
+                label="Número de motor"
+                name="motor"
+              />
             </Col>
             <Col>
-              <FormGroup className="mb-3">
-                <FormLabel>Número de chasis</FormLabel>
-                <FormControl required />
-              </FormGroup>
+              <GroupInputForm
+                form={form}
+                label="Número de chasis"
+                name="chasis"
+              />
             </Col>
           </Row>
           <Row>
             <Col>
-              <FormGroup className="mb-3">
-                <FormLabel>Color</FormLabel>
-                <FormControl required />
-              </FormGroup>
+              <GroupInputForm form={form} label="Color" name="color" />
             </Col>
 
             <Col>
-              <FormGroup className="mb-3">
-                <FormLabel>Número de puertas</FormLabel>
-                <FormControl
-                  required
-                  type="numeric"
-                  pattern="^[0-9]*[.,]?[0-9]*$"
-                />
-              </FormGroup>
+              <GroupInputForm
+                form={form}
+                label="Número de puertas"
+                name="puertas"
+                type="number"
+              />
             </Col>
+
             <Col>
-              <FormGroup className="mb-3">
-                <FormLabel>Año vehículo</FormLabel>
-                <FormSelect>
-                  <option>Seleccione</option>
-                  <option value={2024}>2024</option>
-                  <option value={2023}>2023</option>
-                </FormSelect>
-              </FormGroup>
+              <GroupSelectForm
+                dataSource={[
+                  { title: "Seleccione", value: "" },
+                  { title: "2024", value: "2024" },
+                  { title: "2023", value: "2023" },
+                ]}
+                label={"Año vehículo"}
+                form={form}
+                name={"anio"}
+              />
+            </Col>
+          </Row>
+          <Row>
+            <Col xs={4}>
+              <GroupInputForm
+                type="number"
+                form={form}
+                label="Precio vehículo nuevo"
+                name="valorNuevo"
+              />
             </Col>
           </Row>
         </FormCard>

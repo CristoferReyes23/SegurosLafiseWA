@@ -1,8 +1,11 @@
+import ClientForm from "@/modules/Policy/components/CreatePolicySteps/ClientForm";
+import VehicleForm from "@/modules/Policy/components/CreatePolicySteps/VehicleForm";
 import CreatePolicyHelper from "@/modules/Policy/views/CreatePolicy/CreatePolicy.helper";
 import NavigationButtons from "@/shared/components/Forms/NavigationButtons/NavigationButtons";
 import TabWizard from "@/shared/components/Forms/TabWizard/TabWizard";
 import { getStepSchema } from "@/shared/utils/multiStepFormUtils";
 import { Formik } from "formik";
+import { useMemo } from "react";
 
 const CreatePolicy = () => {
   const {
@@ -14,8 +17,9 @@ const CreatePolicy = () => {
     currentIndex,
     handleSubmit,
     initialValues,
-    renderCurrentStep,
   } = CreatePolicyHelper();
+
+  const pages = useMemo(() => [VehicleForm, ClientForm], []);
 
   return (
     <div>
@@ -24,6 +28,7 @@ const CreatePolicy = () => {
         onSubmit={handleSubmit}
         validationSchema={getStepSchema(currentIndex, steps)}
         validateOnMount
+        enableReinitialize={true}
       >
         {(form) => {
           return (
@@ -32,10 +37,17 @@ const CreatePolicy = () => {
                 stepNumber={stepNumber}
                 currentPage={currentIndex}
                 onClick={onClickTab}
-                tabs={["Cotizar", "Datos del vehículo", "Datos Personales"]}
+                tabs={["Datos del vehículo", "Datos Personales"]}
               />
 
-              {renderCurrentStep(form)}
+              {pages.map((Component, index) => (
+                <section
+                  key={index}
+                  className={`${index != currentIndex && "d-none"}`}
+                >
+                  <Component form={form} />
+                </section>
+              ))}
 
               <NavigationButtons
                 pageLength={3}

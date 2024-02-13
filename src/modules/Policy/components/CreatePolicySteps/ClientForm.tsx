@@ -1,4 +1,5 @@
 import FormCard from "@/shared/components/FormCard";
+import { FormikProps, FormikValues } from "formik";
 import Col from "react-bootstrap/esm/Col";
 import FormControl from "react-bootstrap/esm/FormControl";
 import FormGroup from "react-bootstrap/esm/FormGroup";
@@ -6,7 +7,11 @@ import FormLabel from "react-bootstrap/esm/FormLabel";
 import FormSelect from "react-bootstrap/esm/FormSelect";
 import Row from "react-bootstrap/esm/Row";
 
-const ClientForm = () => {
+interface Props {
+  form: FormikProps<FormikValues>;
+}
+
+const ClientForm = ({ form }: Props) => {
   return (
     <div>
       <FormCard title="Datos del cliente">

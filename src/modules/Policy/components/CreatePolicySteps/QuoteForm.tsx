@@ -1,6 +1,7 @@
 import FormCard from "@/shared/components/FormCard";
 import { getInputProps } from "@/shared/utils/formikFields";
 import { FormikProps, FormikValues } from "formik";
+import { memo, useEffect } from "react";
 import Button from "react-bootstrap/esm/Button";
 import Col from "react-bootstrap/esm/Col";
 import Form from "react-bootstrap/esm/Form";
@@ -12,7 +13,11 @@ interface Props {
   form: FormikProps<FormikValues>;
 }
 
-const QuoteForm = ({ form }: Props) => {
+const QuoteForm = memo(({ form }: Props) => {
+  useEffect(() => {
+    console.log("render again");
+  }, []);
+
   return (
     <div>
       <div className="mb-3">
@@ -55,6 +60,6 @@ const QuoteForm = ({ form }: Props) => {
       </Row>
     </div>
   );
-};
+});
 
 export default QuoteForm;
