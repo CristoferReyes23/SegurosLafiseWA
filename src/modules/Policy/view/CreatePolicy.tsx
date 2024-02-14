@@ -1,6 +1,7 @@
-import ClientForm from "@/modules/Policy/components/CreatePolicySteps/ClientForm";
-import VehicleForm from "@/modules/Policy/components/CreatePolicySteps/VehicleForm";
-import CreatePolicyHelper from "@/modules/Policy/views/CreatePolicy/CreatePolicy.helper";
+import ClientForm from "@/modules/Policy/components/Steps/ClientForm";
+import PlanPolicy from "@/modules/Policy/components/Steps/PlanPolicy";
+import VehicleForm from "@/modules/Policy/components/Steps/VehicleForm";
+import CreatePolicyHelper from "@/modules/Policy/view/CreatePolicy.helper";
 import NavigationButtons from "@/shared/components/Forms/NavigationButtons/NavigationButtons";
 import TabWizard from "@/shared/components/Forms/TabWizard/TabWizard";
 import { getStepSchema } from "@/shared/utils/multiStepFormUtils";
@@ -19,7 +20,7 @@ const CreatePolicy = () => {
     initialValues,
   } = CreatePolicyHelper();
 
-  const pages = useMemo(() => [VehicleForm, ClientForm], []);
+  const pages = useMemo(() => [PlanPolicy, VehicleForm, ClientForm], []);
 
   return (
     <div>
@@ -37,7 +38,11 @@ const CreatePolicy = () => {
                 stepNumber={stepNumber}
                 currentPage={currentIndex}
                 onClick={onClickTab}
-                tabs={["Datos del vehículo", "Datos Personales"]}
+                tabs={[
+                  "Plan de póliza",
+                  "Datos del vehículo",
+                  "Datos Personales",
+                ]}
               />
 
               {pages.map((Component, index) => (

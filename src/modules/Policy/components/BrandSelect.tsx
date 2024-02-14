@@ -1,54 +1,53 @@
-import useFetch from "@/shared/hooks/useFetch";
-import useFormProps from "@/shared/hooks/useFormProps";
+import { useLoadSelect } from "@/modules/Policy/hooks/useLoadSelect";
+import { Brand } from "@/modules/Policy/models/models";
+import {
+  FormikComponentProps,
+  getFormikErrorField,
+  getFormikProps,
+} from "@/modules/Policy/utils/getFormikProps";
+import FormGroupTemplate from "@/shared/components/Forms/FormGroupTemplate";
+import FormSelectTemplate from "@/shared/components/Forms/FormSelectTemplate";
 import { EnumUrlCatalogsPaths } from "@/shared/utils/urlPaths";
-import { FormikProps, FormikValues } from "formik";
-import Feedback from "react-bootstrap/esm/Feedback";
-import FormGroup from "react-bootstrap/esm/FormGroup";
-import FormLabel from "react-bootstrap/esm/FormLabel";
-import FormSelect from "react-bootstrap/esm/FormSelect";
 
-interface Props {
-  form: FormikProps<FormikValues>;
-  name: string;
-}
-
-const BrandSelect = ({ form, name }: Props) => {
-  const { data } = useFetch<
-    Array<{ description: string; id: string; text: string }>
-  >({
-    to: "LAFISE",
-    urlPath: EnumUrlCatalogsPaths.models
-      .replace("{planId}", "477")
-      .replace("{brandId}", "1296"),
+const BrandSelect = ({ form }: FormikComponentProps) => {
+  const { data, isDisabled } = useLoadSelect<Brand[]>({
+    dependencyField: "planId",
+    form,
+    name: "marcaId",
+    pathApi: EnumUrlCatalogsPaths.brands,
+    use: "LAFISE",
   });
 
-  const { isValid, value, errorMessages } = useFormProps({ form, name });
-
   return (
-    <FormGroup className="position-relative mb-3" id={`inputGroup-${name}`}>
-      <FormLabel>Marca</FormLabel>
-
-      <FormSelect
-        onBlur={form.handleBlur}
-        onChange={form.handleChange}
-        value={value ?? ""}
-        name={name}
-        id={name}
-        isValid={!!isValid}
-      >
-        <option value="">Seleccione marca</option>
-        {data?.map((i) => (
-          <option value={i.id} key={i.id}>
-            {i.text}
-          </option>
-        ))}
-      </FormSelect>
-
-      <Feedback type="invalid" tooltip>
-        {errorMessages}
-      </Feedback>
-    </FormGroup>
+    <FormGroupTemplate label={"marcaId"} name={"marcaId"}>
+      <FormSelectTemplate
+        data={data?.map((i) => ({ title: i.text, value: i.id })) ?? []}
+        firstOption={{ title: "Seleccione una marca", value: "" }}
+        errorMessage={getFormikErrorField(form, "marcaId")}
+        {...getFormikProps(form, "marcaId")}
+        disabled={isDisabled}
+      />
+    </FormGroupTemplate>
   );
 };
 
 export default BrandSelect;
+
+// const [data, setData] = useState<SelectDataTemplate[]>([]);
+// const [isDisabled, setIsDisabled] = useState(true);
+
+// useEffect(() => {
+//   if (form.values.planId) {
+//     fetchCall<Brand[]>({
+//       use: "LAFISE",
+//       path: EnumUrlCatalogsPaths.brands.replace(
+//         "{planId}",
+//         form.values.planId
+//       ),
+//     }).then((data) => {
+//       setData(data.map((i) => ({ title: i.text, value: i.id })));
+//     });
+//   }
+
+//   setIsDisabled(form.values.planId == null);
+// }, [form.values.planId]);

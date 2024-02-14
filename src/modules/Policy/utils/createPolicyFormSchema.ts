@@ -1,9 +1,18 @@
-import ClientForm from "@/modules/Policy/components/CreatePolicySteps/ClientForm";
-import VehicleForm from "@/modules/Policy/components/CreatePolicySteps/VehicleForm";
+import ClientForm from "@/modules/Policy/components/Steps/ClientForm";
+import PlanPolicy from "@/modules/Policy/components/Steps/PlanPolicy";
+import VehicleForm from "@/modules/Policy/components/Steps/VehicleForm";
 import { TypeStep } from "@/shared/utils/multiStepFormUtils";
 import { string, number, object, date } from "yup";
 
 export const stepsCreatePolicy: TypeStep[] = [
+  {
+    name: "step0",
+    component: PlanPolicy,
+    initialValues: {},
+    validationSchema: object({
+      planId: number().required(),
+    }),
+  },
   {
     name: "step1",
     component: VehicleForm,
@@ -19,15 +28,16 @@ export const stepsCreatePolicy: TypeStep[] = [
       puertas: number().required(),
     }),
     initialValues: {
-      marcaId: null,
-      modeloId: null,
-      anio: null,
-      valorNuevo: null,
-      placa: null,
-      chasis: null,
-      color: null,
-      motor: null,
-      puertas: null,
+      // planId: "",
+      // marcaId: "",
+      // modeloId: "",
+      // anio: "",
+      // valorNuevo: "",
+      // placa: "",
+      // chasis: "",
+      // color: "",
+      // motor: "",
+      // puertas: "",
     },
   },
   {
@@ -50,20 +60,20 @@ export const stepsCreatePolicy: TypeStep[] = [
       direccion: string().required(),
     }),
     initialValues: {
-      tipoId: null,
-      documentoIdentificacion: null,
-      nombre: null,
-      apellido: null,
-      sexo: null,
-      fechaNacimiento: null,
-      email: null,
-      telefono: null,
-      celular: null,
-      paisOrigen: null,
-      provincia: null,
-      canton: null,
-      distrito: null,
-      direccion: null,
+      // tipoId: null,
+      // documentoIdentificacion: null,
+      // nombre: null,
+      // apellido: null,
+      // sexo: null,
+      // fechaNacimiento: null,
+      // email: null,
+      // telefono: null,
+      // celular: null,
+      // paisOrigen: null,
+      // provincia: null,
+      // canton: null,
+      // distrito: null,
+      // direccion: null,
     },
   },
 ];

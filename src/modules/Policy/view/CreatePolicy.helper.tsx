@@ -1,4 +1,4 @@
-import { stepsCreatePolicy } from "@/modules/Policy/utils/createPolicySteps";
+import { stepsCreatePolicy } from "@/modules/Policy/utils/createPolicyFormSchema";
 import {
   TypeStep,
   generateInitialValues,
