@@ -24,9 +24,10 @@ export const useLoadSelect = <T>({
   useEffect(() => {
     if (form.values[dependencyField]) {
       callApi();
-    } else form.setFieldValue(name, null);
+    }
 
-    setIsDisabled(!form.values.marcaId);
+    form.setFieldValue(name, null);
+    setIsDisabled(!form.values[dependencyField]);
   }, [form.values[dependencyField]]);
 
   const callApi = async () => {
