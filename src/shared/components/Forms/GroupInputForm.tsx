@@ -1,4 +1,7 @@
-import { getFormikProps } from "@/modules/Policy/utils/getFormikProps";
+import {
+  getFormikErrorField,
+  getFormikProps,
+} from "@/modules/Policy/utils/getFormikProps";
 import { FormikProps, FormikValues } from "formik";
 import Feedback from "react-bootstrap/esm/Feedback";
 import Form from "react-bootstrap/esm/Form";
@@ -14,18 +17,16 @@ interface Props {
 }
 
 const GroupInputForm = ({ form, name, label, placeholder, type }: Props) => {
-  const { errorMessage, ...defaultProps } = getFormikProps(form, name);
-
   return (
     <FormGroup className="position-relative mb-3" id={`inputGroup-${name}`}>
       <Form.Label>{label}</Form.Label>
       <Form.Control
         placeholder={placeholder}
-        {...defaultProps}
+        {...getFormikProps(form, name)}
         type={type ?? "text"}
       />
       <Feedback type="invalid" tooltip>
-        {errorMessage}
+        {getFormikErrorField(form, name)}
       </Feedback>
     </FormGroup>
   );

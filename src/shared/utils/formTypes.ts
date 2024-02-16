@@ -1,4 +1,4 @@
 export interface SelectDataTemplate {
-  value: string;
-  title: string;
+  id: string;
+  text: string;
 }

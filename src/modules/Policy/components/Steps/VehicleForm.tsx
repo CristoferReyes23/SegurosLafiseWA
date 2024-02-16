@@ -4,11 +4,8 @@ import { FormikProps, FormikValues } from "formik/dist/types";
 import Col from "react-bootstrap/esm/Col";
 import Row from "react-bootstrap/esm/Row";
 import Stack from "react-bootstrap/esm/Stack";
-import {
-  BrandSelect,
-  ModelSelect,
-  YearSelect,
-} from "@/modules/Policy/components/SelectsVehicleForm";
+import { CommonSelectGroup } from "@/modules/Policy/components/CommonSelectGroup";
+import { EnumUrlCatalogsPaths } from "@/shared/utils/urlPaths";
 
 interface Props {
   form: FormikProps<FormikValues>;
@@ -21,15 +18,33 @@ const VehicleForm = ({ form }: Props) => {
         <FormCard title="Modelo del vehículo">
           <Row>
             <Col>
-              <BrandSelect form={form} />
+              <CommonSelectGroup
+                form={form}
+                name={"marcaId"}
+                dependencyField="planId"
+                pathApi={EnumUrlCatalogsPaths.brands}
+                floatingLabel={"Marca"}
+              />
             </Col>
 
             <Col>
-              <ModelSelect form={form} />
+              <CommonSelectGroup
+                form={form}
+                name={"modeloId"}
+                dependencyField={"marcaId"}
+                pathApi={EnumUrlCatalogsPaths.models}
+                floatingLabel={"Modelo"}
+              />
             </Col>
 
             <Col>
-              <YearSelect form={form} />
+              <CommonSelectGroup
+                form={form}
+                name={"anio"}
+                dependencyField={"marcaId"}
+                pathApi={EnumUrlCatalogsPaths.years}
+                floatingLabel={"Año"}
+              />
             </Col>
           </Row>
           <Row>
@@ -37,7 +52,7 @@ const VehicleForm = ({ form }: Props) => {
               <GroupInputForm
                 type="number"
                 form={form}
-                label="Precio vehículo nuevo"
+                label="Precio del vehículo nuevo"
                 name="valorNuevo"
               />
             </Col>

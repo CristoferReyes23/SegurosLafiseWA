@@ -16,16 +16,11 @@ export const PlanSelect = ({ form }: FormikComponentProps) => {
     urlPath: EnumUrlCatalogsPaths.plans,
   });
 
-  const dataView: SelectDataTemplate[] = (
+  const dataView: SelectDataTemplate[] =
     data?.map((i) => ({
-      title: i.nombre,
-      value: i.id.toString(),
-    })) ?? []
-  ).filter(
-    (item, index, self) =>
-      index ===
-      self.findIndex((t) => t.title === item.title && t.value === item.value)
-  );
+      text: i.nombre,
+      id: i.id.toString(),
+    })) ?? [];
 
   const inputFormik = getFormikProps(form, "planId");
   const errorMessage = getFormikErrorField(form, "planId");
@@ -38,7 +33,7 @@ export const PlanSelect = ({ form }: FormikComponentProps) => {
   return (
     <FloatingLabel label={"Plan de póliza"}>
       <FormSelectTemplate
-        firstOption={{ title: "Seleccione un plan de poliza", value: "" }}
+        firstOption={{ text: "Seleccione un plan de poliza", id: "" }}
         data={dataView}
         {...inputFormik}
         onChange={(e) => {

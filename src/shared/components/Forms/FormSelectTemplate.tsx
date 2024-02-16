@@ -18,11 +18,11 @@ const FormSelectTemplate = ({
     <>
       <FormSelect {...defaultProps}>
         {firstOption && (
-          <option value={firstOption.value}>{firstOption.title}</option>
+          <option value={firstOption.id}>{firstOption.text}</option>
         )}
         {data?.map((i) => (
-          <option value={i.value} key={i.value}>
-            {i.title}
+          <option value={i.id} key={i.id}>
+            {i.text}
           </option>
         ))}
       </FormSelect>
