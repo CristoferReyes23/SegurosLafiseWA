@@ -5,7 +5,7 @@ export interface Plans {
   topAnio: number;
 }
 
-export interface Brand {
+export interface BaseListDataModel {
   id: string;
   text: string;
 }

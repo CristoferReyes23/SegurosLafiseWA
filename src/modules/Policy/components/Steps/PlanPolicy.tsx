@@ -26,15 +26,6 @@ const PlanPolicy = ({ form }: FormikComponentProps) => {
               />
             </FloatingLabel>
           </Col>
-          {/* <Col>
-            <FloatingLabel label={"Moneda"}>
-              <Form.Control
-                {...getFormikProps(form, "topAnio")}
-                disabled
-                placeholder=""
-              />
-            </FloatingLabel>
-          </Col> */}
         </Row>
       </FormCard>
     </div>

@@ -1,8 +1,4 @@
-import {
-  FormikComponentProps,
-  getFormikErrorField,
-  getFormikProps,
-} from "@/modules/Policy/utils/getFormikProps";
+import { FormikComponentProps, getFormikErrorField, getFormikProps } from "@/modules/Policy/utils/getFormikProps";
 import { PlanModel } from "@/modules/Quote/models/plan.model";
 import FormSelectTemplate from "@/shared/components/Forms/FormSelectTemplate";
 import useFetch from "@/shared/hooks/useFetch";
@@ -17,10 +13,12 @@ export const PlanSelect = ({ form }: FormikComponentProps) => {
   });
 
   const dataView: SelectDataTemplate[] =
-    data?.map((i) => ({
-      text: i.nombre,
-      id: i.id.toString(),
-    })) ?? [];
+    data
+      ?.map((i) => ({
+        text: i.nombre,
+        id: i.id.toString(),
+      }))
+      .filter((item, index, self) => index === self.findIndex((t) => t.id === item.id)) ?? []; //avoid duplicated
 
   const inputFormik = getFormikProps(form, "planId");
   const errorMessage = getFormikErrorField(form, "planId");

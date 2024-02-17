@@ -1,5 +1,5 @@
 import { useLoadSelect } from "@/modules/Policy/hooks/useLoadSelect";
-import { Brand } from "@/modules/Policy/models/models";
+import { BaseListDataModel } from "@/modules/Policy/models/models";
 import {
   getFormikErrorField,
   getFormikProps,
@@ -28,7 +28,7 @@ export const CommonSelectGroup = ({
   dependencyField,
   firstOption,
 }: Props) => {
-  const { data, isDisabled } = useLoadSelect<Brand[]>({
+  const { data, isDisabled } = useLoadSelect<BaseListDataModel[]>({
     form,
     name,
     use: "LAFISE",

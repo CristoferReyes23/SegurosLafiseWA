@@ -1,0 +1,15 @@
+.form-fields-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  column-gap: 20px;
+}
+
+.client-step {
+  .direction-container {
+    grid-row: span 2;
+  }
+
+  .dir-input {
+    height: max-content;
+  }
+}

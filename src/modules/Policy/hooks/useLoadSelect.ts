@@ -11,13 +11,7 @@ interface Props extends FormikComponentProps {
   dependencyField: string;
 }
 
-export const useLoadSelect = <T>({
-  form,
-  name,
-  pathApi,
-  dependencyField,
-  use,
-}: Props) => {
+export const useLoadSelect = <T>({ form, name, pathApi, dependencyField, use }: Props) => {
   const [data, setData] = useState<T | undefined>();
   const [isDisabled, setIsDisabled] = useState(true);
 

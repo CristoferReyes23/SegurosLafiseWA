@@ -7,18 +7,11 @@ import TabWizard from "@/shared/components/Forms/TabWizard/TabWizard";
 import { getStepSchema } from "@/shared/utils/multiStepFormUtils";
 import { Formik } from "formik";
 import { useMemo } from "react";
+import "./CreatePolicy.helper.css";
 
 const CreatePolicy = () => {
-  const {
-    steps,
-    goBack,
-    goNext,
-    onClickTab,
-    stepNumber,
-    currentIndex,
-    handleSubmit,
-    initialValues,
-  } = CreatePolicyHelper();
+  const { steps, goBack, goNext, onClickTab, stepNumber, currentIndex, handleSubmit, initialValues } =
+    CreatePolicyHelper();
 
   const pages = useMemo(() => [PlanPolicy, VehicleForm, ClientForm], []);
 
@@ -38,18 +31,11 @@ const CreatePolicy = () => {
                 stepNumber={stepNumber}
                 currentPage={currentIndex}
                 onClick={onClickTab}
-                tabs={[
-                  "Plan de póliza",
-                  "Datos del vehículo",
-                  "Datos Personales",
-                ]}
+                tabs={["Plan de póliza", "Datos del vehículo", "Datos Personales"]}
               />
 
               {pages.map((Component, index) => (
-                <section
-                  key={index}
-                  className={`${index != currentIndex && "d-none"}`}
-                >
+                <section key={index} className={`${index != currentIndex && "d-none"}`}>
                   <Component form={form} />
                 </section>
               ))}
