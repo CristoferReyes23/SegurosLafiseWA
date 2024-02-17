@@ -14,7 +14,7 @@ interface Props {
 
 const ClientForm = ({ form }: Props) => {
   return (
-    <div className="client-step">
+    <div className="client-step vstack gap-3">
       <FormCard title="Datos del cliente">
         <div className="form-fields-container">
           <SelectTypeId form={form} />
@@ -22,20 +22,22 @@ const ClientForm = ({ form }: Props) => {
           <SelectGender form={form} />
           <GroupInputForm form={form} label="Nombre" name="nombre" />
           <GroupInputForm form={form} label="Apellido" name="apellido" />
-          <div className="direction-container">
-            <GroupInputForm
-              form={form}
-              name={"direccion"}
-              label={"Dirección"}
-              as="textarea"
-              className="dir-input"
-              rows={4}
-            />
-          </div>
+          <GroupInputForm type="date" form={form} label="Fecha de nacimiento" name="fechaNacimiento" />
+        </div>
+      </FormCard>
+      <FormCard title="Datos de contacto">
+        <div className="form-fields-container">
           <GroupInputForm form={form} label="Correo" name="email" type="email" />
           <GroupInputForm name={"celular"} form={form} label={"Celular"} type="number" />
-          <GroupInputForm type="date" form={form} label="Fecha de nacimiento" name="fechaNacimiento" />
           <GroupInputForm name={"telefono"} form={form} label={"Teléfono"} type="number" />
+        </div>
+      </FormCard>
+
+      <FormCard title="Dirección">
+        <div className="form-fields-container">
+          <div className="dir-input">
+            <GroupInputForm form={form} name={"direccion"} label={"Dirección"} as="textarea" rows={2} />
+          </div>
           <SelectCountry form={form} />
           <CommonSelectGroup
             dependencyField="paisOrigen"
