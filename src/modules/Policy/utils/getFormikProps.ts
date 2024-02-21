@@ -1,9 +1,6 @@
-import { FormikProps, FormikValues, getIn } from "formik";
+import { FormikProps, getIn } from "formik";
 
-export function getFormikProps(
-  formik: FormikProps<FormikValues>,
-  name: string
-) {
+export function getFormikProps(formik: FormikProps<any>, name: string) {
   const value = getIn(formik.values, name);
   const isInvalid = getIn(formik.errors, name) && getIn(formik.touched, name);
 
@@ -17,13 +14,10 @@ export function getFormikProps(
   };
 }
 
-export function getFormikErrorField(
-  formik: FormikProps<FormikValues>,
-  name: string
-) {
+export function getFormikErrorField(formik: FormikProps<any>, name: string) {
   return getIn(formik.errors, name);
 }
 
 export interface FormikComponentProps {
-  form: FormikProps<FormikValues>;
+  form: FormikProps<any>;
 }

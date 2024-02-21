@@ -1,5 +1,5 @@
 import { FormikComponentProps, getFormikErrorField, getFormikProps } from "@/modules/Policy/utils/getFormikProps";
-import { PlanModel } from "@/modules/Quote/models/plan.model";
+import { PlanModel } from "@/shared/models/plan.model";
 import FormSelectTemplate from "@/shared/components/Forms/FormSelectTemplate";
 import useFetch from "@/shared/hooks/useFetch";
 import { SelectDataTemplate } from "@/shared/utils/formTypes";
@@ -21,7 +21,6 @@ export const PlanSelect = ({ form }: FormikComponentProps) => {
       .filter((item, index, self) => index === self.findIndex((t) => t.id === item.id)) ?? []; //avoid duplicated
 
   const inputFormik = getFormikProps(form, "planId");
-  const errorMessage = getFormikErrorField(form, "planId");
 
   const onChangeSelect = (value: any) => {
     form.setFieldValue("moneda", data?.find((i) => i.id == value)?.moneda);
@@ -38,7 +37,7 @@ export const PlanSelect = ({ form }: FormikComponentProps) => {
           onChangeSelect(e.target.value);
           inputFormik.onChange(e);
         }}
-        errorMessage={errorMessage}
+        errorMessage={getFormikErrorField(form, "planId")}
       />
     </FloatingLabel>
   );
