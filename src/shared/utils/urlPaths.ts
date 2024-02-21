@@ -13,4 +13,6 @@ export enum EnumUrlCatalogsPaths {
   department = "catalogs/paises/{paisOrigen}/departamentos",
   cities = "catalogs/paises/{paisOrigen}/departamentos/{departamentoId}/ciudades",
   districts = "catalogs/paises/{paisOrigen}/departamentos/{departamentoId}/ciudades/{ciudadId}/distritos",
+
+  coverages = "rates/{planId}/coverages",
 }

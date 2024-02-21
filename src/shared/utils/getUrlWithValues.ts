@@ -1,9 +1,4 @@
-import { FormikProps, FormikValues } from "formik";
-
-export function getUrlWithValues(
-  form: FormikProps<FormikValues>,
-  path: string
-): string {
+export function getUrlWithValues(formValues: any, path: string): string {
   // Definir una expresión regular para encontrar los valores entre llaves
   const regex = /{([^{}]+)}/g;
 
@@ -18,8 +13,6 @@ export function getUrlWithValues(
   }
 
   let urlWithValues = path;
-  valores.forEach(
-    (i) => (urlWithValues = urlWithValues.replace(`{${i}}`, form.values[i]))
-  );
+  valores.forEach((i) => (urlWithValues = urlWithValues.replace(`{${i}}`, formValues[i])));
   return urlWithValues;
 }

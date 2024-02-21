@@ -1,5 +1,5 @@
 import { FormikComponentProps } from "@/modules/Policy/utils/getFormikProps";
-import { getUrlWithValues } from "@/modules/Policy/utils/getUrlWithValues";
+import { getUrlWithValues } from "@/shared/utils/getUrlWithValues";
 import { fetchCall } from "@/shared/utils/fetchApi";
 import { TypeUrlTo } from "@/shared/utils/urlPaths";
 import { useEffect, useState } from "react";
