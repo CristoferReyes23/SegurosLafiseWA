@@ -27,7 +27,7 @@ export const useLoadSelect = <T>({ form, name, pathApi, dependencyField, use }: 
   const callApi = async () => {
     const result = await fetchCall<T>({
       use,
-      path: getUrlWithValues(form, pathApi),
+      path: getUrlWithValues(form.values, pathApi),
     });
     setData(result);
   };

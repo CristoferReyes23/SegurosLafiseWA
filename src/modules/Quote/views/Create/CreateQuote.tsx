@@ -1,13 +1,14 @@
-import FormTemplate2 from "@/modules/Quote/components/FormTemplate2";
+import FormTemplate from "@/modules/Quote/components/FormTemplate";
 import ResponseTemplate from "@/modules/Quote/components/ResponseTemplate";
 import CreateQuoteHelper from "@/modules/Quote/views/Create/CreateQuote.helper";
+import "./CreateQuote.css";
 
 const CreateQuote = () => {
   const { formik, response } = CreateQuoteHelper();
 
   return (
     <div>
-      <FormTemplate2 form={formik} />
+      <FormTemplate form={formik} />
       {response && <ResponseTemplate response={response} />}
     </div>
   );

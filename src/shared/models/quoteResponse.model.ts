@@ -4,13 +4,13 @@ export interface QuoteResponseModel {
   descuento: number;
   impuestos: number;
   total: number;
-  coberturas: Cobertura[];
+  coberturas: Coverage[];
   primaMensual: number;
   primaTrimestral: number;
   primaSemestral: number;
 }
 
-export interface Cobertura {
+export interface Coverage {
   nombre: string;
   orden: number;
   id: number;

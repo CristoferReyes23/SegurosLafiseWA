@@ -7,7 +7,7 @@ import TabWizard from "@/shared/components/Forms/TabWizard/TabWizard";
 import { getStepSchema } from "@/shared/utils/multiStepFormUtils";
 import { Formik } from "formik";
 import { useMemo } from "react";
-import "./CreatePolicy.helper.css";
+import "./CreatePolicy.css";
 
 const CreatePolicy = () => {
   const { steps, goBack, goNext, onClickTab, stepNumber, currentIndex, handleSubmit, initialValues } =

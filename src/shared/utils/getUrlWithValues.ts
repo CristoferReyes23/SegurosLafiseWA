@@ -1,4 +1,6 @@
 export function getUrlWithValues(formValues: any, path: string): string {
+  console.log(formValues);
+
   // Definir una expresión regular para encontrar los valores entre llaves
   const regex = /{([^{}]+)}/g;
 

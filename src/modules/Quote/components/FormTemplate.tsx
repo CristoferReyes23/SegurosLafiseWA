@@ -1,87 +1,73 @@
-import { CommonSelectGroup } from "@/modules/Policy/components/CommonSelectGroup";
 import { PlanSelect } from "@/modules/Policy/components/PlanSelect";
-import { getFormikErrorField, getFormikProps } from "@/modules/Policy/utils/getFormikProps";
-import { formSchema, initialValue } from "@/modules/Quote/utils/createQuoteFormSchema";
+import { FormikComponentProps, getFormikProps } from "@/modules/Policy/utils/getFormikProps";
 import FormCard from "@/shared/components/FormCard";
-import FormControlTemplate from "@/shared/components/Forms/FormControlTemplate";
+import CommonSelectApi from "@/shared/components/Forms/CommonSelectApi";
+import FormSelectTemplate from "@/shared/components/Forms/FormSelectTemplate";
+import useFetch from "@/shared/hooks/useFetch";
+import { BaseListDataModel } from "@/shared/models/BaseListData.model";
 import { EnumUrlCatalogsPaths } from "@/shared/utils/urlPaths";
-import { Formik } from "formik";
-import Button from "react-bootstrap/esm/Button";
 import FloatingLabel from "react-bootstrap/esm/FloatingLabel";
-import Row from "react-bootstrap/esm/Row";
 
-interface Props {
-  onSubmitForm: (...args: any) => void;
-}
-
-const FormTemplate = ({ onSubmitForm }: Props) => {
+const FormTemplate = ({ form }: FormikComponentProps) => {
   return (
-    <Formik onSubmit={onSubmitForm} initialValues={initialValue} validationSchema={formSchema}>
-      {(form) => (
-        <form onSubmit={form.handleSubmit}>
-          <FormCard title={"Plan a cotizar"}>
-            <Row>
-              <div className="form-fields-container">
-                <PlanSelect form={form} />
+    <form noValidate onSubmit={form.handleSubmit}>
+      <FormCard title={"Plan a cotizar"}>
+        <div className="form-fields-container">
+          <PlanSelect form={form} />
 
-                <FloatingLabel label="Moneda">
-                  <FormControlTemplate
-                    errorMessage={getFormikErrorField(form, "moneda")}
-                    {...getFormikProps(form, "moneda")}
-                    disabled
-                    placeHolder=""
-                  />
-                </FloatingLabel>
+          <FloatingLabel label="Marca">
+            <CommonSelectApi
+              dependencyField="planId"
+              name="marcaId"
+              form={form}
+              pathApi={EnumUrlCatalogsPaths.brands}
+              firstOption={{ id: "", text: "Seleccione una marca" }}
+            />
+          </FloatingLabel>
 
-                <FloatingLabel label="Valor del vehículo">
-                  <FormControlTemplate
-                    errorMessage={getFormikErrorField(form, "valorn")}
-                    {...getFormikProps(form, "valorn")}
-                  />
-                </FloatingLabel>
-              </div>
-            </Row>
+          <FloatingLabel label="Modelo">
+            <CommonSelectApi
+              dependencyField="marcaId"
+              name="modeloId"
+              form={form}
+              pathApi={EnumUrlCatalogsPaths.models}
+              firstOption={{ id: "", text: "Seleccione un modelo" }}
+            />
+          </FloatingLabel>
 
-            <Row className="mt-3">
-              <div className="form-fields-container">
-                <CommonSelectGroup
-                  floatingLabel="Marca"
-                  dependencyField="planId"
-                  name="marcaId"
-                  form={form}
-                  pathApi={EnumUrlCatalogsPaths.brands}
-                  firstOption={{ id: "", text: "Seleccione una marca" }}
-                />
+          <FloatingLabel label="Año">
+            <CommonSelectApi
+              dependencyField="modeloId"
+              name="anio"
+              form={form}
+              pathApi={EnumUrlCatalogsPaths.years}
+              firstOption={{ id: "", text: "Selccione el año" }}
+            />
+          </FloatingLabel>
 
-                <CommonSelectGroup
-                  floatingLabel="Modelo"
-                  dependencyField="marcaId"
-                  name="modeloId"
-                  form={form}
-                  pathApi={EnumUrlCatalogsPaths.models}
-                  firstOption={{ id: "", text: "Seleccione un modelo" }}
-                />
+          <SelectUses form={form} />
+        </div>
 
-                <CommonSelectGroup
-                  floatingLabel="Año"
-                  dependencyField="modeloId"
-                  name="anio"
-                  form={form}
-                  pathApi={EnumUrlCatalogsPaths.years}
-                  firstOption={{ id: "", text: "Selccione el año" }}
-                />
-              </div>
-            </Row>
-            <div className="d-flex justify-content-end">
-              <Button type="submit" disabled={form.isSubmitting}>
-                Cotizar
-              </Button>
-            </div>
-          </FormCard>
-        </form>
-      )}
-    </Formik>
+        <div className="d-flex justify-content-end">
+          <button className="btn btn-primary" type="submit" disabled={form.isSubmitting}>
+            {form.isSubmitting && (
+              <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+            )}
+            Cotizar
+          </button>
+        </div>
+      </FormCard>
+    </form>
   );
 };
 
 export default FormTemplate;
+
+const SelectUses = ({ form }: FormikComponentProps) => {
+  const { data } = useFetch<BaseListDataModel[]>({ to: "LAFISE", urlPath: EnumUrlCatalogsPaths.uses });
+  return (
+    <FloatingLabel label="Uso del vehículo">
+      <FormSelectTemplate {...getFormikProps(form, "uso")} data={data ?? []} errorMessage={""} />
+    </FloatingLabel>
+  );
+};
