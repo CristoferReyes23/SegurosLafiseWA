@@ -12,40 +12,50 @@ const FormTemplate = ({ form }: FormikComponentProps) => {
   return (
     <form noValidate onSubmit={form.handleSubmit}>
       <FormCard title={"Plan a cotizar"}>
-        <div className="form-fields-container">
-          <PlanSelect form={form} />
+        <div className="row">
+          <div className="col-sm-12 col-md-4 mb-3">
+            <PlanSelect form={form} />
+          </div>
 
-          <FloatingLabel label="Marca">
-            <CommonSelectApi
-              dependencyField="planId"
-              name="marcaId"
-              form={form}
-              pathApi={EnumUrlCatalogsPaths.brands}
-              firstOption={{ id: "", text: "Seleccione una marca" }}
-            />
-          </FloatingLabel>
+          <div className="col-sm-12 col-md-4 mb-3">
+            <FloatingLabel label="Marca">
+              <CommonSelectApi
+                dependencyField="planId"
+                name="marcaId"
+                form={form}
+                pathApi={EnumUrlCatalogsPaths.brands}
+                firstOption={{ id: "", text: "Seleccione una marca" }}
+              />
+            </FloatingLabel>
+          </div>
 
-          <FloatingLabel label="Modelo">
-            <CommonSelectApi
-              dependencyField="marcaId"
-              name="modeloId"
-              form={form}
-              pathApi={EnumUrlCatalogsPaths.models}
-              firstOption={{ id: "", text: "Seleccione un modelo" }}
-            />
-          </FloatingLabel>
+          <div className="col-sm-12 col-md-4 mb-3">
+            <FloatingLabel label="Modelo">
+              <CommonSelectApi
+                dependencyField="marcaId"
+                name="modeloId"
+                form={form}
+                pathApi={EnumUrlCatalogsPaths.models}
+                firstOption={{ id: "", text: "Seleccione un modelo" }}
+              />
+            </FloatingLabel>
+          </div>
 
-          <FloatingLabel label="Año">
-            <CommonSelectApi
-              dependencyField="modeloId"
-              name="anio"
-              form={form}
-              pathApi={EnumUrlCatalogsPaths.years}
-              firstOption={{ id: "", text: "Selccione el año" }}
-            />
-          </FloatingLabel>
+          <div className="col-sm-12 col-md-4 mb-3">
+            <FloatingLabel label="Año">
+              <CommonSelectApi
+                dependencyField="modeloId"
+                name="anio"
+                form={form}
+                pathApi={EnumUrlCatalogsPaths.years}
+                firstOption={{ id: "", text: "Selccione el año" }}
+              />
+            </FloatingLabel>
+          </div>
 
-          <SelectUses form={form} />
+          <div className="col-sm-12 col-md-4 mb-3">
+            <SelectUses form={form} />
+          </div>
         </div>
 
         <div className="d-flex justify-content-end">

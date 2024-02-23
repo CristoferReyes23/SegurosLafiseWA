@@ -6,11 +6,11 @@ interface Props {
 
 const TableResponse = ({ coverages }: Props) => {
   return (
-    <table className="table table-striped">
+    <table className="table table-secondary table-responsive">
       <thead>
         <tr>
           {headerKeys.map((i) => (
-            <th scope="col" key={i.key}>
+            <th className="" scope="col" key={i.key}>
               {i.title}
             </th>
           ))}
@@ -21,8 +21,9 @@ const TableResponse = ({ coverages }: Props) => {
         {coverages.map((coverage) => (
           <tr key={coverage.id}>
             {headerKeys.map((header, indexHead) => (
-              //@ts-ignore
-              <td key={indexHead}>{coverage[header.key]}</td>
+              <td key={indexHead} style={{ maxWidth: header.maxWidth }}>
+                {coverage[header.key]}
+              </td>
             ))}
           </tr>
         ))}
@@ -34,10 +35,10 @@ const TableResponse = ({ coverages }: Props) => {
 export default TableResponse;
 
 const headerKeys = [
-  { key: "id", title: "#" },
-  { key: "coberturaId", title: "ID Cobertura" },
-  { key: "nombre", title: "Nombre" },
-  { key: "orden", title: "Orden" },
+  // { key: "id", title: "#" },
+  // { key: "coberturaId", title: "ID Cobertura" },
+  { key: "nombre", title: "Nombre", maxWidth: "300px" },
+  // { key: "orden", title: "Orden" },
   { key: "prima", title: "Prima" },
   { key: "coaseguro", title: "Coaseguro" },
   { key: "deducible", title: "Deducible" },

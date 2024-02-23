@@ -11,6 +11,7 @@ export interface QuoteResponseModel {
 }
 
 export interface Coverage {
+  [key: string]: any;
   nombre: string;
   orden: number;
   id: number;
