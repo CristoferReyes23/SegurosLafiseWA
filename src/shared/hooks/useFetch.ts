@@ -1,4 +1,4 @@
-import { AuthSessionService } from "@/shared/services/AuthSession.service";
+import { fetchCall } from "@/shared/utils/fetchApi";
 import { TypeProviderApi } from "@/shared/utils/urlPaths";
 import { useEffect, useState } from "react";
 
@@ -13,7 +13,7 @@ const useFetch = <T>(props: Props) => {
   const [data, setData] = useState<T | null>(null);
 
   useEffect(() => {
-    fetchCall<T>(props)
+    fetchCall<T>({ path: props.urlPath, providerName: "LAFISE" })
       .then((resp) => {
         setData(resp);
       })
@@ -35,34 +35,3 @@ const useFetch = <T>(props: Props) => {
 };
 
 export default useFetch;
-
-export async function fetchCall<T>(params: Props): Promise<T> {
-  // return new Promise((res) => {
-  //   res([
-  //     {
-  //       id: 0,
-  //       nombre: "test1",
-  //       moneda: "tes2",
-  //       topAnio: 1,
-  //     },
-  //     {
-  //       id: 1,
-  //       nombre: "test2",
-  //       moneda: "test2",
-  //       topAnio: 1,
-  //     },
-  //   ] as T);
-  // });
-  const session = AuthSessionService.getSession();
-  let domain = "";
-  let token = "";
-  if (params.to === "LAFISE") {
-    domain = import.meta.env.VITE_API_LAFISE_SERVICE;
-    token = session!.tokenLafise;
-  }
-  const url = domain + params.urlPath;
-  const response = await fetch(url, {
-    headers: { Authorization: `Bearer ${token}` },
-  });
-  return await response.json();
-}
