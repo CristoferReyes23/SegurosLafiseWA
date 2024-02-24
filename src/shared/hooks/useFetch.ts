@@ -1,10 +1,10 @@
 import { AuthSessionService } from "@/shared/services/AuthSession.service";
-import { TypeUrlTo } from "@/shared/utils/urlPaths";
+import { TypeProviderApi } from "@/shared/utils/urlPaths";
 import { useEffect, useState } from "react";
 
 interface Props {
   urlPath: string;
-  to: TypeUrlTo;
+  to: TypeProviderApi;
 }
 
 const useFetch = <T>(props: Props) => {

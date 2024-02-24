@@ -1,6 +1,4 @@
-/* ----------------------------- end form object ---------------------------- */
-
-import { initialValue } from "@/modules/Quote/utils/createQuoteFormSchema";
+import { formSchema, initialValue } from "@/modules/Quote/utils/form.schema";
 import { QuoteApi } from "@/shared/apis/quote.api";
 import { QuoteResponseModel } from "@/shared/models/quoteResponse.model";
 import { useFormik } from "formik";
@@ -25,7 +23,7 @@ const CreateQuoteHelper = () => {
   const formik = useFormik({
     initialValues: initialValue,
     onSubmit: onSubmitForm,
-    // validationSchema: formSchema,
+    validationSchema: formSchema,
   });
 
   return {

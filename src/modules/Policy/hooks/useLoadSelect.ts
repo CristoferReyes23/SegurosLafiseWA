@@ -1,17 +1,17 @@
 import { FormikComponentProps } from "@/modules/Policy/utils/getFormikProps";
 import { getUrlWithValues } from "@/shared/utils/getUrlWithValues";
 import { fetchCall } from "@/shared/utils/fetchApi";
-import { TypeUrlTo } from "@/shared/utils/urlPaths";
+import { TypeProviderApi } from "@/shared/utils/urlPaths";
 import { useEffect, useState } from "react";
 
 interface Props extends FormikComponentProps {
   name: string;
-  use: TypeUrlTo;
+  providerName: TypeProviderApi;
   pathApi: string;
   dependencyField: string;
 }
 
-export const useLoadSelect = <T>({ form, name, pathApi, dependencyField, use }: Props) => {
+export const useLoadSelect = <T>({ form, name, pathApi, dependencyField, providerName }: Props) => {
   const [data, setData] = useState<T | undefined>();
   const [isDisabled, setIsDisabled] = useState(true);
 
@@ -26,7 +26,7 @@ export const useLoadSelect = <T>({ form, name, pathApi, dependencyField, use }: 
 
   const callApi = async () => {
     const result = await fetchCall<T>({
-      use,
+      providerName,
       path: getUrlWithValues(form.values, pathApi),
     });
     setData(result);

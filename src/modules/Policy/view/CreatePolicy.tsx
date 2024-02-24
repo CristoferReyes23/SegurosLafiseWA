@@ -4,7 +4,7 @@ import VehicleForm from "@/modules/Policy/components/Steps/VehicleForm";
 import CreatePolicyHelper from "@/modules/Policy/view/CreatePolicy.helper";
 import NavigationButtons from "@/shared/components/Forms/NavigationButtons/NavigationButtons";
 import TabWizard from "@/shared/components/Forms/TabWizard/TabWizard";
-import { getStepSchema } from "@/shared/utils/multiStepFormUtils";
+import { getStepSchema } from "@/modules/Policy/utils/multiStepFormUtils";
 import { Formik } from "formik";
 import { useMemo } from "react";
 import "./CreatePolicy.css";

@@ -1,4 +1,4 @@
-export type TypeUrlTo = "LAFISE" | "BACKEND";
+export type TypeProviderApi = "LAFISE" | "BACKEND";
 
 export type TypesUrlPath = "catalogs/plans" | "catalogs/plans/{planId}/models";
 

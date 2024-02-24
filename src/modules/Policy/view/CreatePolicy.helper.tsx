@@ -1,5 +1,5 @@
 import { stepsCreatePolicy } from "@/modules/Policy/utils/createPolicyFormSchema";
-import { TypeStep, generateInitialValues } from "@/shared/utils/multiStepFormUtils";
+import { TypeStep, generateInitialValues } from "@/modules/Policy/utils/multiStepFormUtils";
 import { FormikValues } from "formik";
 import { useState } from "react";
 

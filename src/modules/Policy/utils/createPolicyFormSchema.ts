@@ -1,7 +1,7 @@
 import ClientForm from "@/modules/Policy/components/Steps/ClientForm";
 import PlanPolicy from "@/modules/Policy/components/Steps/PlanPolicy";
 import VehicleForm from "@/modules/Policy/components/Steps/VehicleForm";
-import { TypeStep } from "@/shared/utils/multiStepFormUtils";
+import { TypeStep } from "@/modules/Policy/utils/multiStepFormUtils";
 import { string, number, object, date } from "yup";
 
 export const stepsCreatePolicy: TypeStep[] = [
