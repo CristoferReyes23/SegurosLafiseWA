@@ -2,7 +2,7 @@ import { PlanSelect } from "@/modules/Policy/components/PlanSelect";
 import {
   FormikComponentProps,
   getFormikProps,
-} from "@/modules/Policy/utils/getFormikProps";
+} from "@/shared/utils/getFormikProps";
 import FormCard from "@/shared/components/FormCard";
 import { FloatingLabel } from "react-bootstrap";
 import Col from "react-bootstrap/esm/Col";

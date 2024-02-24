@@ -1,4 +1,4 @@
-import { FormikComponentProps } from "@/modules/Policy/utils/getFormikProps";
+import { FormikComponentProps } from "@/shared/utils/getFormikProps";
 import { getUrlWithValues } from "@/shared/utils/getUrlWithValues";
 import { fetchCall } from "@/shared/utils/fetchApi";
 import { TypeProviderApi } from "@/shared/utils/urlPaths";

@@ -3,23 +3,16 @@ import Feedback from "react-bootstrap/esm/Feedback";
 import FormSelect, { FormSelectProps } from "react-bootstrap/esm/FormSelect";
 
 interface Props extends FormSelectProps {
-  firstOption?: SelectDataTemplate;
+  firstOptionEmpty?: string;
   data: SelectDataTemplate[];
   errorMessage: string;
 }
 
-const FormSelectTemplate = ({
-  data,
-  firstOption,
-  errorMessage,
-  ...defaultProps
-}: Props) => {
+const FormSelectTemplate = ({ data, errorMessage, firstOptionEmpty, ...defaultProps }: Props) => {
   return (
     <>
       <FormSelect {...defaultProps}>
-        {firstOption && (
-          <option value={firstOption.id}>{firstOption.text}</option>
-        )}
+        {firstOptionEmpty && <option value={""}>{firstOptionEmpty}</option>}
         {data?.map((i) => (
           <option value={i.id} key={i.id}>
             {i.text}

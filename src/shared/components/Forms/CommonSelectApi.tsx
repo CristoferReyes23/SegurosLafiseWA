@@ -1,8 +1,7 @@
 import { useLoadSelect } from "@/modules/Policy/hooks/useLoadSelect";
-import { getFormikErrorField, getFormikProps } from "@/modules/Policy/utils/getFormikProps";
+import { getFormikErrorField, getFormikProps } from "@/shared/utils/getFormikProps";
 import FormSelectTemplate from "@/shared/components/Forms/FormSelectTemplate";
 import { BaseListDataModel } from "@/shared/models/BaseListData.model";
-import { SelectDataTemplate } from "@/shared/utils/formTypes";
 import { FormikProps } from "formik";
 
 interface Props {
@@ -10,14 +9,14 @@ interface Props {
   name: string;
   dependencyField: string;
   pathApi: string;
-  firstOption?: SelectDataTemplate;
+  firstOptionEmpty?: string;
 }
 
-const CommonSelectApi = ({ dependencyField, form, name, pathApi, firstOption }: Props) => {
+const CommonSelectApi = ({ dependencyField, form, name, pathApi, firstOptionEmpty }: Props) => {
   const { data, isDisabled } = useLoadSelect<BaseListDataModel[]>({
     form,
     name,
-    use: "LAFISE",
+    providerName: "LAFISE",
     dependencyField,
     pathApi,
   });
@@ -25,7 +24,7 @@ const CommonSelectApi = ({ dependencyField, form, name, pathApi, firstOption }: 
   return (
     <FormSelectTemplate
       data={data ?? []}
-      firstOption={firstOption}
+      firstOptionEmpty={firstOptionEmpty}
       errorMessage={getFormikErrorField(form, name)}
       {...getFormikProps(form, name)}
       disabled={isDisabled}

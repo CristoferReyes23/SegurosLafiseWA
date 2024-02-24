@@ -1,5 +1,5 @@
 import { PlanSelect } from "@/modules/Policy/components/PlanSelect";
-import { FormikComponentProps, getFormikProps } from "@/modules/Policy/utils/getFormikProps";
+import { FormikComponentProps, getFormikProps } from "@/shared/utils/getFormikProps";
 import FormCard from "@/shared/components/FormCard";
 import CommonSelectApi from "@/shared/components/Forms/CommonSelectApi";
 import FormSelectTemplate from "@/shared/components/Forms/FormSelectTemplate";
@@ -28,7 +28,7 @@ const FormTemplate = ({ form }: FormikComponentProps) => {
                 name="marcaId"
                 form={form}
                 pathApi={EnumUrlCatalogsPaths.brands}
-                firstOption={{ id: "", text: "Seleccione una marca" }}
+                firstOptionEmpty="Seleccione una marca"
               />
             </FloatingLabel>
           </div>
@@ -40,7 +40,7 @@ const FormTemplate = ({ form }: FormikComponentProps) => {
                 name="modeloId"
                 form={form}
                 pathApi={EnumUrlCatalogsPaths.models}
-                firstOption={{ id: "", text: "Seleccione un modelo" }}
+                firstOptionEmpty="Seleccione un modelo"
               />
             </FloatingLabel>
           </div>
@@ -52,7 +52,7 @@ const FormTemplate = ({ form }: FormikComponentProps) => {
                 name="anio"
                 form={form}
                 pathApi={EnumUrlCatalogsPaths.years}
-                firstOption={{ id: "", text: "Selccione el año" }}
+                firstOptionEmpty="Selccione el año"
               />
             </FloatingLabel>
           </div>
@@ -81,7 +81,7 @@ const SelectUses = ({ form }: FormikComponentProps) => {
         {...getFormikProps(form, "uso")}
         data={data ?? []}
         errorMessage={""}
-        firstOption={{ id: "", text: "Seleccione el uso del vehículo" }}
+        firstOptionEmpty="Seleccione el uso del vehículo"
       />
     </FloatingLabel>
   );

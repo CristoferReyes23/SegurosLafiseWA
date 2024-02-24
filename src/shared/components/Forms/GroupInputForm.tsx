@@ -1,4 +1,4 @@
-import { getFormikErrorField, getFormikProps } from "@/modules/Policy/utils/getFormikProps";
+import { getFormikErrorField, getFormikProps } from "@/shared/utils/getFormikProps";
 import { FormikProps, FormikValues } from "formik";
 import Feedback from "react-bootstrap/esm/Feedback";
 import FormControl, { FormControlProps } from "react-bootstrap/esm/FormControl";

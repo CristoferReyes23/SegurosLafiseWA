@@ -33,7 +33,7 @@ const Dashboard = () => {
                 <i className="fa-solid fa-print"></i>
               </h1>
             </div>
-            <Link to={""}>
+            <Link to={"/printer"}>
               <Button variant="success" className="w-100">
                 Continuar
               </Button>

@@ -1,5 +1,5 @@
 import { CommonSelectGroup } from "@/modules/Policy/components/CommonSelectGroup";
-import { FormikComponentProps, getFormikErrorField, getFormikProps } from "@/modules/Policy/utils/getFormikProps";
+import { FormikComponentProps, getFormikErrorField, getFormikProps } from "@/shared/utils/getFormikProps";
 import FormCard from "@/shared/components/FormCard";
 import FormGroupTemplate from "@/shared/components/Forms/FormGroupTemplate";
 import FormSelectTemplate from "@/shared/components/Forms/FormSelectTemplate";
@@ -45,7 +45,7 @@ const ClientForm = ({ form }: Props) => {
             form={form}
             name="departamentoId"
             pathApi={EnumUrlCatalogsPaths.department}
-            firstOption={{ id: "", text: "Seleccione un departamento" }}
+            firstOptionEmpty="Seleccione un departamento"
           />
           <CommonSelectGroup
             dependencyField="departamentoId"
@@ -53,7 +53,7 @@ const ClientForm = ({ form }: Props) => {
             form={form}
             name="ciudadId"
             pathApi={EnumUrlCatalogsPaths.cities}
-            firstOption={{ id: "", text: "Seleccione una ciudad" }}
+            firstOptionEmpty="Seleccione una ciudad"
           />
           <CommonSelectGroup
             dependencyField="ciudadId"
@@ -61,7 +61,7 @@ const ClientForm = ({ form }: Props) => {
             form={form}
             name="distrito"
             pathApi={EnumUrlCatalogsPaths.districts}
-            firstOption={{ id: "", text: "Seleccione un distrito" }}
+            firstOptionEmpty="Seleccione un distrito"
           />
         </div>
       </FormCard>
@@ -80,7 +80,7 @@ const SelectTypeId = ({ form }: FormikComponentProps) => {
   return (
     <FormGroupTemplate label="Tipo de identificación" name="tipoId">
       <FormSelectTemplate
-        firstOption={{ id: "", text: "Seleccione un tipo de identificación" }}
+        firstOptionEmpty="Seleccione un tipo de identificación"
         data={data ?? []}
         errorMessage={getFormikErrorField(form, "tipoId")}
         {...getFormikProps(form, "tipoId")}
@@ -98,7 +98,7 @@ const SelectGender = ({ form }: FormikComponentProps) => {
   return (
     <FormGroupTemplate label="Sexo" name="sexo">
       <FormSelectTemplate
-        firstOption={{ id: "", text: "Seleccione un sexo" }}
+        firstOptionEmpty="Seleccione un sexo"
         data={data ?? []}
         errorMessage={getFormikErrorField(form, "sexo")}
         {...getFormikProps(form, "sexo")}
@@ -116,7 +116,7 @@ const SelectCountry = ({ form }: FormikComponentProps) => {
   return (
     <FormGroupTemplate label="País de origen" name="paisOrigen">
       <FormSelectTemplate
-        firstOption={{ id: "", text: "Seleccione un país" }}
+        firstOptionEmpty="Seleccione un país"
         data={data ?? []}
         errorMessage={getFormikErrorField(form, "paisOrigen")}
         {...getFormikProps(form, "paisOrigen")}

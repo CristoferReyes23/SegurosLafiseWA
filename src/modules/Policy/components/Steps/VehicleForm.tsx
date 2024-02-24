@@ -21,7 +21,7 @@ const VehicleForm = ({ form }: Props) => {
               dependencyField="planId"
               pathApi={EnumUrlCatalogsPaths.brands}
               floatingLabel={"Marca"}
-              firstOption={{ id: "", text: "Seleccione una marca" }}
+              firstOptionEmpty="Seleccione una marca"
             />
             <CommonSelectGroup
               form={form}
@@ -29,7 +29,7 @@ const VehicleForm = ({ form }: Props) => {
               dependencyField={"marcaId"}
               pathApi={EnumUrlCatalogsPaths.models}
               floatingLabel={"Modelo"}
-              firstOption={{ id: "", text: "Seleccione un modelo" }}
+              firstOptionEmpty="Seleccione un modelo"
             />
             <CommonSelectGroup
               form={form}
@@ -37,7 +37,7 @@ const VehicleForm = ({ form }: Props) => {
               dependencyField={"marcaId"}
               pathApi={EnumUrlCatalogsPaths.years}
               floatingLabel={"Año"}
-              firstOption={{ id: "", text: "Seleccione una marca" }}
+              firstOptionEmpty="Seleccione una marca"
             />
             <GroupInputForm type="number" form={form} label="Precio del vehículo nuevo" name="valorNuevo" />
           </div>

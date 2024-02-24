@@ -1,9 +1,8 @@
 import { useLoadSelect } from "@/modules/Policy/hooks/useLoadSelect";
-import { getFormikErrorField, getFormikProps } from "@/modules/Policy/utils/getFormikProps";
+import { getFormikErrorField, getFormikProps } from "@/shared/utils/getFormikProps";
 import FormGroupTemplate from "@/shared/components/Forms/FormGroupTemplate";
 import FormSelectTemplate from "@/shared/components/Forms/FormSelectTemplate";
 import { BaseListDataModel } from "@/shared/models/BaseListData.model";
-import { SelectDataTemplate } from "@/shared/utils/formTypes";
 import { FormikProps } from "formik";
 
 // common select FormGroup
@@ -14,14 +13,14 @@ interface Props {
   dependencyField: string;
   pathApi: string;
   floatingLabel: string;
-  firstOption?: SelectDataTemplate;
+  firstOptionEmpty?: string;
 }
 
-export const CommonSelectGroup = ({ name, form, pathApi, floatingLabel, dependencyField, firstOption }: Props) => {
+export const CommonSelectGroup = ({ name, form, pathApi, floatingLabel, dependencyField, firstOptionEmpty }: Props) => {
   const { data, isDisabled } = useLoadSelect<BaseListDataModel[]>({
     form,
     name,
-    use: "LAFISE",
+    providerName: "LAFISE",
     dependencyField,
     pathApi,
   });
@@ -30,7 +29,7 @@ export const CommonSelectGroup = ({ name, form, pathApi, floatingLabel, dependen
     <FormGroupTemplate label={floatingLabel} name={name}>
       <FormSelectTemplate
         data={data ?? []}
-        firstOption={firstOption}
+        firstOptionEmpty={firstOptionEmpty}
         errorMessage={getFormikErrorField(form, name)}
         {...getFormikProps(form, name)}
         disabled={isDisabled}
