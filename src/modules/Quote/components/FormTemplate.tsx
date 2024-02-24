@@ -18,6 +18,10 @@ const FormTemplate = ({ form }: FormikComponentProps) => {
           </div>
 
           <div className="col-sm-12 col-md-4 mb-3">
+            <SelectUses form={form} />
+          </div>
+
+          <div className="col-sm-12 col-md-4 mb-3">
             <FloatingLabel label="Marca">
               <CommonSelectApi
                 dependencyField="planId"
@@ -52,10 +56,6 @@ const FormTemplate = ({ form }: FormikComponentProps) => {
               />
             </FloatingLabel>
           </div>
-
-          <div className="col-sm-12 col-md-4 mb-3">
-            <SelectUses form={form} />
-          </div>
         </div>
 
         <div className="d-flex justify-content-end">
@@ -77,7 +77,12 @@ const SelectUses = ({ form }: FormikComponentProps) => {
   const { data } = useFetch<BaseListDataModel[]>({ to: "LAFISE", urlPath: EnumUrlCatalogsPaths.uses });
   return (
     <FloatingLabel label="Uso del vehículo">
-      <FormSelectTemplate {...getFormikProps(form, "uso")} data={data ?? []} errorMessage={""} />
+      <FormSelectTemplate
+        {...getFormikProps(form, "uso")}
+        data={data ?? []}
+        errorMessage={""}
+        firstOption={{ id: "", text: "Seleccione el uso del vehículo" }}
+      />
     </FloatingLabel>
   );
 };

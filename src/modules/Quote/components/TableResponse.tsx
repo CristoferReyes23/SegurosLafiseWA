@@ -1,3 +1,4 @@
+import { TABLE_COVERAGES } from "@/modules/Quote/utils/const";
 import { Coverage } from "@/shared/models/quoteResponse.model";
 
 interface Props {
@@ -6,10 +7,10 @@ interface Props {
 
 const TableResponse = ({ coverages }: Props) => {
   return (
-    <table className="table table-secondary table-responsive">
+    <table className="table table-responsive table">
       <thead>
         <tr>
-          {headerKeys.map((i) => (
+          {TABLE_COVERAGES.map((i) => (
             <th className="" scope="col" key={i.key}>
               {i.title}
             </th>
@@ -20,7 +21,7 @@ const TableResponse = ({ coverages }: Props) => {
       <tbody>
         {coverages.map((coverage) => (
           <tr key={coverage.id}>
-            {headerKeys.map((header, indexHead) => (
+            {TABLE_COVERAGES.map((header, indexHead) => (
               <td key={indexHead} style={{ maxWidth: header.maxWidth }}>
                 {coverage[header.key]}
               </td>
@@ -33,16 +34,3 @@ const TableResponse = ({ coverages }: Props) => {
 };
 
 export default TableResponse;
-
-const headerKeys = [
-  // { key: "id", title: "#" },
-  // { key: "coberturaId", title: "ID Cobertura" },
-  { key: "nombre", title: "Nombre", maxWidth: "300px" },
-  // { key: "orden", title: "Orden" },
-  { key: "prima", title: "Prima" },
-  { key: "coaseguro", title: "Coaseguro" },
-  { key: "deducible", title: "Deducible" },
-  { key: "descuento", title: "Descuento" },
-  { key: "sumaAsegurada", title: "Aseguradora" },
-  { key: "total", title: "Total" },
-];
