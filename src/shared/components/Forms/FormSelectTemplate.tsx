@@ -1,8 +1,6 @@
 import { SelectDataTemplate } from "@/shared/utils/formTypes";
-import Feedback from "react-bootstrap/esm/Feedback";
-import FormSelect, { FormSelectProps } from "react-bootstrap/esm/FormSelect";
 
-interface Props extends FormSelectProps {
+interface Props extends React.DetailedHTMLProps<React.SelectHTMLAttributes<HTMLSelectElement>, HTMLSelectElement> {
   firstOptionEmpty?: string;
   data: SelectDataTemplate[];
   errorMessage: string;
@@ -11,17 +9,15 @@ interface Props extends FormSelectProps {
 const FormSelectTemplate = ({ data, errorMessage, firstOptionEmpty, ...defaultProps }: Props) => {
   return (
     <>
-      <FormSelect {...defaultProps}>
+      <select className="form-select" {...defaultProps}>
         {firstOptionEmpty && <option value={""}>{firstOptionEmpty}</option>}
         {data?.map((i) => (
           <option value={i.id} key={i.id}>
             {i.text}
           </option>
         ))}
-      </FormSelect>
-      <Feedback type="invalid" tooltip>
-        {errorMessage}
-      </Feedback>
+      </select>
+      <div className="invalid-tooltip">{errorMessage}</div>
     </>
   );
 };

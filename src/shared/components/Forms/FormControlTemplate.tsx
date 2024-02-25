@@ -1,7 +1,6 @@
-import Feedback from "react-bootstrap/esm/Feedback";
-import FormControl, { FormControlProps } from "react-bootstrap/esm/FormControl";
+import { DetailedHTMLProps, InputHTMLAttributes } from "react";
 
-interface Props extends FormControlProps {
+interface Props extends DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> {
   errorMessage: string;
   type?: string;
   placeHolder?: string;
@@ -10,10 +9,8 @@ interface Props extends FormControlProps {
 const FormControlTemplate = ({ errorMessage, type, placeHolder, ...defaultProps }: Props) => {
   return (
     <>
-      <FormControl {...defaultProps} type={type ?? "text"} placeholder={placeHolder} />
-      <Feedback type="invalid" tooltip>
-        {errorMessage}
-      </Feedback>
+      <input className="form-control" type={type ?? "text"} {...defaultProps} placeholder={placeHolder} />
+      <div className="invalid-tooltip">{errorMessage}</div>
     </>
   );
 };

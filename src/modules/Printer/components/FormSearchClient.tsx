@@ -4,19 +4,29 @@ import useFetch from "@/shared/hooks/useFetch";
 import { BaseListDataModel } from "@/shared/models/BaseListData.model";
 import { FormikComponentProps, getFormikErrorField, getFormikProps } from "@/shared/utils/getFormikProps";
 import { EnumUrlCatalogsPaths } from "@/shared/utils/urlPaths";
-import FloatingLabel from "react-bootstrap/esm/FloatingLabel";
 
 const FormSearchClient = ({ form }: FormikComponentProps) => {
   return (
-    <FormCard title={"Seleccione un cliente para listar sus pólizas"}>
-      <form noValidate>
+    <FormCard title="Buscar cliente">
+      <form noValidate onSubmit={form.handleSubmit}>
         <div className="row">
           <div className="col">
-            <SelectTypeId form={form} />
+            <div className="input-group">
+              <label className="input-group-text">Tipo de Identificación</label>
+              <SelectTypeId form={form} />
+            </div>
+          </div>
+
+          <div className="col">
+            <div className="input-group">
+              <input type="text" placeholder="Identificación" className="form-control" />
+
+              <button className="btn btn-primary" type="submit" disabled={form.isSubmitting}>
+                <i className="fa-solid fa-magnifying-glass"></i> Buscar
+              </button>
+            </div>
           </div>
         </div>
-
-        <div></div>
       </form>
     </FormCard>
   );
@@ -31,13 +41,20 @@ const SelectTypeId = ({ form }: FormikComponentProps) => {
   });
 
   return (
-    <FloatingLabel label="Tipo de identificación">
-      <FormSelectTemplate
-        data={data ?? []}
-        {...getFormikProps(form, "typeUserId")}
-        errorMessage={getFormikErrorField(form, "typeUserId")}
-        firstOptionEmpty="Seleccione un tipo de identificación"
-      />
-    </FloatingLabel>
+    // <div className="form-floating">
+    <FormSelectTemplate
+      data={
+        data ?? [
+          { id: "5", text: "Ruc" },
+          { id: "1", text: "Cédula" },
+          { id: "2", text: "Etc" },
+        ]
+      }
+      {...getFormikProps(form, "typeUserId")}
+      errorMessage={getFormikErrorField(form, "typeUserId")}
+      firstOptionEmpty="Seleccione un tipo de identificación"
+    />
+    // <label>Tipo de identificación</label>
+    // </div>
   );
 };
