@@ -33,13 +33,34 @@ const ClientForm = ({ form }: Props) => {
           <GroupInputForm formik={form} label="Nombre" name="nombre" />
           <GroupInputForm formik={form} label="Apellido" name="apellido" />
           <GroupInputForm type="date" formik={form} label="Fecha de nacimiento" name="fechaNacimiento" />
+          <CommonSelectGroup
+            form={form}
+            firsOption="Seleccione una profesión"
+            label="Profesiones"
+            name="profesion"
+            urlPath={EnumUrlCatalogsPaths.profession}
+          />
+          <CommonSelectGroup
+            form={form}
+            label="Ocupación"
+            name="profesion"
+            firsOption="Seleccione una profesión"
+            urlPath={EnumUrlCatalogsPaths.profession}
+          />
         </div>
       </FormCard>
       <FormCard title="Datos de contacto">
         <div className="form-fields-container">
           <GroupInputForm formik={form} label="Correo" name="email" type="email" />
-          <GroupInputForm name={"celular"} formik={form} label={"Celular"} type="number" />
-          <GroupInputForm name={"telefono"} formik={form} label={"Teléfono"} type="number" />
+          <GroupInputForm name={"celular"} formik={form} label={"Celular"} type="number" maxLength={8} minLength={8} />
+          <GroupInputForm
+            name={"telefono"}
+            formik={form}
+            label={"Teléfono"}
+            type="number"
+            maxLength={8}
+            minLength={8}
+          />
         </div>
       </FormCard>
 
@@ -61,6 +82,7 @@ const ClientForm = ({ form }: Props) => {
             floatingLabel="Departamento"
             form={form}
             name="departamentoId"
+            nameText="xprovincia"
             pathApi={EnumUrlCatalogsPaths.department}
             firstOptionEmpty="Seleccione un departamento"
           />
@@ -69,6 +91,7 @@ const ClientForm = ({ form }: Props) => {
             floatingLabel="Ciudad"
             form={form}
             name="ciudadId"
+            nameText="xcanton"
             pathApi={EnumUrlCatalogsPaths.cities}
             firstOptionEmpty="Seleccione una ciudad"
           />
@@ -77,6 +100,7 @@ const ClientForm = ({ form }: Props) => {
             floatingLabel="Distrito"
             form={form}
             name="distrito"
+            nameText="xdistrito"
             pathApi={EnumUrlCatalogsPaths.districts}
             firstOptionEmpty="Seleccione un distrito"
           />
