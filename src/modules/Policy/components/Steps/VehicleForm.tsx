@@ -39,17 +39,17 @@ const VehicleForm = ({ form }: Props) => {
               floatingLabel={"Año"}
               firstOptionEmpty="Seleccione una marca"
             />
-            <GroupInputForm type="number" form={form} label="Precio del vehículo nuevo" name="valorNuevo" />
+            <GroupInputForm type="number" formik={form} label="Precio del vehículo nuevo" name="valorNuevo" />
           </div>
         </FormCard>
 
         <FormCard title="Datos del vehículo">
           <div className="form-fields-container">
-            <GroupInputForm form={form} label="Número de placa" name="placa" />
-            <GroupInputForm form={form} label="Número de motor" name="motor" />
-            <GroupInputForm form={form} label="Número de chasis" name="chasis" />
-            <GroupInputForm form={form} label="Color" name="color" />
-            <GroupInputForm form={form} label="Número de puertas" name="puertas" type="number" />
+            <GroupInputForm formik={form} label="Número de placa" name="placa" />
+            <GroupInputForm formik={form} label="Número de motor" name="motor" />
+            <GroupInputForm formik={form} label="Número de chasis" name="chasis" />
+            <GroupInputForm formik={form} label="Color" name="color" />
+            <GroupInputForm formik={form} label="Número de puertas" name="puertas" type="number" />
           </div>
         </FormCard>
       </Stack>

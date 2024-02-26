@@ -18,25 +18,25 @@ const ClientForm = ({ form }: Props) => {
       <FormCard title="Datos del cliente">
         <div className="form-fields-container">
           <SelectTypeId form={form} />
-          <GroupInputForm form={form} label="Identificación" name="documentoIdentificacion" />
+          <GroupInputForm formik={form} label="Identificación" name="documentoIdentificacion" />
           <SelectGender form={form} />
-          <GroupInputForm form={form} label="Nombre" name="nombre" />
-          <GroupInputForm form={form} label="Apellido" name="apellido" />
-          <GroupInputForm type="date" form={form} label="Fecha de nacimiento" name="fechaNacimiento" />
+          <GroupInputForm formik={form} label="Nombre" name="nombre" />
+          <GroupInputForm formik={form} label="Apellido" name="apellido" />
+          <GroupInputForm type="date" formik={form} label="Fecha de nacimiento" name="fechaNacimiento" />
         </div>
       </FormCard>
       <FormCard title="Datos de contacto">
         <div className="form-fields-container">
-          <GroupInputForm form={form} label="Correo" name="email" type="email" />
-          <GroupInputForm name={"celular"} form={form} label={"Celular"} type="number" />
-          <GroupInputForm name={"telefono"} form={form} label={"Teléfono"} type="number" />
+          <GroupInputForm formik={form} label="Correo" name="email" type="email" />
+          <GroupInputForm name={"celular"} formik={form} label={"Celular"} type="number" />
+          <GroupInputForm name={"telefono"} formik={form} label={"Teléfono"} type="number" />
         </div>
       </FormCard>
 
       <FormCard title="Dirección">
         <div className="form-fields-container">
           <div className="dir-input">
-            <GroupInputForm form={form} name={"direccion"} label={"Dirección"} as="textarea" rows={2} />
+            <GroupInputForm formik={form} name={"direccion"} label={"Dirección"} />
           </div>
           <SelectCountry form={form} />
           <CommonSelectGroup

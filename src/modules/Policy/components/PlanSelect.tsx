@@ -30,8 +30,26 @@ export const PlanSelect = ({ form }: FormikComponentProps) => {
   return (
     <FloatingLabel label={"Plan de póliza"}>
       <FormSelectTemplate
-        firstOption={{ text: "Seleccione un plan de poliza", id: "" }}
-        data={dataView}
+        firstOptionEmpty="Seleccione un plan de poliza"
+        // data={dataView}
+        data={[
+          {
+            id: "1",
+            text: "test1",
+          },
+          {
+            id: "2",
+            text: "test2",
+          },
+          {
+            id: "3",
+            text: "test3",
+          },
+          {
+            id: "4",
+            text: "test4",
+          },
+        ]}
         {...inputFormik}
         onChange={(e) => {
           onChangeSelect(e.target.value);

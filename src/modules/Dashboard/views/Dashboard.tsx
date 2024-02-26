@@ -23,7 +23,7 @@ const Dashboard = () => {
         ))}
       </Stack>
 
-      {/* print card */}
+      {/* printer card */}
       <Stack direction="horizontal" className="flex-wrap gap-5">
         <Card style={{ width: "18rem" }} className="m-0">
           <Card.Body>

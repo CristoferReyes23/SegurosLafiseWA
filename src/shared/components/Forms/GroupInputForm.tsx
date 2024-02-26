@@ -1,25 +1,25 @@
+import FormControlTemplate from "@/shared/components/Forms/FormControlTemplate";
 import { getFormikErrorField, getFormikProps } from "@/shared/utils/getFormikProps";
-import { FormikProps, FormikValues } from "formik";
-import Feedback from "react-bootstrap/esm/Feedback";
-import FormControl, { FormControlProps } from "react-bootstrap/esm/FormControl";
+import { FormikProps } from "formik";
+import { DetailedHTMLProps, InputHTMLAttributes } from "react";
 import FormGroup from "react-bootstrap/esm/FormGroup";
 import FormLabel from "react-bootstrap/esm/FormLabel";
 
-interface Props extends FormControlProps {
-  name: string;
-  form: FormikProps<FormikValues>;
+interface Props extends DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> {
+  formik: FormikProps<any>;
   label: string;
-  rows?: number;
+  name: string;
 }
 
-const GroupInputForm = ({ form, name, label, ...defaultProps }: Props) => {
+const GroupInputForm = ({ formik, name, label, ...defaultProps }: Props) => {
   return (
     <FormGroup className="position-relative mb-3" id={`inputGroup-${name}`}>
       <FormLabel>{label}</FormLabel>
-      <FormControl {...getFormikProps(form, name)} {...defaultProps} />
-      <Feedback type="invalid" tooltip>
-        {getFormikErrorField(form, name)}
-      </Feedback>
+      <FormControlTemplate
+        errorMessage={getFormikErrorField(formik, name)}
+        {...getFormikProps(formik, name)}
+        {...defaultProps}
+      />
     </FormGroup>
   );
 };

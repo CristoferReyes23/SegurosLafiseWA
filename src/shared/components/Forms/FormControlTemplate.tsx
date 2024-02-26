@@ -3,9 +3,10 @@ import { DetailedHTMLProps, InputHTMLAttributes } from "react";
 interface Props extends DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> {
   errorMessage: string;
   isInvalid: boolean;
+  isNumericOnly?: boolean;
 }
 
-const FormControlTemplate = ({ errorMessage, type, isInvalid, ...defaultProps }: Props) => {
+const FormControlTemplate = ({ errorMessage, type, isInvalid, isNumericOnly, ...defaultProps }: Props) => {
   return (
     <>
       <input className={`form-control ${isInvalid && "is-invalid"}`} {...defaultProps} />
@@ -15,3 +16,5 @@ const FormControlTemplate = ({ errorMessage, type, isInvalid, ...defaultProps }:
 };
 
 export default FormControlTemplate;
+
+// const regexValidNumber = /[0-9]|\./;
