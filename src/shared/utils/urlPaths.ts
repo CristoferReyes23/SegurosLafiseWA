@@ -16,4 +16,6 @@ export enum EnumUrlCatalogsPaths {
   uses = "catalogs/vehicles/uses",
 
   coverages = "rates/{planId}/coverages",
+
+  getPolicies = "",
 }

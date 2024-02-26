@@ -1,4 +1,11 @@
-const TablePolicy = () => {
+import { PolicyListModel } from "@/shared/models/policyListResponse.model";
+
+interface Props {
+  dataSource: PolicyListModel[] | undefined;
+  onClickPrint: (...args: any[]) => void;
+}
+
+const TablePolicy = ({ dataSource, onClickPrint }: Props) => {
   return (
     <table className="table table-response">
       <thead>
@@ -8,8 +15,34 @@ const TablePolicy = () => {
               {i.header}
             </th>
           ))}
+          <th key={"print-header"}></th>
         </tr>
       </thead>
+      <tbody className="">
+        {dataSource ? (
+          dataSource.map((row) => (
+            <tr key={row.id}>
+              {TABLE_POLICY.map((col) => (
+                <td key={col.key}>{row[col.key]}</td>
+              ))}
+              <td key={"print"}>
+                <button type="button" className="btn btn-success" onClick={onClickPrint}>
+                  <span className="me-3">
+                    <i className="fas fa-edit"></i>
+                  </span>
+                  Imprimir
+                </button>
+              </td>
+            </tr>
+          ))
+        ) : (
+          <tr>
+            <td className="text-center text-muted" colSpan={6}>
+              No hay datos que mostrar
+            </td>
+          </tr>
+        )}
+      </tbody>
     </table>
   );
 };
@@ -17,10 +50,10 @@ const TablePolicy = () => {
 export default TablePolicy;
 
 const TABLE_POLICY = [
-  { header: "N° Póliza", key: "" },
-  { header: "N° Placa", key: "" },
-  { header: "Marca", key: "" },
-  { header: "Modelo", key: "" },
-  { header: "Año", key: "" },
-  { header: "Fecha creación", key: "" },
+  { header: "N° Póliza", key: "id" },
+  { header: "N° Placa", key: "placa" },
+  { header: "Marca", key: "brand" },
+  { header: "Modelo", key: "model" },
+  { header: "Año", key: "year" },
+  { header: "Fecha creación", key: "createdAt" },
 ];

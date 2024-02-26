@@ -1,4 +1,4 @@
-import { AuthSessionService } from "@/shared/services/AuthSession.service";
+import { AuthSessionService } from "@/shared/services/authSession.service";
 import { redirect } from "react-router-dom";
 
 export async function protectedLayoutLoader() {

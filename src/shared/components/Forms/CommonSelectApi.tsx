@@ -1,7 +1,7 @@
 import { useLoadSelect } from "@/modules/Policy/hooks/useLoadSelect";
 import { getFormikErrorField, getFormikProps } from "@/shared/utils/getFormikProps";
 import FormSelectTemplate from "@/shared/components/Forms/FormSelectTemplate";
-import { BaseListDataModel } from "@/shared/models/BaseListData.model";
+import { BaseListDataModel } from "@/shared/models/baseListData.model";
 import { FormikProps } from "formik";
 
 interface Props {

@@ -1,5 +1,5 @@
 import { AuthApi } from "@/shared/apis/auth.api";
-import { AuthSessionService } from "@/shared/services/AuthSession.service";
+import { AuthSessionService } from "@/shared/services/authSession.service";
 
 export async function authenticate(a: string, b: string) {
   const response = await AuthApi.ValidateQueryParams(a, b);

@@ -4,7 +4,7 @@ import FormCard from "@/shared/components/FormCard";
 import CommonSelectApi from "@/shared/components/Forms/CommonSelectApi";
 import FormSelectTemplate from "@/shared/components/Forms/FormSelectTemplate";
 import useFetch from "@/shared/hooks/useFetch";
-import { BaseListDataModel } from "@/shared/models/BaseListData.model";
+import { BaseListDataModel } from "@/shared/models/baseListData.model";
 import { EnumUrlCatalogsPaths } from "@/shared/utils/urlPaths";
 import FloatingLabel from "react-bootstrap/esm/FloatingLabel";
 

@@ -1,4 +1,4 @@
-import { AuthSessionService } from "@/shared/services/AuthSession.service";
+import { AuthSessionService } from "@/shared/services/authSession.service";
 import { TypeProviderApi } from "@/shared/utils/urlPaths";
 
 interface Props {
