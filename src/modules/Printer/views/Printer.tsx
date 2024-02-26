@@ -8,6 +8,7 @@ import FormCard from "@/shared/components/FormCard";
 export const Printer = () => {
   const { formik, responseData, isVisibleAlert, setIsVisibleAlert, onClickPrint, urlPdf, hidePdf, isVisiblePdf } =
     PrinterHelper();
+
   return (
     <div>
       <div className="vstack gap-3">

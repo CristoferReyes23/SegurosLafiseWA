@@ -32,9 +32,10 @@ const PrinterHelper = () => {
   });
 
   const onClickPrint = (id: string) => {
-    console.log(id);
-    setIsVisiblePdf(true);
-    setUrlPdf("https://web.stanford.edu/class/cs142/lectures/StateManagement.pdf");
+    PrinterService.getPdfPath(id).then((path) => {
+      setIsVisiblePdf(true);
+      setUrlPdf(path);
+    });
   };
 
   const hidePdf = () => {
