@@ -1,12 +1,9 @@
-import { CommonSelectGroup } from "@/modules/Policy/components/CommonSelectGroup";
-import { FormikComponentProps, getFormikErrorField, getFormikProps } from "@/shared/utils/getFormikProps";
+import { CommonSelectWithDependency } from "@/modules/Policy/components/CommonSelectWithDependency";
 import FormCard from "@/shared/components/FormCard";
-import FormGroupTemplate from "@/shared/components/Forms/FormGroupTemplate";
-import FormSelectTemplate from "@/shared/components/Forms/FormSelectTemplate";
 import GroupInputForm from "@/shared/components/Forms/GroupInputForm";
-import useFetch from "@/shared/hooks/useFetch";
 import { EnumUrlCatalogsPaths } from "@/shared/utils/urlPaths";
 import { FormikProps, FormikValues } from "formik";
+import CommonSelectGroup from "@/modules/Policy/components/CommonSelectGroup";
 
 interface Props {
   form: FormikProps<FormikValues>;
@@ -17,9 +14,22 @@ const ClientForm = ({ form }: Props) => {
     <div className="client-step vstack gap-3">
       <FormCard title="Datos del cliente">
         <div className="form-fields-container">
-          <SelectTypeId form={form} />
+          <CommonSelectGroup
+            form={form}
+            name={"tipoId"}
+            urlPath={EnumUrlCatalogsPaths.typeId}
+            label={"Tipo de identificación"}
+            firsOption={"Seleccione un tipo de identificación"}
+          />
+
           <GroupInputForm formik={form} label="Identificación" name="documentoIdentificacion" />
-          <SelectGender form={form} />
+          <CommonSelectGroup
+            form={form}
+            name={"sexo"}
+            urlPath={EnumUrlCatalogsPaths.sex}
+            label="Sexo"
+            firsOption="Seleccione un sexo"
+          />
           <GroupInputForm formik={form} label="Nombre" name="nombre" />
           <GroupInputForm formik={form} label="Apellido" name="apellido" />
           <GroupInputForm type="date" formik={form} label="Fecha de nacimiento" name="fechaNacimiento" />
@@ -38,8 +48,15 @@ const ClientForm = ({ form }: Props) => {
           <div className="dir-input">
             <GroupInputForm formik={form} name={"direccion"} label={"Dirección"} />
           </div>
-          <SelectCountry form={form} />
           <CommonSelectGroup
+            form={form}
+            name="paisOrigen"
+            nameText="xpaisOrigen"
+            urlPath={EnumUrlCatalogsPaths.countriesOrigin}
+            label="País de origen"
+            firsOption="Seleccione un país"
+          />
+          <CommonSelectWithDependency
             dependencyField="paisOrigen"
             floatingLabel="Departamento"
             form={form}
@@ -47,7 +64,7 @@ const ClientForm = ({ form }: Props) => {
             pathApi={EnumUrlCatalogsPaths.department}
             firstOptionEmpty="Seleccione un departamento"
           />
-          <CommonSelectGroup
+          <CommonSelectWithDependency
             dependencyField="departamentoId"
             floatingLabel="Ciudad"
             form={form}
@@ -55,7 +72,7 @@ const ClientForm = ({ form }: Props) => {
             pathApi={EnumUrlCatalogsPaths.cities}
             firstOptionEmpty="Seleccione una ciudad"
           />
-          <CommonSelectGroup
+          <CommonSelectWithDependency
             dependencyField="ciudadId"
             floatingLabel="Distrito"
             form={form}
@@ -70,57 +87,3 @@ const ClientForm = ({ form }: Props) => {
 };
 
 export default ClientForm;
-
-const SelectTypeId = ({ form }: FormikComponentProps) => {
-  const { data } = useFetch<any[]>({
-    to: "LAFISE",
-    urlPath: EnumUrlCatalogsPaths.typeId,
-  });
-
-  return (
-    <FormGroupTemplate label="Tipo de identificación" name="tipoId">
-      <FormSelectTemplate
-        firstOptionEmpty="Seleccione un tipo de identificación"
-        data={data ?? []}
-        errorMessage={getFormikErrorField(form, "tipoId")}
-        {...getFormikProps(form, "tipoId")}
-      />
-    </FormGroupTemplate>
-  );
-};
-
-const SelectGender = ({ form }: FormikComponentProps) => {
-  const { data } = useFetch<any[]>({
-    to: "LAFISE",
-    urlPath: EnumUrlCatalogsPaths.sex,
-  });
-
-  return (
-    <FormGroupTemplate label="Sexo" name="sexo">
-      <FormSelectTemplate
-        firstOptionEmpty="Seleccione un sexo"
-        data={data ?? []}
-        errorMessage={getFormikErrorField(form, "sexo")}
-        {...getFormikProps(form, "sexo")}
-      />
-    </FormGroupTemplate>
-  );
-};
-
-const SelectCountry = ({ form }: FormikComponentProps) => {
-  const { data } = useFetch<any[]>({
-    to: "LAFISE",
-    urlPath: EnumUrlCatalogsPaths.countriesOrigin,
-  });
-
-  return (
-    <FormGroupTemplate label="País de origen" name="paisOrigen">
-      <FormSelectTemplate
-        firstOptionEmpty="Seleccione un país"
-        data={data ?? []}
-        errorMessage={getFormikErrorField(form, "paisOrigen")}
-        {...getFormikProps(form, "paisOrigen")}
-      />
-    </FormGroupTemplate>
-  );
-};

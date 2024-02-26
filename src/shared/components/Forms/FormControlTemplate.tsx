@@ -6,7 +6,7 @@ interface Props extends DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>,
   isNumericOnly?: boolean;
 }
 
-const FormControlTemplate = ({ errorMessage, type, isInvalid, isNumericOnly, ...defaultProps }: Props) => {
+const FormControlTemplate = ({ errorMessage, isInvalid, isNumericOnly, ...defaultProps }: Props) => {
   return (
     <>
       <input className={`form-control ${isInvalid && "is-invalid"}`} {...defaultProps} />

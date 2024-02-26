@@ -1,39 +1,56 @@
-import { useLoadSelect } from "@/modules/Policy/hooks/useLoadSelect";
-import { getFormikErrorField, getFormikProps } from "@/shared/utils/getFormikProps";
 import FormGroupTemplate from "@/shared/components/Forms/FormGroupTemplate";
 import FormSelectTemplate from "@/shared/components/Forms/FormSelectTemplate";
+import useFetch from "@/shared/hooks/useFetch";
 import { BaseListDataModel } from "@/shared/models/baseListData.model";
-import { FormikProps } from "formik";
+import { FormikComponentProps, getFormikErrorField, getFormikProps } from "@/shared/utils/getFormikProps";
+import { EnumUrlCatalogsPaths } from "@/shared/utils/urlPaths";
 
-// common select FormGroup
-
-interface Props {
-  form: FormikProps<any>;
+interface Props extends FormikComponentProps {
+  urlPath: EnumUrlCatalogsPaths;
   name: string;
-  dependencyField: string;
-  pathApi: string;
-  floatingLabel: string;
-  firstOptionEmpty?: string;
+  label: string;
+  nameText?: string;
+  firsOption: string;
 }
 
-export const CommonSelectGroup = ({ name, form, pathApi, floatingLabel, dependencyField, firstOptionEmpty }: Props) => {
-  const { data, isDisabled } = useLoadSelect<BaseListDataModel[]>({
-    form,
-    name,
-    providerName: "LAFISE",
-    dependencyField,
-    pathApi,
+const CommonSelectGroup = ({ firsOption, form, label, name, urlPath, nameText }: Props) => {
+  const { data } = useFetch<BaseListDataModel[]>({
+    to: "LAFISE",
+    urlPath,
   });
 
+  const { onChange, ...extraProps } = getFormikProps(form, name);
+
+  const onChangeValue = (e: any) => {
+    if (nameText) {
+      form.setFieldValue(nameText, testValue?.find((i) => i.id == e.target.value)?.text);
+    }
+
+    onChange(e);
+  };
+
   return (
-    <FormGroupTemplate label={floatingLabel} name={name}>
+    <FormGroupTemplate label={label} name={name}>
       <FormSelectTemplate
-        data={data ?? []}
-        firstOptionEmpty={firstOptionEmpty}
+        firstOptionEmpty={firsOption}
+        data={data ?? testValue}
         errorMessage={getFormikErrorField(form, name)}
-        {...getFormikProps(form, name)}
-        disabled={isDisabled}
+        onChange={onChangeValue}
+        {...extraProps}
       />
     </FormGroupTemplate>
   );
 };
+
+export default CommonSelectGroup;
+
+const testValue = [
+  {
+    id: "1",
+    text: "t1",
+  },
+  {
+    id: "2",
+    text: "t2",
+  },
+];

@@ -1,8 +1,5 @@
 import { PlanSelect } from "@/modules/Policy/components/PlanSelect";
-import {
-  FormikComponentProps,
-  getFormikProps,
-} from "@/shared/utils/getFormikProps";
+import { FormikComponentProps, getFormikProps } from "@/shared/utils/getFormikProps";
 import FormCard from "@/shared/components/FormCard";
 import { FloatingLabel } from "react-bootstrap";
 import Col from "react-bootstrap/esm/Col";
@@ -19,11 +16,7 @@ const PlanPolicy = ({ form }: FormikComponentProps) => {
           </Col>
           <Col>
             <FloatingLabel label={"Moneda"}>
-              <Form.Control
-                {...getFormikProps(form, "moneda")}
-                disabled
-                placeholder=""
-              />
+              <Form.Control {...getFormikProps(form, "moneda")} disabled placeholder="" />
             </FloatingLabel>
           </Col>
         </Row>

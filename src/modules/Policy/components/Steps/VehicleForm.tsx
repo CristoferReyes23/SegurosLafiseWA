@@ -2,8 +2,9 @@ import GroupInputForm from "@/shared/components/Forms/GroupInputForm";
 import FormCard from "@/shared/components/FormCard";
 import { FormikProps, FormikValues } from "formik/dist/types";
 import Stack from "react-bootstrap/esm/Stack";
-import { CommonSelectGroup } from "@/modules/Policy/components/CommonSelectGroup";
+import { CommonSelectWithDependency } from "@/modules/Policy/components/CommonSelectWithDependency";
 import { EnumUrlCatalogsPaths } from "@/shared/utils/urlPaths";
+import CommonSelectGroup from "@/modules/Policy/components/CommonSelectGroup";
 
 interface Props {
   form: FormikProps<FormikValues>;
@@ -15,7 +16,7 @@ const VehicleForm = ({ form }: Props) => {
       <Stack gap={3}>
         <FormCard title="Modelo del vehículo">
           <div className="form-fields-container">
-            <CommonSelectGroup
+            <CommonSelectWithDependency
               form={form}
               name={"marcaId"}
               dependencyField="planId"
@@ -23,7 +24,7 @@ const VehicleForm = ({ form }: Props) => {
               floatingLabel={"Marca"}
               firstOptionEmpty="Seleccione una marca"
             />
-            <CommonSelectGroup
+            <CommonSelectWithDependency
               form={form}
               name={"modeloId"}
               dependencyField={"marcaId"}
@@ -31,7 +32,7 @@ const VehicleForm = ({ form }: Props) => {
               floatingLabel={"Modelo"}
               firstOptionEmpty="Seleccione un modelo"
             />
-            <CommonSelectGroup
+            <CommonSelectWithDependency
               form={form}
               name={"anio"}
               dependencyField={"marcaId"}
@@ -45,6 +46,13 @@ const VehicleForm = ({ form }: Props) => {
 
         <FormCard title="Datos del vehículo">
           <div className="form-fields-container">
+            <CommonSelectGroup
+              form={form}
+              name="usoo"
+              urlPath={EnumUrlCatalogsPaths.uses}
+              label="Uso del vehículo"
+              firsOption="Seleccione un tipo de uso"
+            />
             <GroupInputForm formik={form} label="Número de placa" name="placa" />
             <GroupInputForm formik={form} label="Número de motor" name="motor" />
             <GroupInputForm formik={form} label="Número de chasis" name="chasis" />
