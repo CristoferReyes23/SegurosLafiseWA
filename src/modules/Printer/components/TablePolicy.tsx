@@ -26,9 +26,9 @@ const TablePolicy = ({ dataSource, onClickPrint }: Props) => {
                 <td key={col.key}>{row[col.key]}</td>
               ))}
               <td key={"print"}>
-                <button type="button" className="btn btn-success" onClick={onClickPrint}>
+                <button type="button" className="btn btn-success" onClick={() => onClickPrint(row.id)}>
                   <span className="me-3">
-                    <i className="fas fa-edit"></i>
+                    <i className="fa-solid fa-print"></i>
                   </span>
                   Imprimir
                 </button>
