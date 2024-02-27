@@ -4,6 +4,9 @@ import GroupInputForm from "@/shared/components/Forms/GroupInputForm";
 import { EnumUrlCatalogsPaths } from "@/shared/utils/urlPaths";
 import { FormikProps, FormikValues } from "formik";
 import CommonSelectGroup from "@/modules/Policy/components/CommonSelectGroup";
+import FormGroupTemplate from "@/shared/components/Forms/FormGroupTemplate";
+import FormCheck from "react-bootstrap/esm/FormCheck";
+import { FormikComponentProps } from "@/shared/utils/getFormikProps";
 
 interface Props {
   form: FormikProps<FormikValues>;
@@ -23,13 +26,7 @@ const ClientForm = ({ form }: Props) => {
           />
 
           <GroupInputForm formik={form} label="Identificación" name="documentoIdentificacion" />
-          <CommonSelectGroup
-            form={form}
-            name={"sexo"}
-            urlPath={EnumUrlCatalogsPaths.sex}
-            label="Sexo"
-            firsOption="Seleccione un sexo"
-          />
+          <GenderCheckBox form={form} />
           <GroupInputForm formik={form} label="Nombre" name="nombre" />
           <GroupInputForm formik={form} label="Apellido" name="apellido" />
           <GroupInputForm type="date" formik={form} label="Fecha de nacimiento" name="fechaNacimiento" />
@@ -74,22 +71,22 @@ const ClientForm = ({ form }: Props) => {
             dependencyField="paisOrigen"
             floatingLabel="Departamento"
             form={form}
-            name="departamentoId"
+            name="provincia"
             nameText="xprovincia"
             pathApi={EnumUrlCatalogsPaths.department}
             firstOptionEmpty="Seleccione un departamento"
           />
           <CommonSelectWithDependency
-            dependencyField="departamentoId"
+            dependencyField="provincia"
             floatingLabel="Ciudad"
             form={form}
-            name="ciudadId"
+            name="canton"
             nameText="xcanton"
             pathApi={EnumUrlCatalogsPaths.cities}
             firstOptionEmpty="Seleccione una ciudad"
           />
           <CommonSelectWithDependency
-            dependencyField="ciudadId"
+            dependencyField="canton"
             floatingLabel="Distrito"
             form={form}
             name="distrito"
@@ -104,3 +101,28 @@ const ClientForm = ({ form }: Props) => {
 };
 
 export default ClientForm;
+
+const GenderCheckBox = ({ form }: FormikComponentProps) => {
+  return (
+    <FormGroupTemplate label="Sexo" name="">
+      <div className="form-control">
+        <FormCheck
+          type="radio"
+          id={"M"}
+          name="sexo"
+          onChange={form.handleChange}
+          label={`Masculino`}
+          className="form-check-inline"
+        />
+        <FormCheck
+          type="radio"
+          id={"F"}
+          name="sexo"
+          onChange={form.handleChange}
+          label={`Femenino`}
+          className="form-check-inline"
+        />
+      </div>
+    </FormGroupTemplate>
+  );
+};
