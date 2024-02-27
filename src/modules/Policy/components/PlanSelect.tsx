@@ -31,7 +31,6 @@ export const PlanSelect = ({ form }: FormikComponentProps) => {
     <FloatingLabel label={"Plan de póliza"}>
       <FormSelectTemplate
         firstOptionEmpty="Seleccione un plan de poliza"
-        // data={dataView}
         data={[
           {
             id: "1",

@@ -40,13 +40,6 @@ const ClientForm = ({ form }: Props) => {
             name="profesion"
             urlPath={EnumUrlCatalogsPaths.profession}
           />
-          <CommonSelectGroup
-            form={form}
-            label="Ocupación"
-            name="profesion"
-            firsOption="Seleccione una profesión"
-            urlPath={EnumUrlCatalogsPaths.profession}
-          />
         </div>
       </FormCard>
       <FormCard title="Datos de contacto">

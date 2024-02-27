@@ -35,7 +35,7 @@ const VehicleForm = ({ form }: Props) => {
             <CommonSelectWithDependency
               form={form}
               name={"anio"}
-              dependencyField={"marcaId"}
+              dependencyField={"modeloId"}
               pathApi={EnumUrlCatalogsPaths.years}
               floatingLabel={"Año"}
               firstOptionEmpty="Seleccione una marca"

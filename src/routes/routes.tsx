@@ -15,7 +15,7 @@ const router = createBrowserRouter(
     <>
       <Route id="root" index element={<RootView />} errorElement={<ErrorBoundary />} />
 
-      <Route element={<ProtectedLayout />} loader={protectedLayoutLoader}>
+      <Route element={<ProtectedLayout />} loader={protectedLayoutLoader} errorElement={<ErrorBoundary />}>
         <Route path="dashboard" element={<Dashboard />} />
         <Route path="policy" element={<CreatePolicy />} />
         <Route path="quote/create" element={<CreateQuote />} />

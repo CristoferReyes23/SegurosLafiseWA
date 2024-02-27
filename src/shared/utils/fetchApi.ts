@@ -11,13 +11,12 @@ interface Props {
 }
 
 export async function fetchCall<T>(params: Props): Promise<T> {
-  const session = AuthSessionService.getSession();
-
   let domain = "";
   let token = "";
   if (params.providerName === "LAFISE") {
+    const tokenLafise = AuthSessionService.getLafiseToken();
     domain = import.meta.env.VITE_API_LAFISE_SERVICE;
-    token = session!.tokenLafise;
+    token = tokenLafise!;
   } else {
     // come from airbak
   }
