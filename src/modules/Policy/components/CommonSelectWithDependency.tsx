@@ -34,14 +34,7 @@ export const CommonSelectWithDependency = ({
   const { onChange, ...inputProps } = getFormikProps(form, name);
 
   const onChangeValue = (e: any) => {
-    if (nameText)
-      form.setFieldValue(
-        nameText,
-        [
-          { id: "t1", text: "t1" },
-          { id: "t2", text: "t2" },
-        ]?.find((i) => i.id == e.target.value)?.text
-      );
+    if (nameText) form.setFieldValue(nameText, data?.find((i) => i.id == e.target.value)?.text);
 
     //event handler
     onChange(e);
@@ -51,12 +44,7 @@ export const CommonSelectWithDependency = ({
     <FormGroupTemplate label={floatingLabel} name={name}>
       <FormSelectTemplate
         onChange={(e) => onChangeValue(e)}
-        data={
-          data ?? [
-            { id: "t1", text: "t1" },
-            { id: "t2", text: "t2" },
-          ]
-        }
+        data={data ?? []}
         firstOptionEmpty={firstOptionEmpty}
         errorMessage={getFormikErrorField(form, name)}
         disabled={isDisabled}
