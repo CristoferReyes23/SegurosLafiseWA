@@ -17,6 +17,7 @@ export enum EnumUrlCatalogsPaths {
   profession = "catalogs/profesion",
 
   coverages = "rates/{planId}/coverages",
+  lafiseAuth = "auth",
 
   getPolicies = "",
 }

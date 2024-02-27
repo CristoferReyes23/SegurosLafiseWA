@@ -51,7 +51,7 @@ export default TablePolicy;
 
 const TABLE_POLICY = [
   { header: "N° Póliza", key: "id" },
-  { header: "N° Placa", key: "placa" },
+  { header: "Placa", key: "placa" },
   { header: "Marca", key: "brand" },
   { header: "Modelo", key: "model" },
   { header: "Año", key: "year" },

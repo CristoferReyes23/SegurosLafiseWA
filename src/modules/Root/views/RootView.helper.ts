@@ -1,4 +1,4 @@
-import { authenticate } from "@/modules/Root/utils/authentication.util";
+import { RootService } from "@/shared/services/root.service";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 
@@ -18,9 +18,12 @@ export const RootViewHelper = () => {
       return;
     }
 
-    authenticate(a!, b!)
-      .then((resp) => {
-        setIsLogged(resp.isLogged);
+    RootService.authenticate(a, b)
+      .then((res) => {
+        setIsLogged(res.isLogged);
+      })
+      .catch((err) => {
+        console.log(err);
       })
       .finally(() => {
         setIsFetching(false);

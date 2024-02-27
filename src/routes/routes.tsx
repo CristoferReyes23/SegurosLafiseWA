@@ -8,11 +8,12 @@ import CreateQuote from "modules/Quote/views/Create/CreateQuote";
 import CreatePolicy from "@/modules/Policy/view/CreatePolicy";
 import Dashboard from "@/modules/Dashboard/views/Dashboard";
 import { Printer } from "@/modules/Printer/views/Printer";
+import ErrorBoundary from "@/views/ErrorBoundary";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
-      <Route id="root" index element={<RootView />} />
+      <Route id="root" index element={<RootView />} errorElement={<ErrorBoundary />} />
 
       <Route element={<ProtectedLayout />} loader={protectedLayoutLoader}>
         <Route path="dashboard" element={<Dashboard />} />
