@@ -5,12 +5,15 @@ import Stack from "react-bootstrap/esm/Stack";
 import { CommonSelectWithDependency } from "@/modules/Policy/components/CommonSelectWithDependency";
 import { EnumUrlCatalogsPaths } from "@/shared/utils/urlPaths";
 import CommonSelectGroup from "@/modules/Policy/components/CommonSelectGroup";
+import { PolicyService } from "@/shared/services/policy.service";
 
 interface Props {
   form: FormikProps<FormikValues>;
 }
 
 const VehicleForm = ({ form }: Props) => {
+  console.log(PolicyService.savePolicy(form.values));
+
   return (
     <div>
       <Stack gap={3}>

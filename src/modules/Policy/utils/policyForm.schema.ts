@@ -39,7 +39,10 @@ export const stepsCreatePolicy: TypeStep[] = [
       nombre: string().required(MESSAGES.required),
       apellido: string().required(MESSAGES.required),
       sexo: string().required(MESSAGES.required),
-      fechaNacimiento: date().required(MESSAGES.required),
+      fechaNacimiento: date()
+        .required(MESSAGES.required)
+        .min(new Date().getFullYear() - 100, "Debes tener al menos 100 años.")
+        .max(new Date(), "La fecha de nacimiento no puede ser en el futuro."),
       email: string().email().required(MESSAGES.required),
       celular: string().length(8, MESSAGES.lengthPhoneNumber).required(MESSAGES.required),
       telefono: string().length(8, MESSAGES.lengthPhoneNumber),
