@@ -21,14 +21,21 @@ export async function fetchCall<T>({
   let token = "";
   let headersComplement: { [key: string]: string } = {};
 
-  if (providerName === "LAFISE") {
-    domain = import.meta.env.VITE_API_LAFISE_SERVICE;
+  switch (providerName) {
+    case "LAFISE":
+      domain = import.meta.env.VITE_API_LAFISE_SERVICE;
 
-    await renewLafiseToken();
-    const tokenLafise = AuthSessionService.getLafiseToken();
-    if (tokenLafise) headersComplement["Authorization"] = `Bearer ${token}`;
-  } else {
-    // come from airbak
+      await renewLafiseToken();
+
+      const tokenLafise = AuthSessionService.getLafiseToken();
+      if (tokenLafise) headersComplement["Authorization"] = `Bearer ${token}`;
+      break;
+
+    case "BACKEND":
+      // TODO:
+      break;
+    default:
+      break;
   }
 
   if (method == "POST") headersComplement["Content-Type"] = "application/json";
