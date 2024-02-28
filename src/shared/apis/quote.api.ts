@@ -10,10 +10,10 @@ export class QuoteApi {
 
     const body = JSON.stringify({
       valn: "0",
-      anio: "2020",
-      usoo: "1",
-      cate: "10",
-      nasiento: "5",
+      anio: formData["anio"],
+      usoo: formData["usoo"],
+      cate: formData["cate"],
+      nasiento: formData["nasiento"],
     });
 
     return await fetchCall({ path, body, method: "POST", providerName: "LAFISE" });
