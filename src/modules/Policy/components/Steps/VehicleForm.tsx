@@ -6,6 +6,7 @@ import { CommonSelectWithDependency } from "@/modules/Policy/components/CommonSe
 import { EnumUrlCatalogsPaths } from "@/shared/utils/urlPaths";
 import CommonSelectGroup from "@/modules/Policy/components/CommonSelectGroup";
 import { PolicyService } from "@/shared/services/policy.service";
+import { ConstRegex } from "@/shared/utils/constRegex";
 
 interface Props {
   form: FormikProps<FormikValues>;
@@ -43,7 +44,13 @@ const VehicleForm = ({ form }: Props) => {
               floatingLabel={"Año"}
               firstOptionEmpty="Seleccione una marca"
             />
-            <GroupInputForm type="number" formik={form} label="Precio del vehículo nuevo" name="valorNuevo" />
+            <GroupInputForm
+              type="text"
+              formik={form}
+              label="Precio del vehículo nuevo"
+              name="valorNuevo"
+              regexValidation={ConstRegex.onlyNumbers}
+            />
           </div>
         </FormCard>
 
@@ -60,7 +67,14 @@ const VehicleForm = ({ form }: Props) => {
             <GroupInputForm formik={form} label="Número de motor" name="motor" />
             <GroupInputForm formik={form} label="Número de chasis" name="chasis" />
             <GroupInputForm formik={form} label="Color" name="color" />
-            <GroupInputForm formik={form} label="Número de puertas" name="puertas" type="number" />
+            <GroupInputForm
+              formik={form}
+              label="Número de puertas"
+              name="puertas"
+              type="text"
+              maxLength={2}
+              regexValidation={ConstRegex.onlyNumberDigit}
+            />
           </div>
         </FormCard>
       </Stack>

@@ -7,6 +7,7 @@ import CommonSelectGroup from "@/modules/Policy/components/CommonSelectGroup";
 import FormGroupTemplate from "@/shared/components/Forms/FormGroupTemplate";
 import FormCheck from "react-bootstrap/esm/FormCheck";
 import { FormikComponentProps } from "@/shared/utils/getFormikProps";
+import { ConstRegex } from "@/shared/utils/constRegex";
 
 interface Props {
   form: FormikProps<FormikValues>;
@@ -42,14 +43,21 @@ const ClientForm = ({ form }: Props) => {
       <FormCard title="Datos de contacto">
         <div className="form-fields-container">
           <GroupInputForm formik={form} label="Correo" name="email" type="email" />
-          <GroupInputForm name={"celular"} formik={form} label={"Celular"} type="number" maxLength={8} minLength={8} />
+          <GroupInputForm
+            name={"celular"}
+            formik={form}
+            label={"Celular"}
+            maxLength={8}
+            minLength={8}
+            regexValidation={ConstRegex.onlyNumberDigit}
+          />
           <GroupInputForm
             name={"telefono"}
             formik={form}
             label={"Teléfono"}
-            type="number"
             maxLength={8}
             minLength={8}
+            regexValidation={ConstRegex.onlyNumberDigit}
           />
         </div>
       </FormCard>

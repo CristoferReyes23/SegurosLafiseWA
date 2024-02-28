@@ -9,15 +9,23 @@ interface Props extends DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>,
   formik: FormikProps<any>;
   label: string;
   name: string;
+  regexValidation?: RegExp;
 }
 
-const GroupInputForm = ({ formik, name, label, ...defaultProps }: Props) => {
+const GroupInputForm = ({ formik, name, label, regexValidation, ...defaultProps }: Props) => {
   return (
     <FormGroup className="position-relative mb-3" id={`inputGroup-${name}`}>
       <FormLabel>{label}</FormLabel>
       <FormControlTemplate
         errorMessage={getFormikErrorField(formik, name)}
         {...getFormikProps(formik, name)}
+        onChange={(e) => {
+          if (regexValidation && !regexValidation.test(e.target.value)) {
+            e.preventDefault();
+            return;
+          }
+          formik.handleChange(e);
+        }}
         {...defaultProps}
       />
     </FormGroup>
