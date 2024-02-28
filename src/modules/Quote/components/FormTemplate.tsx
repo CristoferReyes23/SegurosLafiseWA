@@ -1,5 +1,5 @@
 import { PlanSelect } from "@/modules/Policy/components/PlanSelect";
-import { FormikComponentProps, getFormikProps } from "@/shared/utils/getFormikProps";
+import { FormikComponentProps, getFormikErrorField, getFormikProps } from "@/shared/utils/getFormikProps";
 import FormCard from "@/shared/components/FormCard";
 import CommonSelectApi from "@/shared/components/Forms/CommonSelectApi";
 import FormSelectTemplate from "@/shared/components/Forms/FormSelectTemplate";
@@ -75,12 +75,21 @@ export default FormTemplate;
 
 const SelectUses = ({ form }: FormikComponentProps) => {
   const { data } = useFetch<BaseListDataModel[]>({ to: "LAFISE", urlPath: EnumUrlCatalogsPaths.uses });
+
+  const dataView: BaseListDataModel[] =
+    data
+      ?.map((i) => ({
+        text: i.text,
+        id: i.id.toString(),
+      }))
+      .filter((item, index, self) => index === self.findIndex((t) => t.id === item.id)) ?? []; //avoid
+
   return (
     <FloatingLabel label="Uso del vehículo">
       <FormSelectTemplate
-        {...getFormikProps(form, "uso")}
-        data={data ?? []}
-        errorMessage={""}
+        {...getFormikProps(form, "usoo")}
+        data={dataView}
+        errorMessage={getFormikErrorField(form, "usoo")}
         firstOptionEmpty="Seleccione el uso del vehículo"
       />
     </FloatingLabel>

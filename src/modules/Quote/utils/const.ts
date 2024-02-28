@@ -18,7 +18,7 @@ export const TABLE_COVERAGES = [
   { key: "coaseguro", title: "Coaseguro" },
   { key: "deducible", title: "Deducible" },
   { key: "descuento", title: "Descuento" },
-  { key: "sumaAsegurada", title: "Aseguradora" },
+  { key: "sumaAsegurada", title: "Asegurado" },
   { key: "total", title: "Total" },
   // { key: "id", title: "#" },
   // { key: "orden", title: "Orden" },

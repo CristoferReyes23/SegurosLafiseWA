@@ -21,9 +21,17 @@ const CommonSelectApi = ({ dependencyField, form, name, pathApi, firstOptionEmpt
     pathApi,
   });
 
+  const dataView: BaseListDataModel[] =
+    data
+      ?.map((i) => ({
+        text: i.text,
+        id: i.id.toString(),
+      }))
+      .filter((item, index, self) => index === self.findIndex((t) => t.id === item.id)) ?? []; //avoid
+
   return (
     <FormSelectTemplate
-      data={data ?? []}
+      data={dataView}
       firstOptionEmpty={firstOptionEmpty}
       errorMessage={getFormikErrorField(form, name)}
       {...getFormikProps(form, name)}

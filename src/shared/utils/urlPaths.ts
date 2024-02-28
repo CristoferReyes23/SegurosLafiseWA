@@ -15,6 +15,7 @@ export enum EnumUrlCatalogsPaths {
   districts = "catalogs/paises/{paisOrigen}/departamentos/{departamentoId}/ciudades/{ciudadId}/distritos",
   uses = "catalogs/vehicles/uses",
   profession = "catalogs/profesion",
+  dataSheet = 'catalogs/plans/{planId}/brands/{marcaId}/models/{modeloId}/years/{anio}/datasheet',
 
   coverages = "rates/{planId}/coverages",
   lafiseAuth = "auth",

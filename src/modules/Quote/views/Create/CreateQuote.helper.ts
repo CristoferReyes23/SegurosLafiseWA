@@ -1,6 +1,6 @@
 import { formSchema, initialValue } from "@/modules/Quote/utils/form.schema";
-import { QuoteApi } from "@/shared/apis/quote.api";
 import { QuoteResponseModel } from "@/shared/models/quoteResponse.model";
+import { QuoteService } from "@/shared/services/quote.service";
 import { useFormik } from "formik";
 import { useState } from "react";
 
@@ -8,12 +8,12 @@ const CreateQuoteHelper = () => {
   const [response, setResponse] = useState<QuoteResponseModel | null>(null);
 
   const onSubmitForm = (formData: any, { setSubmitting }: any) => {
-    console.log(formData);
-
-    QuoteApi.createQuote(formData)
+    QuoteService.queryCoverages(formData)
       .then((resp) => {
-        console.log(resp);
         setResponse(resp);
+      })
+      .catch((err) => {
+        console.log(err);
       })
       .finally(() => {
         setSubmitting(false);

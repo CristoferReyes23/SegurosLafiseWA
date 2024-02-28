@@ -7,4 +7,4 @@ export class CustomException extends Error {
   }
 }
 
-export type TypeException = "NOTFOUND" | "UNAUTHORIZED" | "SERVER_ERROR";
+export type TypeException = "NOTFOUND" | "UNAUTHORIZED" | "SERVER_ERROR" | 'DEVELOP';

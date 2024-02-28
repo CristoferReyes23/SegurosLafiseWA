@@ -1,29 +1,38 @@
 import { AuthSessionService } from "@/shared/services/authSession.service";
 import { TypeProviderApi } from "@/shared/utils/urlPaths";
 
-interface Props {
+interface Props extends RequestInit {
   providerName: TypeProviderApi;
   path: string;
-
   method?: "POST" | "GET";
-  body?: any;
-  headers?: any;
 }
 
-export async function fetchCall<T>(params: Props): Promise<T> {
+export async function fetchCall<T>({ providerName, path, method, headers, ...extraProps }: Props): Promise<T> {
   let domain = "";
   let token = "";
-  if (params.providerName === "LAFISE") {
+  let headersComplement = {};
+
+  if (providerName === "LAFISE") {
     const tokenLafise = AuthSessionService.getLafiseToken();
     domain = import.meta.env.VITE_API_LAFISE_SERVICE;
     token = tokenLafise!;
+
+    headersComplement = {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    };
   } else {
     // come from airbak
   }
 
-  const url = domain + params.path;
+  const url = domain + path;
   const response = await fetch(url, {
-    headers: { Authorization: `Bearer ${token}` },
+    method: method ?? "GET",
+    headers: {
+      ...headers,
+      ...headersComplement,
+    },
+    ...extraProps,
   });
   return await response.json();
 }
