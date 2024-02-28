@@ -25,8 +25,8 @@ export class AuthApi {
     const url = import.meta.env.VITE_API_LAFISE_SERVICE + EnumUrlCatalogsPaths.lafiseAuth;
 
     const body = {
-      username: import.meta.env.VITE_LAFISE_PASSWORD,
-      password: import.meta.env.VITE_LAFISE_USERNAME,
+      username: import.meta.env.VITE_LAFISE_USERNAME,
+      password: import.meta.env.VITE_LAFISE_PASSWORD,
       expiryTime: 120,
     };
 

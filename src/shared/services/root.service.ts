@@ -6,18 +6,16 @@ import { CustomException } from "@/shared/utils/customException.model";
 export class RootService {
   static async authenticate(a: string, b: string) {
     try {
-      const validationResponse = await validateBackendSession(a, b);
       const tokenLafise = await AuthApi.queryLafiseToken();
-
-      AuthSessionService.saveSession(validationResponse);
       AuthSessionService.saveSessionLaFise(tokenLafise);
+
+      const validationResponse = await validateBackendSession(a, b);
+      AuthSessionService.saveSession(validationResponse);
 
       return {
         isLogged: true,
       };
     } catch (err) {
-      AuthSessionService.saveSessionLaFise("test");
-
       return {
         isLogged: true,
       };

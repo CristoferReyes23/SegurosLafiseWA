@@ -3,9 +3,6 @@ import { redirect } from "react-router-dom";
 
 export async function protectedLayoutLoader() {
   const session = AuthSessionService.getLafiseToken();
-
-  console.log(session);
-
   if (!session) return redirect("unauthorized");
 
   // example validating token session
