@@ -6,6 +6,7 @@ interface ImportMetaEnv {
 
   readonly VITE_LAFISE_USERNAME: string;
   readonly VITE_LAFISE_PASSWORD: string;
+  readonly VITE_LAFISE_EXPIRED: 10;
   // more env variables...
 }
 

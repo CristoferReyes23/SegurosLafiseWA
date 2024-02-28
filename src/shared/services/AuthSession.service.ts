@@ -3,6 +3,8 @@ import { ValidateSessionResponse } from "@/shared/models/validateSessionResponse
 export class AuthSessionService {
   static saveSessionLaFise(token: string) {
     sessionStorage.setItem("lafiseToken", token);
+    // save lifetime session token
+    saveLifeTimeLafise();
   }
   static getLafiseToken() {
     return sessionStorage.getItem("lafiseToken");
@@ -21,4 +23,14 @@ export class AuthSessionService {
   static clearSession() {
     sessionStorage.clear();
   }
+
+  static getLifeTimeLafise() {
+    return sessionStorage.getItem("expiredLafiseToken");
+  }
+}
+
+function saveLifeTimeLafise() {
+  const currentDate = new Date();
+  const updatedDate = new Date(currentDate.getTime() + (import.meta.env.VITE_LAFISE_EXPIRED - 5));
+  sessionStorage.setItem("expiredLafiseToken", updatedDate.getTime().toString());
 }

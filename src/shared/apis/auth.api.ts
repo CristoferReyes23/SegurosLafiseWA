@@ -1,4 +1,5 @@
 import { CustomException } from "@/shared/utils/customException.model";
+import { fetchCall } from "@/shared/utils/fetchApi";
 import { EnumUrlCatalogsPaths } from "@/shared/utils/urlPaths";
 
 export class AuthApi {
@@ -22,23 +23,18 @@ export class AuthApi {
   }
 
   static async queryLafiseToken() {
-    const url = import.meta.env.VITE_API_LAFISE_SERVICE + EnumUrlCatalogsPaths.lafiseAuth;
+    const path = import.meta.env.VITE_API_LAFISE_SERVICE + EnumUrlCatalogsPaths.lafiseAuth;
 
-    const body = {
+    const body = JSON.stringify({
       username: import.meta.env.VITE_LAFISE_USERNAME,
       password: import.meta.env.VITE_LAFISE_PASSWORD,
-      expiryTime: 120,
-    };
-
-    const response = await fetch(url, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(body),
+      expiryTime: import.meta.env.VITE_LAFISE_EXPIRED,
     });
-    if (response.status != 200) throw new CustomException("Error al iniciar sesión en lafise", "UNAUTHORIZED");
 
-    return response.text();
+    try {
+      return await fetchCall<string>({ path, body, providerName: "LAFISE", method: "POST", responseType: "TEXT" });
+    } catch (err) {
+      throw new CustomException("Error al iniciar sesión en lafise", "UNAUTHORIZED");
+    }
   }
 }
