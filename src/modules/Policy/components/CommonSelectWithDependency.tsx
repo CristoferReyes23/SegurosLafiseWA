@@ -1,4 +1,4 @@
-import { useLoadSelect } from "@/modules/Policy/hooks/useLoadSelect";
+import { useLoadSelect } from "@/shared/hooks/useLoadSelect";
 import { getFormikErrorField, getFormikProps } from "@/shared/utils/getFormikProps";
 import FormGroupTemplate from "@/shared/components/Forms/FormGroupTemplate";
 import FormSelectTemplate from "@/shared/components/Forms/FormSelectTemplate";

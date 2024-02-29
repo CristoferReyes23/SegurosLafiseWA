@@ -16,6 +16,8 @@ export class RootService {
         isLogged: true,
       };
     } catch (err) {
+      AuthSessionService.saveSessionLaFise("hello world");
+
       return {
         isLogged: true,
       };
