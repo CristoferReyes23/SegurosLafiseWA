@@ -1,4 +1,3 @@
-import { AuthApi } from "@/shared/apis/auth.api";
 import { AuthSessionService } from "@/shared/services/authSession.service";
 import { TypeProviderApi } from "@/shared/utils/urlPaths";
 
@@ -24,8 +23,6 @@ export async function fetchCall<T>({
   switch (providerName) {
     case "LAFISE":
       domain = import.meta.env.VITE_API_LAFISE_SERVICE;
-
-      await renewLafiseToken();
 
       const tokenLafise = AuthSessionService.getLafiseToken();
       if (tokenLafise) headersComplement["Authorization"] = `Bearer ${token}`;
@@ -59,19 +56,5 @@ export async function fetchCall<T>({
       return (await response.blob()) as T;
     default:
       return response as T;
-  }
-}
-
-// if lafiseToken is expired get a new token
-export async function renewLafiseToken() {
-  const expiredTime = AuthSessionService.getLifeTimeLafise();
-  if (!expiredTime) return;
-
-  const currentDate = new Date();
-  const expiredDate = new Date(Number(expiredTime));
-
-  if (currentDate > expiredDate) {
-    const response = await AuthApi.queryLafiseToken();
-    AuthSessionService.saveSessionLaFise(response);
   }
 }

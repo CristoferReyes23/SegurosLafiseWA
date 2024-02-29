@@ -9,6 +9,7 @@ export type TypeStep = {
   component: React.ElementType;
   validationSchema: Yup.Schema<any>;
   initialValues: any;
+  titleHeaderStep?: string;
 };
 
 export const getStepSchema = (currentIndex: number, steps: TypeStep[]) => {

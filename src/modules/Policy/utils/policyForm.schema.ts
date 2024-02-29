@@ -9,6 +9,7 @@ export const stepsCreatePolicy: TypeStep[] = [
   {
     name: "step0",
     component: PlanPolicy,
+    titleHeaderStep: "Seleccione el plan de la póliza",
     initialValues: {},
     validationSchema: object({
       planId: number().required(MESSAGES.required),
@@ -17,6 +18,7 @@ export const stepsCreatePolicy: TypeStep[] = [
   {
     name: "step1",
     component: VehicleForm,
+    titleHeaderStep: "Complete la información del vehículo",
     validationSchema: object({
       marcaId: number().required(MESSAGES.required),
       modeloId: number().required(MESSAGES.required),
@@ -33,6 +35,7 @@ export const stepsCreatePolicy: TypeStep[] = [
   {
     name: "step2",
     component: ClientForm,
+    titleHeaderStep: "Complete la información del cliente",
     validationSchema: object({
       tipoId: string().required(MESSAGES.required),
       documentoIdentificacion: string().required(MESSAGES.required),

@@ -5,7 +5,6 @@ import Stack from "react-bootstrap/esm/Stack";
 import { CommonSelectWithDependency } from "@/modules/Policy/components/CommonSelectWithDependency";
 import { EnumUrlCatalogsPaths } from "@/shared/utils/urlPaths";
 import CommonSelectGroup from "@/modules/Policy/components/CommonSelectGroup";
-import { PolicyService } from "@/shared/services/policy.service";
 import { ConstRegex } from "@/shared/utils/constRegex";
 
 interface Props {
@@ -13,8 +12,6 @@ interface Props {
 }
 
 const VehicleForm = ({ form }: Props) => {
-  console.log(PolicyService.savePolicy(form.values));
-
   return (
     <div>
       <Stack gap={3}>

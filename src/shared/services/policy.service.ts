@@ -33,8 +33,6 @@ export class PolicyService {
     //get category of car
     //get seats number
     //send request to server
-
-    console.log("dataViewModel", dataViewModel, "enteViewModel", enteViewModel);
   }
 }
 

@@ -1,4 +1,4 @@
-import { useRouteError } from "react-router-dom";
+import { Link, useRouteError } from "react-router-dom";
 
 const ErrorBoundary = () => {
   const error = useRouteError();
@@ -11,19 +11,19 @@ const ErrorBoundary = () => {
           <div className="col-md-12 text-center">
             <div className="lc-block mb-4">
               <div>
-                <h1 className="fw-bold display-1">404</h1>
+                <h1 className="fw-bold display-1">500</h1>
               </div>
             </div>
             <div className="lc-block">
               <div>
-                <p className="h2">Sorry, we can’t find the page you’re looking for. </p>
+                <p className="h2">Sorry, we get a problem when rendering page. </p>
                 <p className="lead">Click the button below to go back to the homepage</p>
               </div>
             </div>
             <div className="lc-block">
-              <a className="btn btn-primary" href="#" role="button">
-                Click me, I'm a button
-              </a>
+              <Link to="/dashboard" className="btn btn-primary">
+                Go Dashboard
+              </Link>
             </div>
           </div>
         </div>
