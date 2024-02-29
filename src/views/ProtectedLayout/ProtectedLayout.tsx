@@ -6,9 +6,11 @@ import Card from "react-bootstrap/esm/Card";
 import { getImageURL } from "@/shared/utils/getImageUrl";
 import { useState } from "react";
 import SubTitleHeader from "@/views/ProtectedLayout/components/SubTitleHeader";
+import useTokenTimer from "@/views/ProtectedLayout/hooks/useTokenTimer";
 
 const ProtectedLayout = () => {
   const [titleHeader, setTitleHeader] = useState("");
+  useTokenTimer();
 
   return (
     <>

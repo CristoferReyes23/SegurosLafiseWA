@@ -9,8 +9,8 @@ export class RootService {
       const tokenLafise = await AuthApi.queryLafiseToken();
       AuthSessionService.saveSessionLaFise(tokenLafise);
 
-      const validationResponse = await validateBackendSession(a, b);
-      AuthSessionService.saveSession(validationResponse);
+      // const validationResponse = await validateBackendSession(a, b);
+      // AuthSessionService.saveSession(validationResponse);
 
       return {
         isLogged: true,

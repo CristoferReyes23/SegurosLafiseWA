@@ -23,8 +23,6 @@ export class AuthApi {
   }
 
   static async queryLafiseToken() {
-    const path = import.meta.env.VITE_API_LAFISE_SERVICE + EnumUrlCatalogsPaths.lafiseAuth;
-
     const body = JSON.stringify({
       username: import.meta.env.VITE_LAFISE_USERNAME,
       password: import.meta.env.VITE_LAFISE_PASSWORD,
@@ -32,7 +30,13 @@ export class AuthApi {
     });
 
     try {
-      return await fetchCall<string>({ path, body, providerName: "LAFISE", method: "POST", responseType: "TEXT" });
+      return await fetchCall<string>({
+        path: EnumUrlCatalogsPaths.lafiseAuth,
+        body,
+        providerName: "LAFISE",
+        method: "POST",
+        responseType: "TEXT",
+      });
     } catch (err) {
       throw new CustomException("Error al iniciar sesión en lafise", "UNAUTHORIZED");
     }
