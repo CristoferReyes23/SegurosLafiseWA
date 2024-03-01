@@ -30,13 +30,14 @@ export class AuthApi {
     });
 
     try {
-      return await fetchCall<string>({
+      const resp = await fetchCall({
         path: EnumUrlCatalogsPaths.lafiseAuth,
         body,
         providerName: "LAFISE",
         method: "POST",
-        responseType: "TEXT",
       });
+
+      return await resp.text();
     } catch (err) {
       throw new CustomException("Error al iniciar sesión en lafise", "UNAUTHORIZED");
     }
