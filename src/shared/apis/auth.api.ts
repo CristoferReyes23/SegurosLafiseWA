@@ -26,7 +26,7 @@ export class AuthApi {
     const body = JSON.stringify({
       username: import.meta.env.VITE_LAFISE_USERNAME,
       password: import.meta.env.VITE_LAFISE_PASSWORD,
-      expiryTime: import.meta.env.VITE_LAFISE_EXPIRED,
+      expiryTime: Number(import.meta.env.VITE_LAFISE_EXPIRED),
     });
 
     try {

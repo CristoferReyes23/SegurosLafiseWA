@@ -8,13 +8,23 @@ export class QuoteApi {
   static async getCoverages(formData: any): Promise<QuoteResponseModel> {
     const path = getUrlWithValues(formData, EnumUrlCatalogsPaths.coverages);
 
+    // const body = JSON.stringify({
+    //   valn: "0",
+    //   anio: formData["anio"],
+    //   usoo: formData["usoo"],
+    //   cate: String(formData["cate"]),
+    //   nasiento: String(formData["nasiento"]),
+    // });
+
     const body = JSON.stringify({
       valn: "0",
-      anio: formData["anio"],
-      usoo: formData["usoo"],
-      cate: formData["cate"],
-      nasiento: formData["nasiento"],
+      anio: "2020",
+      usoo: "1",
+      cate: "10",
+      nasiento: "5",
     });
+
+    console.log(body);
 
     return await fetchCall({ path, body, method: "POST", providerName: "LAFISE" });
   }

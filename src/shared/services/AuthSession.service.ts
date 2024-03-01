@@ -46,7 +46,7 @@ export class AuthSessionService {
 
 function saveLifeTimeLafise() {
   const currentDate = new Date();
-  const addMinutes = import.meta.env.VITE_LAFISE_EXPIRED * 60000;
+  const addMinutes = Number(import.meta.env.VITE_LAFISE_EXPIRED) * 60000;
   const updatedDate = new Date(currentDate.getTime() + addMinutes);
 
   sessionStorage.setItem("expiredLafiseToken", updatedDate.getTime().toString());

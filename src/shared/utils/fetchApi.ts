@@ -17,7 +17,6 @@ export async function fetchCall<T>({
   ...extraProps
 }: Props): Promise<T> {
   let domain = "";
-  let token = "";
   let headersComplement: { [key: string]: string } = {};
 
   switch (providerName) {
@@ -25,7 +24,7 @@ export async function fetchCall<T>({
       domain = import.meta.env.VITE_API_LAFISE_SERVICE;
 
       const tokenLafise = AuthSessionService.getLafiseToken();
-      if (tokenLafise) headersComplement["Authorization"] = `Bearer ${token}`;
+      if (tokenLafise) headersComplement["Authorization"] = `Bearer ${tokenLafise}`;
       break;
 
     case "BACKEND":

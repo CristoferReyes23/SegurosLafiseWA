@@ -30,7 +30,7 @@ function useTokenTimer() {
       const token = await AuthApi.queryLafiseToken();
       AuthSessionService.saveSessionLaFise(token);
 
-      const addMinutes = import.meta.env.VITE_LAFISE_EXPIRED;
+      const addMinutes = Number(import.meta.env.VITE_LAFISE_EXPIRED);
       setMinutesDelay(addMinutes);
     } catch (err) {
       console.log("err", err);
