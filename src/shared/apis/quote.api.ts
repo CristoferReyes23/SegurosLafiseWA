@@ -16,12 +16,13 @@ export class QuoteApi {
     //   nasiento: String(formData["nasiento"]),
     // });
 
+    console.log(formData);
     const body = JSON.stringify({
       valn: "0",
-      anio: "2020",
-      usoo: "1",
-      cate: "10",
-      nasiento: "5",
+      anio: formData["anio"],
+      usoo: formData["usoo"],
+      cate: formData["cate"].toString(),
+      nasiento: formData["nasiento"].toString(),
     });
 
     console.log(body);
