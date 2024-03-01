@@ -27,12 +27,14 @@ export class QuoteApi {
 
     console.log(body);
 
-    return await fetchCall({ path, body, method: "POST", providerName: "LAFISE" });
+    const resp = await fetchCall({ path, body, method: "POST", providerName: "LAFISE" });
+    return await resp.json();
   }
 
-  static fetchDataSheet(formData: any): Promise<DataSheetResponse> {
+  static async fetchDataSheet(formData: any): Promise<DataSheetResponse> {
     const path = getUrlWithValues(formData, EnumUrlCatalogsPaths.dataSheet);
 
-    return fetchCall<DataSheetResponse>({ path, providerName: "LAFISE" });
+    const resp = await fetchCall({ path, providerName: "LAFISE" });
+    return await resp.json();
   }
 }

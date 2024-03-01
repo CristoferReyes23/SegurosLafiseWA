@@ -8,14 +8,7 @@ interface Props extends RequestInit {
   responseType?: "JSON" | "TEXT" | "BLOB" | "OTHER";
 }
 
-export async function fetchCall<T>({
-  providerName,
-  path,
-  method,
-  headers,
-  responseType = "JSON",
-  ...extraProps
-}: Props): Promise<T> {
+export async function fetchCall({ providerName, path, method, headers, responseType = "JSON", ...extraProps }: Props) {
   let domain = "";
   let headersComplement: { [key: string]: string } = {};
 
@@ -46,14 +39,15 @@ export async function fetchCall<T>({
     ...extraProps,
   });
 
-  switch (responseType) {
-    case "JSON":
-      return await response.json();
-    case "TEXT":
-      return (await response.text()) as T;
-    case "BLOB":
-      return (await response.blob()) as T;
-    default:
-      return response as T;
-  }
+  return response;
+  // switch (responseType) {
+  //   case "JSON":
+  //     return await response.json();
+  //   case "TEXT":
+  //     return (await response.text()) as T;
+  //   case "BLOB":
+  //     return (await response.blob()) as T;
+  //   default:
+  //     return response as T;
+  // }
 }
