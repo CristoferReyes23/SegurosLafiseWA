@@ -14,6 +14,7 @@ const CreateQuoteHelper = () => {
       })
       .catch((err) => {
         console.log(err);
+        setResponse(null);
       })
       .finally(() => {
         setSubmitting(false);

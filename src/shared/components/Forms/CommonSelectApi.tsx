@@ -3,6 +3,7 @@ import { getFormikErrorField, getFormikProps } from "@/shared/utils/getFormikPro
 import FormSelectTemplate from "@/shared/components/Forms/FormSelectTemplate";
 import { BaseListDataModel } from "@/shared/models/baseListData.model";
 import { FormikProps } from "formik";
+import { testData } from "@/shared/utils/test";
 
 interface Props {
   form: FormikProps<any>;
@@ -27,7 +28,7 @@ const CommonSelectApi = ({ dependencyField, form, name, pathApi, firstOptionEmpt
         text: i.text,
         id: i.id.toString(),
       }))
-      .filter((item, index, self) => index === self.findIndex((t) => t.id === item.id)) ?? []; //avoid
+      .filter((item, index, self) => index === self.findIndex((t) => t.id === item.id)) ?? testData; //avoid
 
   return (
     <FormSelectTemplate

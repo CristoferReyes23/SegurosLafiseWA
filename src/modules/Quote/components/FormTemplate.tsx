@@ -7,6 +7,7 @@ import useFetch from "@/shared/hooks/useFetch";
 import { BaseListDataModel } from "@/shared/models/baseListData.model";
 import { EnumUrlCatalogsPaths } from "@/shared/utils/urlPaths";
 import FloatingLabel from "react-bootstrap/esm/FloatingLabel";
+import { testData } from "@/shared/utils/test";
 
 const FormTemplate = ({ form }: FormikComponentProps) => {
   return (
@@ -82,7 +83,7 @@ const SelectUses = ({ form }: FormikComponentProps) => {
         text: i.text,
         id: i.id.toString(),
       }))
-      .filter((item, index, self) => index === self.findIndex((t) => t.id === item.id)) ?? []; //avoid
+      .filter((item, index, self) => index === self.findIndex((t) => t.id === item.id)) ?? testData; //avoid
 
   return (
     <FloatingLabel label="Uso del vehículo">
