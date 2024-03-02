@@ -29,8 +29,6 @@ const CreatePolicyHelper = () => {
   const onClickTab = (index: number) => setCurrentIndex(index);
 
   const handleSubmit = (values: FormikValues) => {
-    console.log("submit from formik", values);
-
     navigate("/policy/successful", {
       replace: true,
       state: {

@@ -2,9 +2,12 @@ import PaymentSuccessfulHelper from "@/modules/Policy/view/PaymentSuccessful/Pay
 import ViewModalPdf from "@/modules/Printer/components/ViewModalPdf";
 import Button from "react-bootstrap/esm/Button";
 import Card from "react-bootstrap/esm/Card";
+import { Navigate } from "react-router-dom";
 
 const PaymentSuccessful = () => {
-  const { isVisibleModal, hideModal, showModal } = PaymentSuccessfulHelper();
+  const { isVisibleModal, hideModal, showModal, locationParams } = PaymentSuccessfulHelper();
+
+  if (!locationParams) return <Navigate to="/dashboard" replace={true} />;
 
   return (
     <div>

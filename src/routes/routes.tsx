@@ -10,7 +10,6 @@ import Dashboard from "@/modules/Dashboard/views/Dashboard";
 import { Printer } from "@/modules/Printer/views/Printer";
 import ErrorBoundary from "@/views/ErrorBoundary";
 import PaymentSuccessful from "@/modules/Policy/view/PaymentSuccessful/PaymentSuccessful";
-import { successPolicyLoader } from "@/routes/loaders/successPolicy.loader";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -21,7 +20,7 @@ const router = createBrowserRouter(
         <Route path="dashboard" element={<Dashboard />} />
         <Route path="policy">
           <Route index element={<CreatePolicy />} />
-          <Route path="successful" element={<PaymentSuccessful />} loader={successPolicyLoader} />
+          <Route path="successful" element={<PaymentSuccessful />} />
         </Route>
         <Route path="quote/create" element={<CreateQuote />} />
         <Route path="printer" element={<Printer />} />

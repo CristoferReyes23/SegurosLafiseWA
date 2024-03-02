@@ -3,12 +3,12 @@ import { useLocation } from "react-router-dom";
 
 function PaymentSuccessfulHelper() {
   const [isVisibleModal, setIsVisibleModal] = useState(false);
-  const { state } = useLocation();
+  const { state: locationParams } = useLocation();
 
   useEffect(() => {
     setTimeout(() => {
       setIsVisibleModal(true);
-    }, 3000);
+    }, 2000);
   }, []);
 
   const showModal = () => {
@@ -20,10 +20,10 @@ function PaymentSuccessfulHelper() {
   };
 
   return {
+    locationParams,
     isVisibleModal,
-    showModal,
     hideModal,
-    state,
+    showModal,
   };
 }
 
