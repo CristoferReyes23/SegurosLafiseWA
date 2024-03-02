@@ -1,4 +1,5 @@
 import { DetailedHTMLProps, InputHTMLAttributes } from "react";
+import Feedback from "react-bootstrap/esm/Feedback";
 
 interface Props extends DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> {
   errorMessage: string;
@@ -9,12 +10,10 @@ interface Props extends DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>,
 const FormControlTemplate = ({ errorMessage, isInvalid, isNumericOnly, ...defaultProps }: Props) => {
   return (
     <>
-      <input className={`form-control ${isInvalid && "is-invalid"}`} {...defaultProps} />
-      <div className="invalid-tooltip">{errorMessage}</div>
+      <input className={`form-control text-uppercase ${isInvalid ? "is-invalid" : ""}`} {...defaultProps} />
+      <Feedback type="invalid">{errorMessage}</Feedback>
     </>
   );
 };
 
 export default FormControlTemplate;
-
-// const regexValidNumber = /[0-9]|\./;

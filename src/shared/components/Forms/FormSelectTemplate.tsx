@@ -1,24 +1,26 @@
 import { SelectDataTemplate } from "@/shared/utils/formTypes";
+import Feedback from "react-bootstrap/esm/Feedback";
+import FormSelect, { FormSelectProps } from "react-bootstrap/esm/FormSelect";
 
-interface Props extends React.DetailedHTMLProps<React.SelectHTMLAttributes<HTMLSelectElement>, HTMLSelectElement> {
+interface Props extends FormSelectProps {
   firstOptionEmpty?: string;
   data: SelectDataTemplate[];
   errorMessage: string;
   isInvalid: boolean;
 }
 
-const FormSelectTemplate = ({ data, errorMessage, firstOptionEmpty, isInvalid, ...defaultProps }: Props) => {
+const FormSelectTemplate = ({ data, errorMessage, firstOptionEmpty, ...defaultProps }: Props) => {
   return (
     <>
-      <select className={`form-select ${isInvalid && "is-invalid"}`} {...defaultProps}>
+      <FormSelect className="" {...defaultProps}>
         {firstOptionEmpty && <option value={""}>{firstOptionEmpty}</option>}
         {data?.map((i) => (
           <option value={i.id} key={i.id}>
             {i.text}
           </option>
         ))}
-      </select>
-      <div className="invalid-tooltip">{errorMessage}</div>
+      </FormSelect>
+      <Feedback type="invalid">{errorMessage}</Feedback>
     </>
   );
 };

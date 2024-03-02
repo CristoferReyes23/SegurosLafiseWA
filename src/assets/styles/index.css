@@ -1,16 +1,59 @@
 :root {
-  --bs-blue: #10369a;
+  --bg-blue: #0033a0;
   --color-gray: #ececec;
 }
 
-body {
-  font-family: Arial, Helvetica, sans-serif;
+/* --------------------------------- globals -------------------------------- */
+
+html {
+  font-family: sans-serif;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
 }
 
 .bg-blue {
-  background-color: var(--bs-blue);
+  background-color: var(--bg-blue);
 }
 
 .text-blue {
-  color: var(--bs-blue);
+  color: var(--bg-blue);
+}
+
+/* ----------------------------- form templates ----------------------------- */
+
+.form-control {
+  padding: 6px 12px;
+}
+
+.form-control,
+input[disabled].form-control,
+.form-select {
+  height: 45px;
+  font-size: 16px;
+  color: #545453;
+  border: 2px solid #e6ebf6;
+  border-radius: 4px;
+  box-shadow: none;
+  background-color: #fff;
+}
+
+label {
+  max-width: 100%;
+  font-weight: 700;
+  font-size: 12px;
+  color: var(--bg-blue);
+  margin-bottom: 5px !important;
+}
+
+select.form-select {
+  appearance: none;
+  --bs-form-select-bg-img: url("../images/select-inputs.svg");
+  background-image: url("../images/select-inputs.svg") !important;
+  background-size: 10px !important;
+}
+
+.invalid-feedback {
+  margin-top: 0.25rem;
+  font-size: 12px;
+  color: #dc3545;
 }

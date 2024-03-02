@@ -5,6 +5,7 @@ import useFetch from "@/shared/hooks/useFetch";
 import { SelectDataTemplate } from "@/shared/utils/formTypes";
 import { EnumUrlCatalogsPaths } from "@/shared/utils/urlPaths";
 import FloatingLabel from "react-bootstrap/esm/FloatingLabel";
+import { testData } from "@/shared/utils/test";
 
 export const PlanSelect = ({ form }: FormikComponentProps) => {
   const { data } = useFetch<PlanModel[]>({
@@ -31,7 +32,7 @@ export const PlanSelect = ({ form }: FormikComponentProps) => {
     <FloatingLabel label={"Plan de póliza"}>
       <FormSelectTemplate
         firstOptionEmpty="Seleccione un plan de poliza"
-        data={dataView}
+        data={testData}
         {...inputFormik}
         onChange={(e) => {
           onChangeSelect(e.target.value);

@@ -18,9 +18,7 @@ const useFetch = <T>(props: Props) => {
       .then((resp) => {
         setData(resp);
       })
-      .catch((err) => {
-        console.log(err);
-
+      .catch((_) => {
         setErrorMessage("");
       })
       .finally(() => {
