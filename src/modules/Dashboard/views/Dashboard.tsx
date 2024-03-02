@@ -14,7 +14,7 @@ const Dashboard = () => {
               <Card.Text className="h5 text-center mb-2">{i.title}</Card.Text>
               <Card.Img src={i.image} height={200} className="object-fit-cover rounded-0" />
               <Link to={i.to}>
-                <Button variant="success" className="w-100">
+                <Button variant="primary" className="w-100">
                   {i.titleButton}
                 </Button>
               </Link>
@@ -34,7 +34,7 @@ const Dashboard = () => {
               </h1>
             </div>
             <Link to={"/printer"}>
-              <Button variant="success" className="w-100">
+              <Button variant="primary" className="w-100">
                 Continuar
               </Button>
             </Link>
