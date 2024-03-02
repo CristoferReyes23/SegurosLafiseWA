@@ -46,7 +46,7 @@ export const stepsCreatePolicy: TypeStep[] = [
         .required(MESSAGES.required)
         .min(new Date().getFullYear() - 100, "Debes tener al menos 100 años.")
         .max(new Date(), "La fecha de nacimiento no puede ser en el futuro."),
-      email: string().email().required(MESSAGES.required),
+      email: string().email(MESSAGES.email).required(MESSAGES.required),
       celular: string().length(8, MESSAGES.lengthPhoneNumber).required(MESSAGES.required),
       telefono: string().length(8, MESSAGES.lengthPhoneNumber),
       paisOrigen: number().required(MESSAGES.required),

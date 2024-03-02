@@ -4,6 +4,7 @@ import FormGroupTemplate from "@/shared/components/Forms/FormGroupTemplate";
 import FormSelectTemplate from "@/shared/components/Forms/FormSelectTemplate";
 import { BaseListDataModel } from "@/shared/models/baseListData.model";
 import { FormikProps } from "formik";
+import { testData } from "@/shared/utils/test";
 
 interface Props {
   form: FormikProps<any>;
@@ -44,7 +45,7 @@ export const CommonSelectWithDependency = ({
     <FormGroupTemplate label={floatingLabel} name={name}>
       <FormSelectTemplate
         onChange={(e) => onChangeValue(e)}
-        data={data ?? []}
+        data={data ?? testData}
         firstOptionEmpty={firstOptionEmpty}
         errorMessage={getFormikErrorField(form, name)}
         disabled={isDisabled}
