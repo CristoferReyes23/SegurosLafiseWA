@@ -14,7 +14,7 @@ const CreatePolicy = () => {
   const { steps, goBack, goNext, onClickTab, stepNumber, currentIndex, handleSubmit, initialValues } =
     CreatePolicyHelper();
 
-  const pages = useMemo(() => [VerifyForm, PlanPolicy, VehicleForm, ClientForm], []);
+  const pages = useMemo(() => [PlanPolicy, VehicleForm, ClientForm, VerifyForm], []);
 
   return (
     <div>
@@ -32,7 +32,7 @@ const CreatePolicy = () => {
                 stepNumber={stepNumber}
                 currentPage={currentIndex}
                 onClick={onClickTab}
-                tabs={["Comprobar", "Plan de póliza", "Datos del vehículo", "Datos Personales"]}
+                tabs={["Plan de póliza", "Datos del vehículo", "Datos Personales", "Comprobar"]}
               />
 
               {pages.map((Component, index) => (
@@ -42,7 +42,7 @@ const CreatePolicy = () => {
               ))}
 
               <NavigationButtons
-                pageLength={3}
+                pageLength={pages.length}
                 onClickPrevious={goBack}
                 currentPage={currentIndex}
                 onClickNext={goNext}

@@ -25,10 +25,7 @@ const NavigationButtons = (props: Props) => {
     <Row className="justify-content-end mt-3">
       <Col className="col-auto">
         {!isFirst && (
-          <Button
-            className="btn btn-secondary me-3"
-            onClick={props.onClickPrevious}
-          >
+          <Button className="btn btn-secondary me-3" onClick={props.onClickPrevious}>
             Atrás
           </Button>
         )}

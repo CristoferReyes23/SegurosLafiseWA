@@ -10,7 +10,7 @@ const PanelTemplate = ({ children, heading }: Props) => {
     <div className="panel mb-3">
       <div className="panel-heading">{heading}</div>
       <div className="panel-body">
-        <div className="row">{children}</div>
+        <div className="d-flex flex-wrap">{children}</div>
       </div>
     </div>
   );

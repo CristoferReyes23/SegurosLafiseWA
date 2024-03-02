@@ -2,13 +2,13 @@ export const VEHICLE_FORM_KEYS_VALUES = [
   { key: "marcaId", title: "Marca" },
   { key: "modeloId", title: "Modelo" },
   { key: "anio", title: "Año" },
-  { key: "valorNuevo", title: "Precio del vehículo nuevo" },
   { key: "usoo", title: "Uso" },
   { key: "placa", title: "Placa" },
   { key: "motor", title: "Motor" },
   { key: "chasis", title: "Chasis" },
   { key: "puertas", title: "Puertas" },
   { key: "color", title: "Color" },
+  { key: "valorNuevo", title: "Precio del vehículo" },
 ];
 
 export const CLIENT_FORM_KEYS_VALUES = [
@@ -25,4 +25,5 @@ export const CLIENT_FORM_KEYS_VALUES = [
   { key: "xprovincia", title: "Departamento" },
   { key: "xcanton", title: "Ciudad" },
   { key: "xdistrito", title: "Distrito" },
+  { key: "direccion", title: "Dirección" },
 ];

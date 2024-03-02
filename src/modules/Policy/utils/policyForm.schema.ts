@@ -8,13 +8,6 @@ import { string, number, object, date } from "yup";
 
 export const stepsCreatePolicy: TypeStep[] = [
   {
-    component: VerifyForm,
-    initialValues: {},
-    name: "VerifyForm",
-    titleHeaderStep: "",
-    validationSchema: object({}),
-  },
-  {
     name: "step0",
     component: PlanPolicy,
     titleHeaderStep: "Seleccione el plan de la póliza",
@@ -65,5 +58,12 @@ export const stepsCreatePolicy: TypeStep[] = [
       profesion: string().required(MESSAGES.required),
     }),
     initialValues: {},
+  },
+  {
+    component: VerifyForm,
+    initialValues: {},
+    name: "VerifyForm",
+    titleHeaderStep: "",
+    validationSchema: object({}),
   },
 ];

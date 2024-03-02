@@ -21,7 +21,6 @@ const VerifyForm = ({ form }: FormikComponentProps) => {
           {CLIENT_FORM_KEYS_VALUES.map((i) => (
             <ItemValue key={i.key} title={i.title} value={form.values[i.key]} />
           ))}
-          <ItemValue key="dir" title={"Dirección"} value={form.values["direction"]} />
         </PanelTemplate>
       </FormCard>
     </div>
@@ -35,8 +34,10 @@ interface ItemValueProps {
   value: string;
 }
 const ItemValue = ({ title, value }: ItemValueProps) => (
-  <div className="col-sm-6 col-md-3 mb-1">
-    <p className="fw-semibold text-blue mb-0">{title}:</p>
-    <p className="w-100 text-truncate border-3 border-bottom d-inline-block mb-0">{value ?? "Sin dato"}</p>
+  <div className="mb-1" style={{ flex: "1 1 25%", width: "100%" }}>
+    <p className="mb-0 key-label ">
+      <span className="fw-bold text-blue d-inline me-3">{title}: </span>
+      <span>{value}</span>
+    </p>
   </div>
 );

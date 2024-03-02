@@ -21,3 +21,8 @@
 .panel-body {
   padding: 15px;
 }
+
+.key-label {
+  text-wrap: wrap;
+  font-size: 12px;
+}
