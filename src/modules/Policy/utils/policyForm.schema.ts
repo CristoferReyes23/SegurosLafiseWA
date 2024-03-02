@@ -1,11 +1,19 @@
 import ClientForm from "@/modules/Policy/components/Steps/ClientForm";
 import PlanPolicy from "@/modules/Policy/components/Steps/PlanPolicy";
 import VehicleForm from "@/modules/Policy/components/Steps/VehicleForm";
+import VerifyForm from "@/modules/Policy/components/Steps/VerifyForm";
 import { TypeStep } from "@/modules/Policy/utils/multiStepFormUtils";
 import { MESSAGES } from "@/shared/utils/formMessages";
 import { string, number, object, date } from "yup";
 
 export const stepsCreatePolicy: TypeStep[] = [
+  {
+    component: VerifyForm,
+    initialValues: {},
+    name: "VerifyForm",
+    titleHeaderStep: "",
+    validationSchema: object({}),
+  },
   {
     name: "step0",
     component: PlanPolicy,

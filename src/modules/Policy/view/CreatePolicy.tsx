@@ -8,12 +8,13 @@ import { getStepSchema } from "@/modules/Policy/utils/multiStepFormUtils";
 import { Formik } from "formik";
 import { useMemo } from "react";
 import "./CreatePolicy.css";
+import VerifyForm from "@/modules/Policy/components/Steps/VerifyForm";
 
 const CreatePolicy = () => {
   const { steps, goBack, goNext, onClickTab, stepNumber, currentIndex, handleSubmit, initialValues } =
     CreatePolicyHelper();
 
-  const pages = useMemo(() => [PlanPolicy, VehicleForm, ClientForm], []);
+  const pages = useMemo(() => [VerifyForm, PlanPolicy, VehicleForm, ClientForm], []);
 
   return (
     <div>
@@ -31,7 +32,7 @@ const CreatePolicy = () => {
                 stepNumber={stepNumber}
                 currentPage={currentIndex}
                 onClick={onClickTab}
-                tabs={["Plan de póliza", "Datos del vehículo", "Datos Personales"]}
+                tabs={["Comprobar", "Plan de póliza", "Datos del vehículo", "Datos Personales"]}
               />
 
               {pages.map((Component, index) => (
