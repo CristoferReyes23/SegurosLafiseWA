@@ -6,14 +6,18 @@ import { useState } from "react";
 
 const CreateQuoteHelper = () => {
   const [response, setResponse] = useState<QuoteResponseModel | null>(null);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const onSubmitForm = (formData: any, { setSubmitting }: any) => {
     QuoteService.queryCoverages(formData)
       .then((resp) => {
         setResponse(resp);
+        setErrorMessage("");
       })
       .catch((err) => {
         console.log(err);
+
+        setErrorMessage(err.message);
         setResponse(null);
       })
       .finally(() => {
@@ -27,7 +31,11 @@ const CreateQuoteHelper = () => {
     validationSchema: formSchema,
   });
 
+  const onCloseAlert = () => setErrorMessage("");
+
   return {
+    errorMessage,
+    onCloseAlert,
     onSubmitForm,
     response,
     formik,

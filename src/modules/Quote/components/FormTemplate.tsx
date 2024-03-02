@@ -9,7 +9,11 @@ import { EnumUrlCatalogsPaths } from "@/shared/utils/urlPaths";
 import FloatingLabel from "react-bootstrap/esm/FloatingLabel";
 import { testData } from "@/shared/utils/test";
 
-const FormTemplate = ({ form }: FormikComponentProps) => {
+interface Props extends FormikComponentProps {
+  children?: any;
+}
+
+const FormTemplate = ({ form, children }: Props) => {
   return (
     <form noValidate onSubmit={form.handleSubmit}>
       <FormCard title={"Plan a cotizar"}>
@@ -67,6 +71,9 @@ const FormTemplate = ({ form }: FormikComponentProps) => {
             Cotizar
           </button>
         </div>
+
+        {/* renderiza los componentes hijos  */}
+        {children}
       </FormCard>
     </form>
   );

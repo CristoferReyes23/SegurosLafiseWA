@@ -10,11 +10,13 @@ interface Props extends FormSelectProps {
 }
 
 const FormSelectTemplate = ({ data, errorMessage, firstOptionEmpty, ...defaultProps }: Props) => {
+  const withoutSelectDefault = data.filter((i) => i.id != "0");
+
   return (
     <>
       <FormSelect className="" {...defaultProps}>
         {firstOptionEmpty && <option value={""}>{firstOptionEmpty}</option>}
-        {data?.map((i) => (
+        {withoutSelectDefault?.map((i) => (
           <option value={i.id} key={i.id}>
             {i.text}
           </option>

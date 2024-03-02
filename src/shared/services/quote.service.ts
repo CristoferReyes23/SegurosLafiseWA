@@ -3,7 +3,7 @@ import { CustomException } from "@/shared/utils/customException.model";
 
 export class QuoteService {
   static async queryCoverages(formData: any) {
-    return QuoteApi.getCoverages({});
+    // return QuoteApi.getCoverages({});
 
     //get category and number of seats
     const dataSheet = await QuoteApi.fetchDataSheet(formData);

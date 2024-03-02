@@ -27,8 +27,6 @@ export const PlanSelect = ({ form }: FormikComponentProps) => {
     form.setFieldValue("moneda", data?.find((i) => i.id == value)?.moneda);
     form.setFieldValue("topAnio", data?.find((i) => i.id == value)?.topAnio);
 
-    console.log(testData?.find((i) => i.id == value)?.text);
-    
     form.setFieldValue("xplan", testData?.find((i) => i.id == value)?.text);
   };
 
@@ -36,7 +34,7 @@ export const PlanSelect = ({ form }: FormikComponentProps) => {
     <FloatingLabel label={"Plan de póliza"}>
       <FormSelectTemplate
         firstOptionEmpty="Seleccione un plan de poliza"
-        data={testData}
+        data={dataView}
         {...inputFormik}
         onChange={(e) => {
           onChangeSelect(e.target.value);
