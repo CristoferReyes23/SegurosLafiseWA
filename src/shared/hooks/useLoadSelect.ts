@@ -25,27 +25,6 @@ export const useLoadSelect = <T>({ form, name, pathApi, dependencyField, provide
   }, [form.values[dependencyField]]);
 
   const callApi = async () => {
-    // //test
-    // setData([
-    //   {
-    //     id: "1",
-    //     text: "test1",
-    //   },
-    //   {
-    //     id: "2",
-    //     text: "test2",
-    //   },
-    //   {
-    //     id: "3",
-    //     text: "test3",
-    //   },
-    //   {
-    //     id: "4",
-    //     text: "test4",
-    //   },
-    // ] as T);
-    // return;
-
     const result = await fetchCall({
       providerName,
       path: getUrlWithValues(form.values, pathApi),
