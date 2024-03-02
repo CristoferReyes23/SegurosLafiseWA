@@ -9,6 +9,7 @@ import FormCheck from "react-bootstrap/esm/FormCheck";
 import { FormikComponentProps } from "@/shared/utils/getFormikProps";
 import { ConstRegex } from "@/shared/utils/constRegex";
 import { useMemo } from "react";
+import DocumentInputControl from "@/shared/components/Forms/DocumentInputControl";
 
 interface Props {
   form: FormikProps<FormikValues>;
@@ -26,8 +27,12 @@ const ClientForm = ({ form }: Props) => {
             label={"Tipo de identificación"}
             firsOption={"Seleccione un tipo de identificación"}
           />
-
-          <GroupInputForm formik={form} label="Identificación" name="documentoIdentificacion" />
+          <DocumentInputControl
+            dependencyName="tipoId"
+            label="Identificación"
+            name="documentoIdentificacion"
+            formik={form}
+          />
           <GenderCheckBox form={form} />
           <GroupInputForm formik={form} label="Nombre" name="nombre" />
           <GroupInputForm formik={form} label="Apellido" name="apellido" />

@@ -1,6 +1,6 @@
 import CommonSelectGroup from "@/modules/Policy/components/CommonSelectGroup";
 import FormCard from "@/shared/components/FormCard";
-import GroupInputForm from "@/shared/components/Forms/GroupInputForm";
+import DocumentInputControl from "@/shared/components/Forms/DocumentInputControl";
 import { FormikComponentProps } from "@/shared/utils/getFormikProps";
 import { EnumUrlCatalogsPaths } from "@/shared/utils/urlPaths";
 
@@ -20,7 +20,7 @@ const FormSearchClient = ({ form }: FormikComponentProps) => {
           </div>
 
           <div className="col">
-            <GroupInputForm formik={form} label="Identificación" name="userIdValue" />
+            <DocumentInputControl dependencyName="typeUserId" label="Identificación" name="userIdValue" formik={form} />
           </div>
         </div>
 
