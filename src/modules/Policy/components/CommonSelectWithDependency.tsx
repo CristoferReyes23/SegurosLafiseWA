@@ -35,7 +35,7 @@ export const CommonSelectWithDependency = ({
   const { onChange, ...inputProps } = getFormikProps(form, name);
 
   const onChangeValue = (e: any) => {
-    if (nameText) form.setFieldValue(nameText, data?.find((i) => i.id == e.target.value)?.text);
+    if (nameText) form.setFieldValue(nameText, testData?.find((i) => i.id == e.target.value)?.text);
 
     //event handler
     onChange(e);

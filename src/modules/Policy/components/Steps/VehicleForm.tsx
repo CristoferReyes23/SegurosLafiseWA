@@ -21,6 +21,7 @@ const VehicleForm = ({ form }: Props) => {
               form={form}
               name={"marcaId"}
               dependencyField="planId"
+              nameText="xmarca"
               pathApi={EnumUrlCatalogsPaths.brands}
               floatingLabel={"Marca"}
               firstOptionEmpty="Seleccione una marca"
@@ -28,6 +29,7 @@ const VehicleForm = ({ form }: Props) => {
             <CommonSelectWithDependency
               form={form}
               name={"modeloId"}
+              nameText="xmodelo"
               dependencyField={"marcaId"}
               pathApi={EnumUrlCatalogsPaths.models}
               floatingLabel={"Modelo"}
@@ -56,6 +58,7 @@ const VehicleForm = ({ form }: Props) => {
             <CommonSelectGroup
               form={form}
               name="usoo"
+              nameText="xusoo"
               urlPath={EnumUrlCatalogsPaths.uses}
               label="Uso del vehículo"
               firsOption="Seleccione un tipo de uso"

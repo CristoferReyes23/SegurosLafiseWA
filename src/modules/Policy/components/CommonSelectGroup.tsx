@@ -20,7 +20,6 @@ const CommonSelectGroup = ({ firsOption, form, label, name, urlPath, nameText }:
   });
 
   const { onChange, ...extraProps } = getFormikProps(form, name);
-
   const onChangeValue = (e: any) => {
     if (nameText) {
       form.setFieldValue(nameText, testValue?.find((i) => i.id == e.target.value)?.text);

@@ -39,6 +39,7 @@ const ClientForm = ({ form }: Props) => {
             firsOption="Seleccione una profesión"
             label="Profesiones"
             name="profesion"
+            nameText="xprofesion"
             urlPath={EnumUrlCatalogsPaths.profession}
           />
         </div>

@@ -26,6 +26,10 @@ export const PlanSelect = ({ form }: FormikComponentProps) => {
   const onChangeSelect = (value: any) => {
     form.setFieldValue("moneda", data?.find((i) => i.id == value)?.moneda);
     form.setFieldValue("topAnio", data?.find((i) => i.id == value)?.topAnio);
+
+    console.log(testData?.find((i) => i.id == value)?.text);
+    
+    form.setFieldValue("xplan", testData?.find((i) => i.id == value)?.text);
   };
 
   return (

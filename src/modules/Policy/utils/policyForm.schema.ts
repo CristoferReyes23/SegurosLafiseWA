@@ -63,7 +63,7 @@ export const stepsCreatePolicy: TypeStep[] = [
     component: VerifyForm,
     initialValues: {},
     name: "VerifyForm",
-    titleHeaderStep: "",
+    titleHeaderStep: "Confirme el pago",
     validationSchema: object({}),
   },
 ];
