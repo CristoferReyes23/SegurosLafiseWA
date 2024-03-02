@@ -8,6 +8,7 @@ import FormGroupTemplate from "@/shared/components/Forms/FormGroupTemplate";
 import FormCheck from "react-bootstrap/esm/FormCheck";
 import { FormikComponentProps } from "@/shared/utils/getFormikProps";
 import { ConstRegex } from "@/shared/utils/constRegex";
+import { useMemo } from "react";
 
 interface Props {
   form: FormikProps<FormikValues>;
@@ -30,7 +31,9 @@ const ClientForm = ({ form }: Props) => {
           <GenderCheckBox form={form} />
           <GroupInputForm formik={form} label="Nombre" name="nombre" />
           <GroupInputForm formik={form} label="Apellido" name="apellido" />
-          <GroupInputForm type="date" formik={form} label="Fecha de nacimiento" name="fechaNacimiento" />
+
+          <BirthdayInput form={form} />
+
           <CommonSelectGroup
             form={form}
             firsOption="Seleccione una profesión"
@@ -132,5 +135,30 @@ const GenderCheckBox = ({ form }: FormikComponentProps) => {
         />
       </div>
     </FormGroupTemplate>
+  );
+};
+
+const BirthdayInput = ({ form }: FormikComponentProps) => {
+  const minDateString = useMemo(() => {
+    const minDate = new Date();
+    minDate.setFullYear(minDate.getFullYear() - Number(import.meta.env.VITE_BIRTHDAY_MIN));
+    return minDate.toISOString().split("T")[0];
+  }, []);
+
+  const maxDateString = useMemo(() => {
+    const maxDate = new Date();
+    maxDate.setFullYear(maxDate.getFullYear() - 100);
+    return maxDate.toISOString().split("T")[0];
+  }, []);
+
+  return (
+    <GroupInputForm
+      type="date"
+      formik={form}
+      label="Fecha de nacimiento"
+      min={maxDateString}
+      max={minDateString}
+      name="fechaNacimiento"
+    />
   );
 };
