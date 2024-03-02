@@ -19,7 +19,7 @@ export const PlanSelect = ({ form }: FormikComponentProps) => {
         text: i.nombre,
         id: i.id.toString(),
       }))
-      .filter((item, index, self) => index === self.findIndex((t) => t.id === item.id)) ?? []; //avoid duplicated
+      .filter((item, index, self) => index === self.findIndex((t) => t.id === item.id)) ?? testData; //avoid duplicated
 
   const inputFormik = getFormikProps(form, "planId");
 
@@ -27,7 +27,7 @@ export const PlanSelect = ({ form }: FormikComponentProps) => {
     form.setFieldValue("moneda", data?.find((i) => i.id == value)?.moneda);
     form.setFieldValue("topAnio", data?.find((i) => i.id == value)?.topAnio);
 
-    form.setFieldValue("xplan", testData?.find((i) => i.id == value)?.text);
+    form.setFieldValue("xplan", dataView?.find((i) => i.id == value)?.text);
   };
 
   return (

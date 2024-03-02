@@ -3,6 +3,7 @@ import { TypeStep, generateInitialValues } from "@/modules/Policy/utils/multiSte
 import { FormikValues } from "formik";
 import { useEffect, useState } from "react";
 import { useHeaderLayout } from "@/views/ProtectedLayout/ProtectedLayout";
+import { useNavigate } from "react-router-dom";
 
 const CreatePolicyHelper = () => {
   const [steps] = useState<TypeStep[]>(stepsCreatePolicy);
@@ -10,6 +11,7 @@ const CreatePolicyHelper = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [stepNumber, setStepNumber] = useState(0);
   const { setTitleHeader } = useHeaderLayout();
+  const navigate = useNavigate();
 
   useEffect(() => {
     setTitleHeader(steps[currentIndex].titleHeaderStep ?? "");
@@ -28,6 +30,15 @@ const CreatePolicyHelper = () => {
 
   const handleSubmit = (values: FormikValues) => {
     console.log("submit from formik", values);
+
+    navigate("/policy/successful", {
+      replace: true,
+      state: {
+        policyId: "123123",
+        message: "testing message",
+        client: "test",
+      },
+    });
   };
 
   return {

@@ -1,6 +1,7 @@
 :root {
   --bg-blue: #0033a0;
   --color-gray: #ececec;
+  --color-success: #81d320;
 }
 
 /* --------------------------------- globals -------------------------------- */
@@ -32,6 +33,11 @@ h4,
 .h4 {
   color: var(--bg-blue);
   font-family: "Roboto", sans-serif;
+}
+
+h1,
+.h1 {
+  font-weight: 300;
 }
 
 p,
@@ -103,9 +109,30 @@ input[disabled].form-control:focus {
 }
 
 .btn-success {
-  background-color: #81d320;
-  border: 2px solid #81d320;
+  background-color: var(--color-success);
+  border: 2px solid var(--color-success);
   color: #fff;
+}
+
+.text-success {
+  color: var(--color-success) !important;
+}
+
+.lead {
+  font-size: 20px;
+  font-weight: 100;
+  margin-bottom: 20px;
+  line-height: 1.4;
+}
+
+.modal-title {
+  margin: 0;
+  line-height: 1.42857143;
+}
+
+h4,
+.h4 {
+  font-weight: 400;
 }
 
 /* ----------------------------- form templates ----------------------------- */
