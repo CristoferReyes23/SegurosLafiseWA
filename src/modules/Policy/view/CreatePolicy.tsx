@@ -2,7 +2,7 @@ import ClientForm from "@/modules/Policy/components/Steps/ClientForm";
 import PlanPolicy from "@/modules/Policy/components/Steps/PlanPolicy";
 import VehicleForm from "@/modules/Policy/components/Steps/VehicleForm";
 import CreatePolicyHelper from "@/modules/Policy/view/CreatePolicy.helper";
-import NavigationButtons from "@/modules/Policy/components/NavigationButtons/NavigationButtons";
+import NavigationButtons from "@/modules/Policy/components/NavigationButtons";
 import TabWizard from "@/modules/Policy/components/TabWizard/TabWizard";
 import { getStepSchema } from "@/modules/Policy/utils/multiStepFormUtils";
 import { Formik } from "formik";
