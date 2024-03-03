@@ -9,8 +9,13 @@ import CommonSelectGroup from "@/shared/components/Forms/Selects/CommonSelectGro
 import GroupInputForm from "@/shared/components/Forms/GroupInputForm";
 import { ConstRegex } from "@/shared/utils/constRegex";
 import { useEffect, useState } from "react";
+import AlertTemplate from "@/shared/components/AlertTemplate/AlertTemplate";
 
-const PlanPolicy = ({ form }: FormikComponentProps) => {
+interface Props extends FormikComponentProps {
+  alertRef: any;
+}
+
+const PlanPolicy = ({ form, alertRef }: Props) => {
   return (
     <div>
       <FormCard title="Datos de cotización del vehículo">
@@ -70,6 +75,8 @@ const PlanPolicy = ({ form }: FormikComponentProps) => {
             />
           </Col>
         </Row>
+
+        <AlertTemplate childRef={alertRef} />
       </FormCard>
 
       <FormCard title="Detalle del vehículo" classNames="mt-3">

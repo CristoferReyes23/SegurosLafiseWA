@@ -5,8 +5,6 @@ export interface TabStep {
 }
 
 export type TypeStep = {
-  name: string;
-  component: React.ElementType;
   validationSchema: Yup.Schema<any>;
   initialValues: any;
   titleHeaderStep?: string;

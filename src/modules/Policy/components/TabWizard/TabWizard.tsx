@@ -1,5 +1,5 @@
 import Nav from "react-bootstrap/esm/Nav";
-import './TabWizard.css'
+import "./TabWizard.css";
 
 interface Props {
   tabs: string[];
