@@ -126,6 +126,7 @@ const GenderCheckBox = ({ form }: FormikComponentProps) => {
         <FormCheck
           type="radio"
           id={"M"}
+          value={"M"}
           name="sexo"
           onChange={form.handleChange}
           label={`Masculino`}
@@ -134,6 +135,7 @@ const GenderCheckBox = ({ form }: FormikComponentProps) => {
         <FormCheck
           type="radio"
           id={"F"}
+          value={"F"}
           name="sexo"
           onChange={form.handleChange}
           label={`Femenino`}

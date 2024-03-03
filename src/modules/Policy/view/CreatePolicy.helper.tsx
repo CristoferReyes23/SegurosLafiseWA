@@ -1,22 +1,21 @@
 import { stepsCreatePolicy } from "@/modules/Policy/utils/policyForm.schema";
 import { TypeStep, generateInitialValues } from "@/modules/Policy/utils/multiStepFormUtils";
-import { FormikValues, useFormik } from "formik";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { FormikValues } from "formik";
+import { useEffect, useRef, useState } from "react";
 import { useHeaderLayout } from "@/views/ProtectedLayout/ProtectedLayout";
 import { useNavigate } from "react-router-dom";
-import { customValidation } from "@/modules/Policy/utils/customValidationForm";
-import { QuoteResponseModel } from "@/shared/models/quoteResponse.model";
 import { IAlertTemplate } from "@/shared/components/AlertTemplate/AlertTemplate";
+import { QuoteResponseModel } from "@/shared/models/quoteResponse.model";
 import { QuoteService } from "@/shared/services/quote.service";
 import { MESSAGES } from "@/shared/utils/formMessages";
+import { EnumIndexPages } from "@/modules/Policy/utils/enumPages";
 
 const CreatePolicyHelper = () => {
   // wizard state values and form props
   const [steps] = useState<TypeStep[]>(stepsCreatePolicy);
   const [initialValues] = useState<any>(generateInitialValues(steps));
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [stepNumber, setStepNumber] = useState(0);
-  const [validationSchema, setValidationSchema] = useState<any>(undefined);
+  const validationSchema = steps[currentIndex].validationSchema;
 
   // component ref
   const loadingRef = useRef<any>(null);
@@ -29,105 +28,114 @@ const CreatePolicyHelper = () => {
   const navigate = useNavigate();
   const [coverageResponse, setCoverages] = useState<QuoteResponseModel | null>(null);
 
-  // update title header into dashboard context and update validation schema if index page changes
+  // update context dashboard title
   useEffect(() => {
     setTitleHeader(steps[currentIndex].titleHeaderStep ?? "");
-    setValidationSchema(steps[currentIndex].validationSchema);
   }, [currentIndex]);
 
   const handleSubmit = (values: FormikValues) => {
-    console.log(values);
-
-    navigate("/policy/successful", {
-      replace: true,
-      state: {
-        policyId: "123123",
-        message: "testing message",
-        client: "test",
-      },
-    });
+    loadingRef.current?.show(true);
+    handlerEventSubmit(values)
+      .then((res) => {
+        console.log("res", res);
+        if (res) updateWizardSteps(false);
+      })
+      .finally(() => loadingRef.current?.show(false));
   };
 
-  const formik = useFormik({
-    initialValues: initialValues,
-    onSubmit: handleSubmit,
-    validate: customValidation,
-    validationSchema: validationSchema,
-    validateOnMount: true,
-  });
+  const handlerEventSubmit = async (values: any) => {
+    console.log("currentIndex", currentIndex);
 
-  //#region tabs events
-  const onClickTab = (index: number) => {
-    formik.validateForm();
-    if (!formik.isValid) return;
+    switch (currentIndex) {
+      case EnumIndexPages.quote:
+        return await nextStepQuote(values);
 
-    if (currentIndex == EnumIndexPages.quote) {
-      getCoveragesData().then((isOk) => {
-        if (isOk) setCurrentIndex(index);
-      });
-    } else {
-      setCurrentIndex(index);
+      case EnumIndexPages.client:
+        return true;
+
+      case EnumIndexPages.verify:
+        navigate("/policy/successful", {
+          replace: true,
+          state: {
+            policyId: "123123",
+            message: "testing message",
+            client: "test",
+          },
+        });
+        break;
+
+      default:
+        break;
     }
   };
 
-  const goBack = () => setCurrentIndex((pre) => pre - 1);
-  const goNext = () => {
-    if (currentIndex == EnumIndexPages.quote) {
-      getCoveragesData().then((isOk) => {
-        console.log("ok", isOk);
-        if (isOk) updateStateWizard();
-      });
-    } else {
-      updateStateWizard();
-    }
-  };
-
-  const updateStateWizard = () => {
-    setCurrentIndex((pre) => pre + 1);
-    setStepNumber((pre) => {
-      return currentIndex + 1 > pre ? currentIndex + 1 : pre;
-    });
-  };
-  //#endregion
-
-  const getCoveragesData = async () => {
+  const nextStepQuote = async (values: any) => {
     let isOk = false;
-
     try {
-      loadingRef.current?.show(true);
-
-      const data = await QuoteService.queryCoverages(formik.values);
+      const data = await QuoteService.queryCoverages(values);
       setCoverages(data);
       isOk = true;
     } catch (err: any) {
       alertRef.current?.show(true, { message: err.type ? err.message : MESSAGES.unexpectedError });
       setCoverages(null);
     }
-    loadingRef.current?.show(false);
     return isOk;
   };
+
+  const updateWizardSteps = (goBack: boolean) => {
+    if (goBack) {
+      setCurrentIndex((pre) => pre - 1);
+      return;
+    }
+
+    if (currentIndex != EnumIndexPages.verify) {
+      setCurrentIndex((pre) => pre + 1);
+      return;
+    }
+  };
+
+  //#region tabs events
+  const onClickTab = (index: number) => {
+    setCurrentIndex(index);
+  };
+
+  const goBack = () => {
+    updateWizardSteps(true);
+  };
+  const goNext = () => {};
+  //#endregion
+
+  // const getCoveragesData = async () => {
+  //   let isOk = false;
+
+  //   try {
+  //     loadingRef.current?.show(true);
+
+  //     const data = await QuoteService.queryCoverages(formik.values);
+  //     setCoverages(data);
+  //     isOk = true;
+  //   } catch (err: any) {
+  //     alertRef.current?.show(true, { message: err.type ? err.message : MESSAGES.unexpectedError });
+  //     setCoverages(null);
+  //   }
+  //   loadingRef.current?.show(false);
+  //   return isOk;
+  // };
 
   return {
     steps,
     goBack,
     goNext,
-    formik,
     alertRef,
     onClickTab,
     loadingRef,
-    stepNumber,
+    stepNumber: 0,
     currentIndex,
     handleSubmit,
     initialValues,
-    coverageResponse,
     validationSchema,
+    coverageResponse,
   };
 };
 
 export default CreatePolicyHelper;
-
-enum EnumIndexPages {
-  quote = 0,
-  client = 1,
-  verify = 2,
-}

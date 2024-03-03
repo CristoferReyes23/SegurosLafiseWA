@@ -1,5 +1,4 @@
 import { useFormikContext } from "formik";
-import { useEffect } from "react";
 import Button from "react-bootstrap/esm/Button";
 import Col from "react-bootstrap/esm/Col";
 import Row from "react-bootstrap/esm/Row";
@@ -13,13 +12,7 @@ interface Props {
 
 const NavigationButtons = (props: Props) => {
   const isFirst = props.currentPage == 0;
-  const isLast = props.currentPage === props.pageLength - 1;
-
-  const { isValid, validateForm, handleSubmit } = useFormikContext();
-
-  useEffect(() => {
-    validateForm();
-  }, [props.currentPage, validateForm]);
+  const { isValid, handleSubmit } = useFormikContext();
 
   return (
     <Row className="justify-content-end mt-3">
@@ -29,11 +22,7 @@ const NavigationButtons = (props: Props) => {
             Atrás
           </Button>
         )}
-        <Button
-          disabled={!isValid}
-          className="btn btn-primary"
-          onClick={() => (isLast ? handleSubmit() : props.onClickNext())}
-        >
+        <Button disabled={!isValid} className="btn btn-primary" onClick={() => handleSubmit()}>
           Continuar
         </Button>
       </Col>
