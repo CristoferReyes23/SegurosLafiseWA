@@ -102,34 +102,14 @@ const CreatePolicyHelper = () => {
   const goBack = () => {
     updateWizardSteps(true);
   };
-  const goNext = () => {};
   //#endregion
-
-  // const getCoveragesData = async () => {
-  //   let isOk = false;
-
-  //   try {
-  //     loadingRef.current?.show(true);
-
-  //     const data = await QuoteService.queryCoverages(formik.values);
-  //     setCoverages(data);
-  //     isOk = true;
-  //   } catch (err: any) {
-  //     alertRef.current?.show(true, { message: err.type ? err.message : MESSAGES.unexpectedError });
-  //     setCoverages(null);
-  //   }
-  //   loadingRef.current?.show(false);
-  //   return isOk;
-  // };
 
   return {
     steps,
     goBack,
-    goNext,
     alertRef,
     onClickTab,
     loadingRef,
-    stepNumber: 0,
     currentIndex,
     handleSubmit,
     initialValues,

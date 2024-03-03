@@ -6,7 +6,6 @@ import Row from "react-bootstrap/esm/Row";
 interface Props {
   pageLength: number;
   currentPage: number;
-  onClickNext: () => void;
   onClickPrevious: () => void;
 }
 

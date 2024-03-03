@@ -11,7 +11,7 @@ import LoadingSpinner from "@/shared/components/LoadingSpinner/LoadingSpinner";
 import { customValidation } from "@/modules/Policy/utils/customValidationForm";
 
 const CreatePolicy = () => {
-  const { goBack, goNext, onClickTab, stepNumber, currentIndex, loadingRef, alertRef, validationSchema, handleSubmit } =
+  const { goBack, onClickTab, currentIndex, loadingRef, alertRef, validationSchema, handleSubmit } =
     CreatePolicyHelper();
 
   const pages = useMemo(() => [PlanPolicy, ClientForm, VerifyForm], []);
@@ -29,7 +29,6 @@ const CreatePolicy = () => {
           return (
             <>
               <TabWizard
-                stepNumber={stepNumber}
                 currentPage={currentIndex}
                 onClick={onClickTab}
                 tabs={["Datos del vehículo", "Datos Personales", "Comprobar"]}
@@ -40,12 +39,7 @@ const CreatePolicy = () => {
                 </section>
               ))}
 
-              <NavigationButtons
-                pageLength={pages.length}
-                onClickPrevious={goBack}
-                currentPage={currentIndex}
-                onClickNext={goNext}
-              />
+              <NavigationButtons pageLength={pages.length} onClickPrevious={goBack} currentPage={currentIndex} />
             </>
           );
         }}
