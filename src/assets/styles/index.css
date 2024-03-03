@@ -91,6 +91,15 @@ input[disabled].form-control:focus {
   box-shadow: none;
 }
 
+.form-control[disabled],
+.form-control[readonly],
+fieldset[disabled] .form-control,
+.form-select:disabled {
+  background-color: #f2f5fa;
+  opacity: 1;
+  color: #b3c2e3;
+}
+
 .bg-blue {
   background-color: var(--bg-blue);
 }
@@ -150,7 +159,6 @@ input[disabled].form-control,
   border: 2px solid #e6ebf6;
   border-radius: 4px;
   box-shadow: none;
-  background-color: #fff;
 }
 
 label {
