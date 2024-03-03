@@ -36,10 +36,16 @@ const DocumentInputControl = ({ formik, name, label, dependencyName }: Props) =>
     formik.setFieldValue(name, "");
   }, [formik.values[dependencyName]]);
 
+  const { isInvalid, ...inputFormik } = getFormikProps(formik, name);
+
   return (
     <FormGroup className="position-relative mb-3" id={`inputGroup-${name}`}>
       <FormLabel htmlFor={name}>{label}</FormLabel>
-      <InputMask className="form-control text-uppercase" mask={mask} {...getFormikProps(formik, name)} />
+      <InputMask
+        className={`form-control text-uppercase ${isInvalid ? "is-invalid" : ""}`}
+        mask={mask}
+        {...inputFormik}
+      />
       <Feedback type="invalid">{getFormikErrorField(formik, name)}</Feedback>
     </FormGroup>
   );

@@ -4,14 +4,14 @@ import VehicleForm from "@/modules/Policy/components/Steps/VehicleForm";
 import CreatePolicyHelper from "@/modules/Policy/view/CreatePolicy.helper";
 import NavigationButtons from "@/modules/Policy/components/NavigationButtons";
 import TabWizard from "@/modules/Policy/components/TabWizard/TabWizard";
-import { getStepSchema } from "@/modules/Policy/utils/multiStepFormUtils";
 import { Formik } from "formik";
 import { useMemo } from "react";
 import "./CreatePolicy.css";
 import VerifyForm from "@/modules/Policy/components/Steps/VerifyForm";
+import { customValidation } from "@/modules/Policy/utils/customValidationForm";
 
 const CreatePolicy = () => {
-  const { steps, goBack, goNext, onClickTab, stepNumber, currentIndex, handleSubmit, initialValues } =
+  const { goBack, goNext, onClickTab, stepNumber, currentIndex, handleSubmit, initialValues, validationSchema } =
     CreatePolicyHelper();
 
   const pages = useMemo(() => [PlanPolicy, VehicleForm, ClientForm, VerifyForm], []);
@@ -21,7 +21,8 @@ const CreatePolicy = () => {
       <Formik
         initialValues={initialValues}
         onSubmit={handleSubmit}
-        validationSchema={getStepSchema(currentIndex, steps)}
+        validate={customValidation}
+        validationSchema={validationSchema}
         validateOnMount
         enableReinitialize={true}
       >

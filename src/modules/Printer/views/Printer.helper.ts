@@ -1,3 +1,4 @@
+import { customValidation } from "@/modules/Printer/utils/customValidation";
 import { formSchema } from "@/modules/Printer/utils/formPrinter.schema";
 import { BaseViewModel } from "@/shared/models/baseView.model";
 import { PolicyListResponseModel } from "@/shared/models/policyListResponse.model";
@@ -28,6 +29,7 @@ const PrinterHelper = () => {
   const formik = useFormik({
     initialValues: {},
     onSubmit: onSubmit,
+    validate: customValidation,
     validationSchema: formSchema,
   });
 

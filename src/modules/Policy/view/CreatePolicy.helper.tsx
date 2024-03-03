@@ -12,9 +12,11 @@ const CreatePolicyHelper = () => {
   const [stepNumber, setStepNumber] = useState(0);
   const { setTitleHeader } = useHeaderLayout();
   const navigate = useNavigate();
+  const [validationSchema, setValidationSchema] = useState<any>({});
 
   useEffect(() => {
     setTitleHeader(steps[currentIndex].titleHeaderStep ?? "");
+    setValidationSchema(steps[currentIndex]);
   }, [currentIndex]);
 
   const goNext = () => {
@@ -29,6 +31,8 @@ const CreatePolicyHelper = () => {
   const onClickTab = (index: number) => setCurrentIndex(index);
 
   const handleSubmit = (values: FormikValues) => {
+    console.log(values);
+
     navigate("/policy/successful", {
       replace: true,
       state: {
@@ -48,6 +52,7 @@ const CreatePolicyHelper = () => {
     currentIndex,
     handleSubmit,
     initialValues,
+    validationSchema,
   };
 };
 
