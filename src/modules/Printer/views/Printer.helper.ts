@@ -13,7 +13,7 @@ const PrinterHelper = () => {
   const [urlPdf, setUrlPdf] = useState("");
   const loadingRef = useRef<any>(null);
 
-  const onSubmit = (formData: any, { setSubmitting }: any) => {
+  const onSubmit = (formData: any) => {
     loadingRef.current?.show(true);
 
     PrinterService.getAllPolicy(formData["userIdValue"])
@@ -26,7 +26,6 @@ const PrinterHelper = () => {
       })
       .finally(() => {
         loadingRef.current?.show(false);
-        setSubmitting(false);
       });
   };
 

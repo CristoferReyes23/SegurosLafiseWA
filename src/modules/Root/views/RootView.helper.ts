@@ -1,13 +1,15 @@
 import { RootService } from "@/shared/services/root.service";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 
 export const RootViewHelper = () => {
   const [isFetching, setIsFetching] = useState(true);
   const [isLogged, setIsLogged] = useState(false);
   const [searchParams] = useSearchParams();
+  const loadingRef = useRef<any>(null);
 
   useEffect(() => {
+    loadingRef.current?.show(true);
     const a = searchParams.get("a");
     const b = searchParams.get("b");
 
@@ -26,12 +28,14 @@ export const RootViewHelper = () => {
         console.log(err);
       })
       .finally(() => {
+        loadingRef.current?.show(false);
         setIsFetching(false);
       });
   }, []);
 
   return {
     isFetching,
+    loadingRef,
     isLogged,
   };
 };

@@ -26,10 +26,7 @@ const FormSearchClient = ({ form }: FormikComponentProps) => {
 
         <div className="row">
           <div className="col-auto d-flex align-items-center">
-            <button className="btn btn-primary" type="submit" disabled={form.isSubmitting || !form.isValid}>
-              {form.isSubmitting && (
-                <span className="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
-              )}
+            <button className="btn btn-primary" type="submit" disabled={!form.isValid}>
               <i className="fa-solid fa-magnifying-glass"></i> Buscar
             </button>
           </div>

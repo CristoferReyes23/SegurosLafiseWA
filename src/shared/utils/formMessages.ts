@@ -3,4 +3,6 @@ export enum MESSAGES {
   email = "Correo inválido",
   lengthPhoneNumber = "8 dígitos requirido",
   invalidFormatDocument = "Formato del documento incorrecto",
+
+  unexpectedError = "Ocurrió un error inesperado",
 }

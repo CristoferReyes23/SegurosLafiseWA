@@ -64,15 +64,10 @@ const FormTemplate = ({ form, children }: Props) => {
         </div>
 
         <div className="d-flex justify-content-end">
-          <button className="btn btn-primary" type="submit" disabled={form.isSubmitting}>
-            {form.isSubmitting && (
-              <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-            )}
+          <button className="btn btn-primary" type="submit" disabled={!form.isValid}>
             Cotizar
           </button>
         </div>
-
-        {/* renderiza los componentes hijos  */}
         {children}
       </FormCard>
     </form>
