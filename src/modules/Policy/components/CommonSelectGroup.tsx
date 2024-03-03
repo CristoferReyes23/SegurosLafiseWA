@@ -14,7 +14,7 @@ interface Props extends FormikComponentProps {
 }
 
 const CommonSelectGroup = ({ firsOption, form, label, name, urlPath, nameText }: Props) => {
-  const { data } = useFetch<BaseListDataModel[]>({
+  const { data, isFetching } = useFetch<BaseListDataModel[]>({
     to: "LAFISE",
     urlPath,
   });
@@ -35,6 +35,7 @@ const CommonSelectGroup = ({ firsOption, form, label, name, urlPath, nameText }:
         data={data ?? testValue}
         errorMessage={getFormikErrorField(form, name)}
         onChange={onChangeValue}
+        disabled={isFetching}
         {...extraProps}
       />
     </FormGroupTemplate>

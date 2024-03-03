@@ -13,6 +13,7 @@ const useFetch = <T>(props: Props) => {
   const [data, setData] = useState<T | null>(null);
 
   useEffect(() => {
+    setIsFetching(true);
     fetchCall({ path: props.urlPath, providerName: "LAFISE" })
       .then((resp) => resp.json())
       .then((resp) => {

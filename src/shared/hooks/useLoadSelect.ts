@@ -26,7 +26,13 @@ export const useLoadSelect = <T>({ form, name, pathApi, dependencyField, provide
   }, [form.values[dependencyField]]);
 
   const callApi = async () => {
-    return testData;
+    setIsDisabled(true);
+    return new Promise((res) => {
+      setTimeout(() => {
+        res(testData);
+        setIsDisabled(false);
+      }, 2000);
+    });
 
     const result = await fetchCall({
       providerName,
@@ -34,6 +40,7 @@ export const useLoadSelect = <T>({ form, name, pathApi, dependencyField, provide
     });
     const jsonData = await result.json();
     setData(jsonData);
+    setIsDisabled(false);
   };
 
   return {
