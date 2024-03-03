@@ -6,7 +6,7 @@ import PrinterHelper from "@/modules/Printer/views/Printer.helper";
 import FormCard from "@/shared/components/FormCard";
 import LoadingSpinner from "@/shared/components/LoadingSpinner/LoadingSpinner";
 
-export const Printer = () => {
+const Printer = () => {
   const {
     formik,
     responseData,
@@ -36,3 +36,4 @@ export const Printer = () => {
     </div>
   );
 };
+export default Printer;

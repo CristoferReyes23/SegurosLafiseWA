@@ -12,11 +12,11 @@ const CreatePolicyHelper = () => {
   const [stepNumber, setStepNumber] = useState(0);
   const { setTitleHeader } = useHeaderLayout();
   const navigate = useNavigate();
-  const [validationSchema, setValidationSchema] = useState<any>({});
+  const [validationSchema, setValidationSchema] = useState<any>(undefined);
 
   useEffect(() => {
     setTitleHeader(steps[currentIndex].titleHeaderStep ?? "");
-    setValidationSchema(steps[currentIndex]);
+    setValidationSchema(steps[currentIndex].validationSchema);
   }, [currentIndex]);
 
   const goNext = () => {

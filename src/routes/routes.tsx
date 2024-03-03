@@ -6,8 +6,8 @@ import ProtectedLayout from "@/views/ProtectedLayout/ProtectedLayout";
 import RootView from "modules/Root/views/RootView";
 import CreateQuote from "modules/Quote/views/Create/CreateQuote";
 import CreatePolicy from "@/modules/Policy/view/CreatePolicy";
+import Printer from "@/modules/Printer/views/Printer";
 import Dashboard from "@/modules/Dashboard/views/Dashboard";
-import { Printer } from "@/modules/Printer/views/Printer";
 import ErrorBoundary from "@/views/ErrorBoundary";
 import PaymentSuccessful from "@/modules/Policy/view/PaymentSuccessful/PaymentSuccessful";
 
