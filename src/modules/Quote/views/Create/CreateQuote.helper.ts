@@ -19,8 +19,6 @@ const CreateQuoteHelper = () => {
         setErrorMessage("");
       })
       .catch((err) => {
-        console.log(err);
-
         setErrorMessage(err.type ? err.message : MESSAGES.unexpectedError);
         setResponse(null);
       })

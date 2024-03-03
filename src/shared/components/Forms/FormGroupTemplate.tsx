@@ -10,7 +10,7 @@ interface Props {
 const FormGroupTemplate = ({ label, name, children }: Props) => {
   return (
     <FormGroup className="position-relative mb-3" id={`inputGroup-${name}`}>
-      <FormLabel>{label}</FormLabel>
+      <FormLabel htmlFor={name}>{label}</FormLabel>
       {children}
     </FormGroup>
   );

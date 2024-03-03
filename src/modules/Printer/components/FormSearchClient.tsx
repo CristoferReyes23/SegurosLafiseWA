@@ -1,4 +1,4 @@
-import CommonSelectGroup from "@/modules/Policy/components/CommonSelectGroup";
+import CommonSelectGroup from "@/shared/components/Forms/Selects/CommonSelectGroup";
 import FormCard from "@/shared/components/FormCard";
 import DocumentInputControl from "@/shared/components/Forms/DocumentInputControl";
 import { FormikComponentProps } from "@/shared/utils/getFormikProps";

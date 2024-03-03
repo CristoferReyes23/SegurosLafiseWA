@@ -1,9 +1,9 @@
-import { CommonSelectWithDependency } from "@/modules/Policy/components/CommonSelectWithDependency";
+import { CommonSelectWithDependency } from "@/shared/components/Forms/Selects/CommonSelectWithDependency";
 import FormCard from "@/shared/components/FormCard";
 import GroupInputForm from "@/shared/components/Forms/GroupInputForm";
 import { EnumUrlCatalogsPaths } from "@/shared/utils/urlPaths";
 import { FormikProps, FormikValues } from "formik";
-import CommonSelectGroup from "@/modules/Policy/components/CommonSelectGroup";
+import CommonSelectGroup from "@/shared/components/Forms/Selects/CommonSelectGroup";
 import FormGroupTemplate from "@/shared/components/Forms/FormGroupTemplate";
 import FormCheck from "react-bootstrap/esm/FormCheck";
 import { FormikComponentProps } from "@/shared/utils/getFormikProps";

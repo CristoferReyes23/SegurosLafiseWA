@@ -1,10 +1,10 @@
 import { useLoadSelect } from "@/shared/hooks/useLoadSelect";
 import { getFormikErrorField, getFormikProps } from "@/shared/utils/getFormikProps";
-import FormGroupTemplate from "@/shared/components/Forms/FormGroupTemplate";
 import FormSelectTemplate from "@/shared/components/Forms/FormSelectTemplate";
 import { BaseListDataModel } from "@/shared/models/baseListData.model";
 import { FormikProps } from "formik";
 import { testData } from "@/shared/utils/test";
+import FormGroupTemplate from "@/shared/components/Forms/FormGroupTemplate";
 
 interface Props {
   form: FormikProps<any>;

@@ -4,8 +4,8 @@ import FormSelectTemplate from "@/shared/components/Forms/FormSelectTemplate";
 import useFetch from "@/shared/hooks/useFetch";
 import { SelectDataTemplate } from "@/shared/utils/formTypes";
 import { EnumUrlCatalogsPaths } from "@/shared/utils/urlPaths";
-import FloatingLabel from "react-bootstrap/esm/FloatingLabel";
 import { testData } from "@/shared/utils/test";
+import FormGroupTemplate from "@/shared/components/Forms/FormGroupTemplate";
 
 export const PlanSelect = ({ form }: FormikComponentProps) => {
   const { data } = useFetch<PlanModel[]>({
@@ -31,7 +31,7 @@ export const PlanSelect = ({ form }: FormikComponentProps) => {
   };
 
   return (
-    <FloatingLabel label={"Plan de póliza"}>
+    <FormGroupTemplate label="Plan de póliza" name="planId">
       <FormSelectTemplate
         firstOptionEmpty="Seleccione un plan de poliza"
         data={dataView}
@@ -42,6 +42,6 @@ export const PlanSelect = ({ form }: FormikComponentProps) => {
         }}
         errorMessage={getFormikErrorField(form, "planId")}
       />
-    </FloatingLabel>
+    </FormGroupTemplate>
   );
 };

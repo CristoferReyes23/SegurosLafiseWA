@@ -2,9 +2,9 @@ import GroupInputForm from "@/shared/components/Forms/GroupInputForm";
 import FormCard from "@/shared/components/FormCard";
 import { FormikProps, FormikValues } from "formik/dist/types";
 import Stack from "react-bootstrap/esm/Stack";
-import { CommonSelectWithDependency } from "@/modules/Policy/components/CommonSelectWithDependency";
+import { CommonSelectWithDependency } from "@/shared/components/Forms/Selects/CommonSelectWithDependency";
 import { EnumUrlCatalogsPaths } from "@/shared/utils/urlPaths";
-import CommonSelectGroup from "@/modules/Policy/components/CommonSelectGroup";
+import CommonSelectGroup from "@/shared/components/Forms/Selects/CommonSelectGroup";
 import { ConstRegex } from "@/shared/utils/constRegex";
 
 interface Props {
