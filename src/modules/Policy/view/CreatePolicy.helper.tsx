@@ -44,8 +44,6 @@ const CreatePolicyHelper = () => {
   };
 
   const handlerEventSubmit = async (values: any) => {
-    console.log("currentIndex", currentIndex);
-
     switch (currentIndex) {
       case EnumIndexPages.quote:
         return await nextStepQuote(values);

@@ -11,7 +11,7 @@ import LoadingSpinner from "@/shared/components/LoadingSpinner/LoadingSpinner";
 import { customValidation } from "@/modules/Policy/utils/customValidationForm";
 
 const CreatePolicy = () => {
-  const { goBack, onClickTab, currentIndex, loadingRef, alertRef, validationSchema, handleSubmit } =
+  const { goBack, onClickTab, currentIndex, loadingRef, alertRef, validationSchema, handleSubmit, initialValues } =
     CreatePolicyHelper();
 
   const pages = useMemo(() => [PlanPolicy, ClientForm, VerifyForm], []);
@@ -19,7 +19,7 @@ const CreatePolicy = () => {
   return (
     <div>
       <Formik
-        initialValues={{}}
+        initialValues={initialValues}
         validationSchema={validationSchema}
         validate={(values) => customValidation(values, currentIndex)}
         onSubmit={handleSubmit}
