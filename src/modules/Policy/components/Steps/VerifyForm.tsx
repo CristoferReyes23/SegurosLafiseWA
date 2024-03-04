@@ -1,15 +1,18 @@
 import QuoteTable from "@/modules/Policy/components/QuoteResponseTemplate";
 import { CLIENT_FORM_KEYS_VALUES, VEHICLE_FORM_KEYS_VALUES } from "@/modules/Policy/utils/verifyFormConst";
 import FormCard from "@/shared/components/FormCard";
+import { QuoteResponseModel } from "@/shared/models/quoteResponse.model";
 import { FormikComponentProps } from "@/shared/utils/getFormikProps";
 
-const VerifyForm = ({ form }: FormikComponentProps) => {
+interface Props extends FormikComponentProps {
+  covertures: QuoteResponseModel | null;
+}
+
+const VerifyForm = ({ form, covertures }: Props) => {
   return (
     <div>
       <FormCard title="Confirme los datos registrados">
-        <PanelTemplate heading="Plan de póliza">
-          <QuoteTable />
-        </PanelTemplate>
+        <PanelTemplate heading="Plan de póliza">{covertures && <QuoteTable covertures={covertures} />}</PanelTemplate>
 
         <PanelTemplate heading="Vehículo">
           <div className="d-flex flex-wrap">

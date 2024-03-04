@@ -11,8 +11,17 @@ import LoadingSpinner from "@/shared/components/LoadingSpinner/LoadingSpinner";
 import { customValidation } from "@/modules/Policy/utils/customValidationForm";
 
 const CreatePolicy = () => {
-  const { goBack, onClickTab, currentIndex, loadingRef, alertRef, validationSchema, handleSubmit, initialValues } =
-    CreatePolicyHelper();
+  const {
+    goBack,
+    onClickTab,
+    currentIndex,
+    loadingRef,
+    alertRef,
+    validationSchema,
+    handleSubmit,
+    initialValues,
+    coverageResponse,
+  } = CreatePolicyHelper();
 
   const pages = useMemo(() => [PlanPolicy, ClientForm, VerifyForm], []);
 
@@ -35,7 +44,7 @@ const CreatePolicy = () => {
               />
               {pages.map((Component, index) => (
                 <section key={index} className={`${index != currentIndex && "d-none"}`}>
-                  <Component form={form} alertRef={alertRef} />
+                  <Component form={form} alertRef={alertRef} covertures={coverageResponse} />
                 </section>
               ))}
 
