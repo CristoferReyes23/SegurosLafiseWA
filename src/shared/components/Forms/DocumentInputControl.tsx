@@ -4,7 +4,7 @@ import { DetailedHTMLProps, InputHTMLAttributes, useEffect, useState } from "rea
 import Feedback from "react-bootstrap/esm/Feedback";
 import FormGroup from "react-bootstrap/esm/FormGroup";
 import FormLabel from "react-bootstrap/esm/FormLabel";
-import InputMask from "react-input-mask";
+import { IMaskInput } from "react-imask";
 
 interface Props extends DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> {
   formik: FormikProps<any>;
@@ -15,17 +15,17 @@ interface Props extends DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>,
 }
 
 const DocumentInputControl = ({ formik, name, label, dependencyName }: Props) => {
-  const [mask, setMask] = useState("");
+  const [mask, setMask] = useState<any>("");
 
   useEffect(() => {
     const selectedType = formik.values[dependencyName];
 
     switch (selectedType) {
       case "1": //cedula
-        setMask("999-999999-9999a");
+        setMask("000-000000-0000a");
         break;
       case "2": //ruc
-        setMask("a99999999999999");
+        setMask("a00000000000000");
         break;
 
       default:
@@ -41,10 +41,14 @@ const DocumentInputControl = ({ formik, name, label, dependencyName }: Props) =>
   return (
     <FormGroup className="position-relative mb-3" id={`inputGroup-${name}`}>
       <FormLabel htmlFor={name}>{label}</FormLabel>
-      <InputMask
-        className={`form-control text-uppercase ${isInvalid ? "is-invalid" : ""}`}
+      <IMaskInput
         mask={mask}
-        {...inputFormik}
+        lazy={false}
+        className={`form-control text-uppercase ${isInvalid ? "is-invalid" : ""}`}
+        value={inputFormik.value}
+        onAccept={(value) => {
+          formik.setFieldValue(name, value);
+        }}
       />
       <Feedback type="invalid">{getFormikErrorField(formik, name)}</Feedback>
     </FormGroup>
