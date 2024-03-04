@@ -11,6 +11,8 @@ const CreateQuoteHelper = () => {
   const loadingRef = useRef<any>();
 
   const onSubmitForm = (formData: any) => {
+    setResponse(null);
+
     loadingRef.current?.show(true);
 
     QuoteService.queryCoverages(formData)

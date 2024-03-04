@@ -2,6 +2,18 @@ import { TypeStep } from "@/modules/Policy/utils/multiStepFormUtils";
 import { MESSAGES } from "@/shared/utils/formMessages";
 import { string, number, object, date } from "yup";
 
+const minBirthday = () => {
+  const minDate = new Date();
+  minDate.setFullYear(minDate.getFullYear() - Number(import.meta.env.VITE_BIRTHDAY_MIN));
+  return minDate;
+};
+
+const maxBirthday = () => {
+  const maxDate = new Date();
+  maxDate.setFullYear(maxDate.getFullYear() - 100);
+  return maxDate.toISOString().split("T")[0];
+};
+
 export const stepsCreatePolicy: TypeStep[] = [
   {
     titleHeaderStep: "Complete la información del vehículo",
@@ -30,8 +42,8 @@ export const stepsCreatePolicy: TypeStep[] = [
       sexo: string().required(MESSAGES.required),
       fechaNacimiento: date()
         .required(MESSAGES.required)
-        .min(new Date().getFullYear() - 100, "Debes tener al menos 100 años.")
-        .max(new Date(), "La fecha de nacimiento no puede ser en el futuro."),
+        .min(maxBirthday(), MESSAGES.minBirthday)
+        .max(minBirthday(), MESSAGES.maxBirthday),
       email: string().email(MESSAGES.email).required(MESSAGES.required),
       celular: string().length(8, MESSAGES.lengthPhoneNumber).required(MESSAGES.required),
       telefono: string().length(8, MESSAGES.lengthPhoneNumber),

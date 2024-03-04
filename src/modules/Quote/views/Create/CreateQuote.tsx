@@ -12,7 +12,7 @@ const CreateQuote = () => {
       <FormTemplate form={formik}>
         {errorMessage && <ErrorAlert message={errorMessage} onClose={onCloseAlert} />}
       </FormTemplate>
-      {response && !formik.isSubmitting && <ResponseTemplate response={response} />}
+      {response && <ResponseTemplate response={response} />}
 
       <LoadingSpinner childRef={loadingRef} />
     </div>
