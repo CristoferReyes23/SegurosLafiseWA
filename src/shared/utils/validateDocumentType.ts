@@ -1,11 +1,13 @@
+import { ConstRegex } from "@/shared/utils/constRegex";
+import { EnumDocumentTypeValues } from "@/shared/utils/constValues";
 import { MESSAGES } from "@/shared/utils/formMessages";
 
 export function validateDocumentType(values: any, propertyDep: string, propertyName: string) {
   const errors: any = {};
 
   const regexMap: any = {
-    "2": /^[A-Za-z]\d{14}$/, // ruc
-    "1": /^\d{3}-\d{6}-\d{4}[A-Za-z]$/,
+    [EnumDocumentTypeValues.RUC]: ConstRegex.rucValidation,
+    [EnumDocumentTypeValues.CEDULA]: ConstRegex.cedulaValidation,
   };
 
   const selected = values[propertyDep];

@@ -3,10 +3,10 @@ import { validateDocumentType } from "@/shared/utils/validateDocumentType";
 
 export const customValidation = (values: any, currentIndex: number) => {
   let errors = {};
-
-  if (currentIndex === EnumIndexPages.client) {
+  if (currentIndex === EnumIndexPages.client)
     errors = validateDocumentType(values, "tipoId", "documentoIdentificacion");
-  }
 
+    console.log(errors);
+    
   return errors;
 };

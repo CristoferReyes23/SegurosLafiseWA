@@ -1,4 +1,4 @@
-import { customValidation } from "@/modules/Printer/utils/customValidation";
+import { customValidation } from "@/modules/Policy/utils/customValidationForm";
 import { formSchema } from "@/modules/Printer/utils/formPrinter.schema";
 import { BaseViewModel } from "@/shared/models/baseView.model";
 import { PolicyListResponseModel } from "@/shared/models/policyListResponse.model";
@@ -16,7 +16,7 @@ const PrinterHelper = () => {
   const onSubmit = (formData: any) => {
     loadingRef.current?.show(true);
 
-    PrinterService.getAllPolicy(formData["userIdValue"])
+    PrinterService.getAllPolicy(formData["documentoIdentificacion"])
       .then((res) => {
         setResponseData(res);
 
@@ -32,8 +32,9 @@ const PrinterHelper = () => {
   const formik = useFormik({
     initialValues: {},
     onSubmit: onSubmit,
-    validate: customValidation,
+    validate: (values) => customValidation(values, 1),
     validationSchema: formSchema,
+    validateOnMount: true,
   });
 
   const onClickPrint = (id: string) => {

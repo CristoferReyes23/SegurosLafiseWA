@@ -11,7 +11,7 @@ const FormSearchClient = ({ form }: FormikComponentProps) => {
         <div className="row">
           <div className="col">
             <CommonSelectGroup
-              name="typeUserId"
+              name="tipoId"
               form={form}
               firsOption="Seleccione un tipo de identificación"
               label="Tipo de identificación"
@@ -20,7 +20,7 @@ const FormSearchClient = ({ form }: FormikComponentProps) => {
           </div>
 
           <div className="col">
-            <DocumentInputControl dependencyName="typeUserId" label="Identificación" name="userIdValue" formik={form} />
+            <DocumentInputControl dependencyName="tipoId" label="Identificación" name="documentoIdentificacion" formik={form} />
           </div>
         </div>
 

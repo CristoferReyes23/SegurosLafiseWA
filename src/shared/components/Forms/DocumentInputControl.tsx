@@ -1,3 +1,4 @@
+import { EnumDocumentTypeValues } from "@/shared/utils/constValues";
 import { getFormikErrorField, getFormikProps } from "@/shared/utils/getFormikProps";
 import { FormikProps } from "formik";
 import { DetailedHTMLProps, InputHTMLAttributes, useEffect, useState } from "react";
@@ -15,38 +16,45 @@ interface Props extends DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>,
 }
 
 const DocumentInputControl = ({ formik, name, label, dependencyName }: Props) => {
+  const [isDisabled, setIsDisabled] = useState(true);
   const [mask, setMask] = useState<any>("");
+  const [valueInput, setValueInput] = useState("");
 
   useEffect(() => {
     const selectedType = formik.values[dependencyName];
+    formik.setFieldValue(name, "");
+    setValueInput("");
+    setIsDisabled(selectedType == "" || !selectedType);
 
     switch (selectedType) {
-      case "1": //cedula
+      case EnumDocumentTypeValues.CEDULA: //cedula
         setMask("000-000000-0000a");
         break;
-      case "2": //ruc
+      case EnumDocumentTypeValues.RUC: //ruc
         setMask("a00000000000000");
         break;
 
       default:
-        setMask("");
+        setMask(/[\s\S]*/);
         break;
     }
-
-    formik.setFieldValue(name, "");
   }, [formik.values[dependencyName]]);
 
-  const { isInvalid, ...inputFormik } = getFormikProps(formik, name);
+  const { isInvalid } = getFormikProps(formik, name);
 
   return (
     <FormGroup className="position-relative mb-3" id={`inputGroup-${name}`}>
       <FormLabel htmlFor={name}>{label}</FormLabel>
       <IMaskInput
+        disabled={isDisabled}
         mask={mask}
         lazy={false}
         className={`form-control text-uppercase ${isInvalid ? "is-invalid" : ""}`}
-        value={inputFormik.value}
+        value={valueInput}
+        name={name}
+        id={name}
         onAccept={(value) => {
+          setValueInput(value);
           formik.setFieldValue(name, value);
         }}
       />
