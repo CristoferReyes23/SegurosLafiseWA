@@ -86,13 +86,12 @@ const PlanPolicy = ({ form, alertRef }: Props) => {
           <GroupInputForm formik={form} label="Número de chasis" name="chasis" />
           <GroupInputForm formik={form} label="Color" name="color" />
           <GroupInputForm
-            disabled={true}
-            readOnly={true}
             formik={form}
             label="Número de puertas"
             name="puertas"
             type="text"
             maxLength={2}
+            regexValidation={ConstRegex.onlyNumberDigit}
           />
         </div>
       </FormCard>

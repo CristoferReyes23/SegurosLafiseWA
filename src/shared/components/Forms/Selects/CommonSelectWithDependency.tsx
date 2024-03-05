@@ -3,7 +3,6 @@ import { getFormikErrorField, getFormikProps } from "@/shared/utils/getFormikPro
 import FormSelectTemplate from "@/shared/components/Forms/FormSelectTemplate";
 import { BaseListDataModel } from "@/shared/models/baseListData.model";
 import { FormikProps } from "formik";
-import { testData } from "@/shared/utils/test";
 import FormGroupTemplate from "@/shared/components/Forms/FormGroupTemplate";
 
 interface Props {
@@ -35,7 +34,7 @@ export const CommonSelectWithDependency = ({
   const { onChange, ...inputProps } = getFormikProps(form, name);
 
   const onChangeValue = (e: any) => {
-    if (nameText) form.setFieldValue(nameText, testData?.find((i) => i.id == e.target.value)?.text);
+    if (nameText) form.setFieldValue(nameText, data?.find((i) => i.id == e.target.value)?.text);
 
     //event handler
     onChange(e);
@@ -45,7 +44,7 @@ export const CommonSelectWithDependency = ({
     <FormGroupTemplate label={floatingLabel} name={name}>
       <FormSelectTemplate
         onChange={(e) => onChangeValue(e)}
-        data={data ?? testData}
+        data={data ?? []}
         firstOptionEmpty={firstOptionEmpty}
         errorMessage={getFormikErrorField(form, name)}
         disabled={isDisabled}

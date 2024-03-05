@@ -17,23 +17,23 @@ export const useLoadSelect = <T>({ form, name, pathApi, dependencyField, provide
   const [isDisabled, setIsDisabled] = useState(true);
 
   useEffect(() => {
+    setIsDisabled(!form.values[dependencyField]);
+    form.setFieldValue(name, null);
+
     if (form.values[dependencyField]) {
       callApi();
     }
-
-    form.setFieldValue(name, null);
-    setIsDisabled(!form.values[dependencyField]);
   }, [form.values[dependencyField]]);
 
   const callApi = async () => {
     setIsDisabled(true);
-    
     //test code
     return new Promise((res) => {
       setTimeout(() => {
-        res(testData);
         setIsDisabled(false);
-      }, 2000);
+        setData(testData as T);
+        res("ok");
+      }, 600);
     });
 
     //TODO:
