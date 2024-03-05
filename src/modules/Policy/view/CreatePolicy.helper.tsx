@@ -1,6 +1,6 @@
 import { stepsCreatePolicy } from "@/modules/Policy/utils/policyForm.schema";
 import { TypeStep, generateInitialValues } from "@/modules/Policy/utils/multiStepFormUtils";
-import { FormikValues } from "formik";
+import { FormikValues, useFormik } from "formik";
 import { useEffect, useRef, useState } from "react";
 import { useHeaderLayout } from "@/views/ProtectedLayout/ProtectedLayout";
 import { useNavigate } from "react-router-dom";
@@ -9,6 +9,7 @@ import { QuoteResponseModel } from "@/shared/models/quoteResponse.model";
 import { QuoteService } from "@/shared/services/quote.service";
 import { MESSAGES } from "@/shared/utils/formMessages";
 import { EnumIndexPages } from "@/modules/Policy/utils/enumPages";
+import { customValidation } from "@/modules/Policy/utils/customValidationForm";
 
 const CreatePolicyHelper = () => {
   // wizard state values and form props
@@ -37,11 +38,18 @@ const CreatePolicyHelper = () => {
     loadingRef.current?.show(true);
     handlerEventSubmit(values)
       .then((res) => {
-        console.log("res", res);
         if (res) updateWizardSteps(false);
       })
       .finally(() => loadingRef.current?.show(false));
   };
+
+  const formik = useFormik({
+    initialValues,
+    onSubmit: handleSubmit,
+    validateOnMount: true,
+    validationSchema,
+    validate: (values) => customValidation(values, currentIndex),
+  });
 
   const handlerEventSubmit = async (values: any) => {
     switch (currentIndex) {
@@ -100,11 +108,22 @@ const CreatePolicyHelper = () => {
   const goBack = () => {
     updateWizardSteps(true);
   };
+
+  const goNext = () => {
+    loadingRef.current?.show(true);
+    handlerEventSubmit(formik.values)
+      .then((res) => {
+        if (res) updateWizardSteps(false);
+      })
+      .finally(() => loadingRef.current?.show(false));
+  };
   //#endregion
 
   return {
     steps,
+    formik,
     goBack,
+    goNext,
     alertRef,
     onClickTab,
     loadingRef,

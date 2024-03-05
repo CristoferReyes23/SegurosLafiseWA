@@ -6,53 +6,36 @@ import TabWizard from "@/modules/Policy/components/TabWizard/TabWizard";
 import { useMemo } from "react";
 import "./CreatePolicy.css";
 import VerifyForm from "@/modules/Policy/components/Steps/VerifyForm";
-import { Formik } from "formik";
+import { FormikProvider } from "formik";
 import LoadingSpinner from "@/shared/components/LoadingSpinner/LoadingSpinner";
-import { customValidation } from "@/modules/Policy/utils/customValidationForm";
 
 const CreatePolicy = () => {
-  const {
-    goBack,
-    onClickTab,
-    currentIndex,
-    loadingRef,
-    alertRef,
-    validationSchema,
-    handleSubmit,
-    initialValues,
-    coverageResponse,
-  } = CreatePolicyHelper();
+  const { formik, goBack, goNext, alertRef, loadingRef, onClickTab, currentIndex, coverageResponse } =
+    CreatePolicyHelper();
 
   const pages = useMemo(() => [PlanPolicy, ClientForm, VerifyForm], []);
 
   return (
     <div>
-      <Formik
-        initialValues={initialValues}
-        validationSchema={validationSchema}
-        validate={(values) => customValidation(values, currentIndex)}
-        onSubmit={handleSubmit}
-        validateOnMount
-      >
-        {(form) => {
-          return (
-            <>
-              <TabWizard
-                currentPage={currentIndex}
-                onClick={onClickTab}
-                tabs={["Datos del vehículo", "Datos Personales", "Comprobar"]}
-              />
-              {pages.map((Component, index) => (
-                <section key={index} className={`${index != currentIndex && "d-none"}`}>
-                  <Component form={form} alertRef={alertRef} covertures={coverageResponse} />
-                </section>
-              ))}
+      <FormikProvider value={formik}>
+        <TabWizard
+          currentPage={currentIndex}
+          onClick={onClickTab}
+          tabs={["Datos del vehículo", "Datos Personales", "Comprobar"]}
+        />
+        {pages.map((Component, index) => (
+          <section key={index} className={`${index != currentIndex && "d-none"}`}>
+            <Component form={formik} alertRef={alertRef} covertures={coverageResponse} />
+          </section>
+        ))}
 
-              <NavigationButtons pageLength={pages.length} onClickPrevious={goBack} currentPage={currentIndex} />
-            </>
-          );
-        }}
-      </Formik>
+        <NavigationButtons
+          pageLength={pages.length}
+          onClickPrevious={goBack}
+          currentPage={currentIndex}
+          onClickNext={goNext}
+        />
+      </FormikProvider>
       <LoadingSpinner childRef={loadingRef} />
     </div>
   );
