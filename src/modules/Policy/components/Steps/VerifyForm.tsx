@@ -41,8 +41,8 @@ interface ItemValueProps {
   value: string;
 }
 const ItemValue = ({ title, value }: ItemValueProps) => (
-  <div className="col-sm-4">
-    <p className="mb-0 p-text-container">
+  <div className="col-sm-4 mb-sm-1">
+    <p className="p-text-container">
       <span className="fw-bold text-blue d-inline me-3">{title}: </span>
       <span>{value}</span>
     </p>
