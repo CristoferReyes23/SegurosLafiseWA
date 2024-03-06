@@ -1,30 +1,65 @@
 # React + TypeScript + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+#### Pasos para probar el proyecto.
 
-Currently, two official plugins are available:
+1. Renombrar el archivo env.develop a env.local
+2. Asignar los valores de las variables de entorno del archivo env.local
+3. npm install
+4. npm run dev
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+En la consola de la aplicacion se mostrara un enlace a este sitio, si accede aparecera un loading page y luego aparecera un texto que dice unauthorized.
 
-## Expanding the ESLint configuration
+> ```
+> Local:   http://localhost:5173/
+> ```
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+Para tener acceso a la aplicacion se debe agregar los siguientes parametros a la URL (a y b son requeridos pero el valor puede ser aleatorio):
 
-- Configure the top-level `parserOptions` property like this:
+> ```
+> http://localhost:5173/?a=asdas&b=asdkasjdhasjkd
+> ```
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+#### Estructura de archivo
+
+```
+index.html
+package.json
+env.local
+public
+   |-- vite.svg
+src
+   |-- App.tsx
+   |-- assets
+   |   |-- images
+   |   |-- react.svg
+   |   |-- styles
+   |-- main.tsx
+   |-- modules
+   |   |-- ModuleName
+   |   |   |-- components
+   |   |   |-- utils
+   |   |   |-- view
+   |-- routes
+   |   |-- routes.tsx
+   |-- shared
+   |   |-- apis
+   |   |-- components
+   |   |-- hooks
+   |   |-- models
+   |   |-- services
+   |   |-- utils
+   |-- views
+tsconfig.json
+tsconfig.node.json
+vite.config.ts
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+Las pantallas de la aplicacion se encuentran divididas en modulos, los cuales estan compuestos de componentes, vistas  y utilidades. Cada modulo cuenta con servicio y api lo cual se encarga de la logica del negocio.
+
+#### Librerias implementadas.
+
+1. React router dom (control de rutas)
+2. Formik (controlador de estado del formulario)
+3. Yup (esquemas de validacion de formulario)
+4. React-boostrap (estilos)
+5. React-Imask (input con control de mascaras)
