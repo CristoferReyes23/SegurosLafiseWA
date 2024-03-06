@@ -15,7 +15,7 @@ const VerifyForm = ({ form, covertures }: Props) => {
         <PanelTemplate heading="Plan de póliza">{covertures && <QuoteTable covertures={covertures} />}</PanelTemplate>
 
         <PanelTemplate heading="Vehículo">
-          <div className="d-flex flex-wrap">
+          <div className="row">
             {VEHICLE_FORM_KEYS_VALUES.map((i) => (
               <ItemValue key={i.key} title={i.title} value={form.values[i.key]} />
             ))}
@@ -23,7 +23,7 @@ const VerifyForm = ({ form, covertures }: Props) => {
         </PanelTemplate>
 
         <PanelTemplate heading="Cliente">
-          <div className="d-flex flex-wrap">
+          <div className="row">
             {CLIENT_FORM_KEYS_VALUES.map((i) => (
               <ItemValue key={i.key} title={i.title} value={form.values[i.key]} />
             ))}
@@ -41,7 +41,7 @@ interface ItemValueProps {
   value: string;
 }
 const ItemValue = ({ title, value }: ItemValueProps) => (
-  <div className="mb-1" style={{ flex: "1 1 25%", width: "100%" }}>
+  <div className="col-sm-4">
     <p className="mb-0 p-text-container">
       <span className="fw-bold text-blue d-inline me-3">{title}: </span>
       <span>{value}</span>

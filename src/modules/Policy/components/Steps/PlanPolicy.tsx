@@ -80,20 +80,30 @@ const PlanPolicy = ({ form, alertRef }: Props) => {
       </FormCard>
 
       <FormCard title="Detalle del vehículo" classNames="mt-3">
-        <div className="form-fields-container">
-          <GroupInputForm formik={form} label="Número de placa" name="placa" />
-          <GroupInputForm formik={form} label="Número de motor" name="motor" />
-          <GroupInputForm formik={form} label="Número de chasis" name="chasis" />
-          <GroupInputForm formik={form} label="Color" name="color" />
-          <GroupInputForm
-            formik={form}
-            label="Número de puertas"
-            name="puertas"
-            type="text"
-            maxLength={2}
-            regexValidation={ConstRegex.onlyNumberDigit}
-          />
-        </div>
+        <Row>
+          <Col sm={4}>
+            <GroupInputForm formik={form} label="Número de placa" name="placa" />
+          </Col>
+          <Col sm={4}>
+            <GroupInputForm formik={form} label="Número de motor" name="motor" />
+          </Col>
+          <Col sm={4}>
+            <GroupInputForm formik={form} label="Número de chasis" name="chasis" />
+          </Col>
+          <Col sm={4}>
+            <GroupInputForm formik={form} label="Color" name="color" />
+          </Col>
+          <Col sm={4}>
+            <GroupInputForm
+              formik={form}
+              label="Número de puertas"
+              name="puertas"
+              type="text"
+              maxLength={2}
+              regexValidation={ConstRegex.onlyNumberDigit}
+            />
+          </Col>
+        </Row>
       </FormCard>
     </div>
   );

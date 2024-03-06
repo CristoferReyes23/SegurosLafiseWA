@@ -10,6 +10,8 @@ import { FormikComponentProps } from "@/shared/utils/getFormikProps";
 import { ConstRegex } from "@/shared/utils/constRegex";
 import { useMemo } from "react";
 import DocumentInputControl from "@/shared/components/Forms/DocumentInputControl";
+import Col from "react-bootstrap/esm/Col";
+import Row from "react-bootstrap/esm/Row";
 
 interface Props {
   form: FormikProps<FormikValues>;
@@ -19,99 +21,127 @@ const ClientForm = ({ form }: Props) => {
   return (
     <div className="client-step vstack gap-3">
       <FormCard title="Datos del cliente">
-        <div className="form-fields-container">
-          <CommonSelectGroup
-            form={form}
-            name={"tipoId"}
-            urlPath={EnumUrlCatalogsPaths.typeId}
-            label={"Tipo de identificación"}
-            firsOption={"Seleccione un tipo de identificación"}
-          />
-          <DocumentInputControl
-            dependencyName="tipoId"
-            label="Identificación"
-            name="documentoIdentificacion"
-            formik={form}
-          />
-          <GenderCheckBox form={form} />
-          <GroupInputForm formik={form} label="Nombre" name="nombre" />
-          <GroupInputForm formik={form} label="Apellido" name="apellido" />
-
-          <BirthdayInput form={form} />
-
-          <CommonSelectGroup
-            form={form}
-            firsOption="Seleccione una profesión"
-            label="Profesiones"
-            name="profesion"
-            nameText="xprofesion"
-            urlPath={EnumUrlCatalogsPaths.profession}
-          />
-        </div>
+        <Row>
+          <Col sm={4}>
+            <CommonSelectGroup
+              form={form}
+              name={"tipoId"}
+              urlPath={EnumUrlCatalogsPaths.typeId}
+              label={"Tipo de identificación"}
+              firsOption={"Seleccione un tipo de identificación"}
+            />
+          </Col>
+          <Col sm={4}>
+            <DocumentInputControl
+              dependencyName="tipoId"
+              label="Identificación"
+              name="documentoIdentificacion"
+              formik={form}
+            />
+          </Col>
+          <Col sm={4}>
+            <GenderCheckBox form={form} />
+          </Col>
+          <Col sm={4}>
+            <GroupInputForm formik={form} label="Nombre" name="nombre" />
+          </Col>
+          <Col sm={4}>
+            <GroupInputForm formik={form} label="Apellido" name="apellido" />
+          </Col>
+          <Col sm={4}>
+            <BirthdayInput form={form} />
+          </Col>
+          <Col sm={4}>
+            <CommonSelectGroup
+              form={form}
+              firsOption="Seleccione una profesión"
+              label="Profesiones"
+              name="profesion"
+              nameText="xprofesion"
+              urlPath={EnumUrlCatalogsPaths.profession}
+            />
+          </Col>
+        </Row>
       </FormCard>
       <FormCard title="Datos de contacto">
-        <div className="form-fields-container">
-          <GroupInputForm formik={form} label="Correo" name="email" type="email" />
-          <GroupInputForm
-            name={"celular"}
-            formik={form}
-            label={"Celular"}
-            maxLength={8}
-            minLength={8}
-            regexValidation={ConstRegex.onlyNumberDigit}
-          />
-          <GroupInputForm
-            name={"telefono"}
-            formik={form}
-            label={"Teléfono"}
-            maxLength={8}
-            minLength={8}
-            regexValidation={ConstRegex.onlyNumberDigit}
-          />
-        </div>
+        <Row>
+          <Col sm={4}>
+            <GroupInputForm formik={form} label="Correo" name="email" type="email" />
+          </Col>
+          <Col sm={4}>
+            <GroupInputForm
+              name={"celular"}
+              formik={form}
+              label={"Celular"}
+              maxLength={8}
+              minLength={8}
+              regexValidation={ConstRegex.onlyNumberDigit}
+            />
+          </Col>
+          <Col sm={4}>
+            <GroupInputForm
+              name={"telefono"}
+              formik={form}
+              label={"Teléfono"}
+              maxLength={8}
+              minLength={8}
+              regexValidation={ConstRegex.onlyNumberDigit}
+            />
+          </Col>
+        </Row>
       </FormCard>
 
       <FormCard title="Dirección">
-        <div className="form-fields-container">
-          <div className="dir-input">
-            <GroupInputForm formik={form} name={"direccion"} label={"Dirección"} />
-          </div>
-          <CommonSelectGroup
-            form={form}
-            name="paisOrigen"
-            nameText="xpaisOrigen"
-            urlPath={EnumUrlCatalogsPaths.countriesOrigin}
-            label="País de origen"
-            firsOption="Seleccione un país"
-          />
-          <CommonSelectWithDependency
-            dependencyField="paisOrigen"
-            floatingLabel="Departamento"
-            form={form}
-            name="provincia"
-            nameText="xprovincia"
-            pathApi={EnumUrlCatalogsPaths.department}
-            firstOptionEmpty="Seleccione un departamento"
-          />
-          <CommonSelectWithDependency
-            dependencyField="provincia"
-            floatingLabel="Ciudad"
-            form={form}
-            name="canton"
-            nameText="xcanton"
-            pathApi={EnumUrlCatalogsPaths.cities}
-            firstOptionEmpty="Seleccione una ciudad"
-          />
-          <CommonSelectWithDependency
-            dependencyField="canton"
-            floatingLabel="Distrito"
-            form={form}
-            name="distrito"
-            nameText="xdistrito"
-            pathApi={EnumUrlCatalogsPaths.districts}
-            firstOptionEmpty="Seleccione un distrito"
-          />
-        </div>
+        <Row>
+          <Col sm={4}>
+            <div className="dir-input">
+              <GroupInputForm formik={form} name={"direccion"} label={"Dirección"} />
+            </div>
+          </Col>
+          <Col sm={4}>
+            <CommonSelectGroup
+              form={form}
+              name="paisOrigen"
+              nameText="xpaisOrigen"
+              urlPath={EnumUrlCatalogsPaths.countriesOrigin}
+              label="País de origen"
+              firsOption="Seleccione un país"
+            />
+          </Col>
+          <Col sm={4}>
+            <CommonSelectWithDependency
+              dependencyField="paisOrigen"
+              floatingLabel="Departamento"
+              form={form}
+              name="provincia"
+              nameText="xprovincia"
+              pathApi={EnumUrlCatalogsPaths.department}
+              firstOptionEmpty="Seleccione un departamento"
+            />
+          </Col>
+          <Col sm={4}>
+            <CommonSelectWithDependency
+              dependencyField="provincia"
+              floatingLabel="Ciudad"
+              form={form}
+              name="canton"
+              nameText="xcanton"
+              pathApi={EnumUrlCatalogsPaths.cities}
+              firstOptionEmpty="Seleccione una ciudad"
+            />
+          </Col>
+          <Col sm={4}>
+            <CommonSelectWithDependency
+              dependencyField="canton"
+              floatingLabel="Distrito"
+              form={form}
+              name="distrito"
+              nameText="xdistrito"
+              pathApi={EnumUrlCatalogsPaths.districts}
+              firstOptionEmpty="Seleccione un distrito"
+            />
+          </Col>
+        </Row>
       </FormCard>
     </div>
   );
