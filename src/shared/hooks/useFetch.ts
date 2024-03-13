@@ -13,23 +13,18 @@ const useFetch = <T>(props: Props) => {
   const [data, setData] = useState<T | null>(null);
 
   useEffect(() => {
-    //test code
     setIsFetching(true);
-    setIsFetching(false);
-
-    //TODO:
-    // setIsFetching(true);
-    // fetchCall({ path: props.urlPath, providerName: "LAFISE" })
-    //   .then((resp) => resp.json())
-    //   .then((resp) => {
-    //     setData(resp);
-    //   })
-    //   .catch((_) => {
-    //     setErrorMessage("");
-    //   })
-    //   .finally(() => {
-    //     setIsFetching(false);
-    //   });
+    fetchCall({ path: props.urlPath, providerName: "LAFISE" })
+      .then((resp) => resp.json())
+      .then((resp) => {
+        setData(resp);
+      })
+      .catch((_) => {
+        setErrorMessage("");
+      })
+      .finally(() => {
+        setIsFetching(false);
+      });
   }, []);
 
   return {

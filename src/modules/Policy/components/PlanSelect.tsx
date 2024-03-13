@@ -4,7 +4,6 @@ import FormSelectTemplate from "@/shared/components/Forms/FormSelectTemplate";
 import useFetch from "@/shared/hooks/useFetch";
 import { SelectDataTemplate } from "@/shared/utils/formTypes";
 import { EnumUrlCatalogsPaths } from "@/shared/utils/urlPaths";
-import { testData } from "@/shared/utils/test";
 import FormGroupTemplate from "@/shared/components/Forms/FormGroupTemplate";
 
 export const PlanSelect = ({ form }: FormikComponentProps) => {
@@ -19,7 +18,7 @@ export const PlanSelect = ({ form }: FormikComponentProps) => {
         text: i.nombre,
         id: i.id.toString(),
       }))
-      .filter((item, index, self) => index === self.findIndex((t) => t.id === item.id)) ?? testData; //avoid duplicated
+      .filter((item, index, self) => index === self.findIndex((t) => t.id === item.id)) ?? []; //avoid duplicated
 
   const inputFormik = getFormikProps(form, "planId");
 
