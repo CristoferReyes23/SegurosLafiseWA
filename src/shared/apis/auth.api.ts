@@ -23,6 +23,7 @@ export class AuthApi {
   }
 
   static async queryLafiseToken() {
+    return "asdaksjdhasjdsa";
     const body = JSON.stringify({
       username: import.meta.env.VITE_LAFISE_USERNAME,
       password: import.meta.env.VITE_LAFISE_PASSWORD,

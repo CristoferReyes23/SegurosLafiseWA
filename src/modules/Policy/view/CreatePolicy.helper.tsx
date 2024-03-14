@@ -10,6 +10,8 @@ import { QuoteService } from "@/shared/services/quote.service";
 import { MESSAGES } from "@/shared/utils/formMessages";
 import { EnumIndexPages } from "@/modules/Policy/utils/enumPages";
 import { customValidation } from "@/modules/Policy/utils/customValidationForm";
+import { PolicyService } from "@/shared/services/policy.service";
+import { PolicyApi } from "@/shared/apis/policy.api";
 
 const CreatePolicyHelper = () => {
   // wizard state values and form props
@@ -25,7 +27,7 @@ const CreatePolicyHelper = () => {
   // dashboard context
   const { setTitleHeader } = useHeaderLayout();
 
-  // navigation, components refs and saving data
+  // navigation and saving coverages data.
   const navigate = useNavigate();
   const [coverageResponse, setCoverages] = useState<QuoteResponseModel | null>(null);
 
@@ -54,28 +56,37 @@ const CreatePolicyHelper = () => {
   const handlerEventSubmit = async (values: any) => {
     switch (currentIndex) {
       case EnumIndexPages.quote:
-        return await nextStepQuote(values);
+        return await getCoverages(values);
 
       case EnumIndexPages.client:
         return true;
 
       case EnumIndexPages.verify:
-        navigate("/policy/successful", {
-          replace: true,
-          state: {
-            policyId: "123123",
-            message: "testing message",
-            client: "test",
-          },
-        });
-        break;
+        return await createPolicy(values);
 
       default:
-        break;
+        return;
     }
   };
 
-  const nextStepQuote = async (values: any) => {
+  const createPolicy = async (values: any) => {
+    console.log(values);
+
+    const response = await PolicyService.createPolicy(values);
+
+    if (response.success) {
+      navigate("/policy/successful", {
+        replace: true,
+        state: {
+          policyId: "123123",
+          message: "testing message",
+          client: "test",
+        },
+      });
+    }
+  };
+
+  const getCoverages = async (values: any) => {
     let isOk = false;
     try {
       const data = await QuoteService.queryCoverages(values);
@@ -88,6 +99,7 @@ const CreatePolicyHelper = () => {
     return isOk;
   };
 
+  //#region tabs events
   const updateWizardSteps = (goBack: boolean) => {
     if (goBack) {
       setCurrentIndex((pre) => pre - 1);
@@ -100,7 +112,6 @@ const CreatePolicyHelper = () => {
     }
   };
 
-  //#region tabs events
   const onClickTab = (index: number) => {
     setCurrentIndex(index);
   };

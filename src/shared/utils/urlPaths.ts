@@ -15,10 +15,14 @@ export enum EnumUrlCatalogsPaths {
   districts = "catalogs/paises/{paisOrigen}/departamentos/{provincia}/ciudades/{canton}/distritos",
   uses = "catalogs/vehicles/uses",
   profession = "catalogs/profesion",
-  dataSheet = 'catalogs/plans/{planId}/brands/{marcaId}/models/{modeloId}/years/{anio}/datasheet',
+  dataSheet = "catalogs/plans/{planId}/brands/{marcaId}/models/{modeloId}/years/{anio}/datasheet",
 
   coverages = "rates/{planId}/coverages",
   lafiseAuth = "auth",
+
+  createPolicy = "polizas/create",
+  confirmPolicy = "polizas/confirmation?polizaId=",
+  getPdfPolicy = "polizas/GetPDF",
 
   getPolicies = "",
 }

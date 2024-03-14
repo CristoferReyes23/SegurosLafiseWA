@@ -1,4 +1,7 @@
 import { PolicyListResponseModel } from "@/shared/models/policyListResponse.model";
+import { CreatePolicyRequestModel } from "@/shared/models/request/CreatePolicyRequest.model";
+import { fetchCall } from "@/shared/utils/fetchApi";
+import { EnumUrlCatalogsPaths } from "@/shared/utils/urlPaths";
 
 export class PolicyApi {
   static getPoliciesByClientId(_clientId: string): Promise<PolicyListResponseModel> {
@@ -22,5 +25,29 @@ export class PolicyApi {
     });
 
     // return fetchCall({ path: EnumUrlCatalogsPaths.getPolicies, providerName: "BACKEND" });
+  }
+
+  static async createPolicy(body: CreatePolicyRequestModel): Promise<Number> {
+    return 1;
+
+    const response = await fetchCall({
+      path: EnumUrlCatalogsPaths.createPolicy,
+      providerName: "LAFISE",
+      body: JSON.stringify(body),
+    });
+
+    const policyId = await response.text();
+    return Number(policyId);
+  }
+
+  static async confirmPolicy(policyId: Number): Promise<boolean> {
+    return true;
+
+    const response = await fetchCall({
+      path: EnumUrlCatalogsPaths.confirmPolicy + policyId,
+      providerName: "LAFISE",
+    });
+
+    return response.ok;
   }
 }
