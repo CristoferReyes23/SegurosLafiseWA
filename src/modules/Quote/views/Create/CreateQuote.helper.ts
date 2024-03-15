@@ -17,7 +17,7 @@ const CreateQuoteHelper = () => {
 
     QuoteService.queryCoverages(formData)
       .then((resp) => {
-        setResponse(resp);
+        setResponse(resp.coverages);
         setErrorMessage("");
       })
       .catch((err) => {
