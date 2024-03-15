@@ -1,4 +1,4 @@
-import { EnumDocumentTypeValues } from "@/shared/utils/constValues";
+import { EnumDocumentMaskTemplateValues, EnumDocumentTypeValues } from "@/shared/utils/constValues";
 import { getFormikErrorField, getFormikProps } from "@/shared/utils/getFormikProps";
 import { FormikProps } from "formik";
 import { DetailedHTMLProps, InputHTMLAttributes, useEffect, useState } from "react";
@@ -28,10 +28,10 @@ const DocumentInputControl = ({ formik, name, label, dependencyName }: Props) =>
 
     switch (selectedType) {
       case EnumDocumentTypeValues.CEDULA: //cedula
-        setMask("000-000000-0000a");
+        setMask(EnumDocumentMaskTemplateValues.CEDULA);
         break;
       case EnumDocumentTypeValues.RUC: //ruc
-        setMask("a00000000000000");
+        setMask(EnumDocumentMaskTemplateValues.RUC);
         break;
 
       default:

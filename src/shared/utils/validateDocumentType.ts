@@ -1,4 +1,4 @@
-import { ConstRegex } from "@/shared/utils/constRegex";
+import { ConstRegex } from "@/shared/utils/constValues";
 import { EnumDocumentTypeValues } from "@/shared/utils/constValues";
 import { MESSAGES } from "@/shared/utils/formMessages";
 

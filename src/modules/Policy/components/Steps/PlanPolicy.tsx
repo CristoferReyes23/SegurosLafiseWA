@@ -7,7 +7,7 @@ import { CommonSelectWithDependency } from "@/shared/components/Forms/Selects/Co
 import { EnumUrlCatalogsPaths } from "@/shared/utils/urlPaths";
 import CommonSelectGroup from "@/shared/components/Forms/Selects/CommonSelectGroup";
 import GroupInputForm from "@/shared/components/Forms/GroupInputForm";
-import { ConstRegex } from "@/shared/utils/constRegex";
+import { ConstRegex } from "@/shared/utils/constValues";
 import { useEffect, useState } from "react";
 import AlertTemplate from "@/shared/components/AlertTemplate/AlertTemplate";
 

@@ -22,7 +22,7 @@ const CommonSelectGroup = ({ firsOption, form, label, name, urlPath, nameText }:
   const { onChange, ...extraProps } = getFormikProps(form, name);
   const onChangeValue = (e: any) => {
     if (nameText) {
-      form.setFieldValue(nameText, testValue?.find((i) => i.id == e.target.value)?.text);
+      form.setFieldValue(nameText, data?.find((i) => i.id == e.target.value)?.text);
     }
 
     onChange(e);
@@ -32,7 +32,7 @@ const CommonSelectGroup = ({ firsOption, form, label, name, urlPath, nameText }:
     <FormGroupTemplate label={label} name={name}>
       <FormSelectTemplate
         firstOptionEmpty={firsOption}
-        data={data ?? testValue}
+        data={data ?? []}
         errorMessage={getFormikErrorField(form, name)}
         onChange={onChangeValue}
         disabled={isFetching}
@@ -43,18 +43,3 @@ const CommonSelectGroup = ({ firsOption, form, label, name, urlPath, nameText }:
 };
 
 export default CommonSelectGroup;
-
-const testValue = [
-  {
-    id: "1",
-    text: "t1",
-  },
-  {
-    id: "2",
-    text: "t2",
-  },
-  {
-    id: "4",
-    text: "t2",
-  },
-];

@@ -7,7 +7,7 @@ import CommonSelectGroup from "@/shared/components/Forms/Selects/CommonSelectGro
 import FormGroupTemplate from "@/shared/components/Forms/FormGroupTemplate";
 import FormCheck from "react-bootstrap/esm/FormCheck";
 import { FormikComponentProps } from "@/shared/utils/getFormikProps";
-import { ConstRegex } from "@/shared/utils/constRegex";
+import { ConstRegex } from "@/shared/utils/constValues";
 import { useMemo } from "react";
 import DocumentInputControl from "@/shared/components/Forms/DocumentInputControl";
 import Col from "react-bootstrap/esm/Col";

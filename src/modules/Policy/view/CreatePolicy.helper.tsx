@@ -11,7 +11,6 @@ import { MESSAGES } from "@/shared/utils/formMessages";
 import { EnumIndexPages } from "@/modules/Policy/utils/enumPages";
 import { customValidation } from "@/modules/Policy/utils/customValidationForm";
 import { PolicyService } from "@/shared/services/policy.service";
-import { PolicyApi } from "@/shared/apis/policy.api";
 
 const CreatePolicyHelper = () => {
   // wizard state values and form props
@@ -70,19 +69,21 @@ const CreatePolicyHelper = () => {
   };
 
   const createPolicy = async (values: any) => {
-    console.log(values);
+    try {
+      const response = await PolicyService.createPolicy(values);
 
-    const response = await PolicyService.createPolicy(values);
-
-    if (response.success) {
-      navigate("/policy/successful", {
-        replace: true,
-        state: {
-          policyId: "123123",
-          message: "testing message",
-          client: "test",
-        },
-      });
+      if (response.success) {
+        navigate("/policy/successful", {
+          replace: true,
+          state: {
+            policyId: "123123",
+            message: "testing message",
+            client: "test",
+          },
+        });
+      }
+    } catch (err) {
+      console.log("err", err);
     }
   };
 
@@ -90,8 +91,12 @@ const CreatePolicyHelper = () => {
     let isOk = false;
     try {
       const data = await QuoteService.queryCoverages(values);
-      setCoverages(data);
+      setCoverages(data.coverages);
       alertRef.current?.show(false);
+
+      formik.setFieldValue("cate", data.dataSheet.auCategoria);
+      formik.setFieldValue("nasiento", data.dataSheet.auNumPasajeros);
+      formik.setFieldValue("valn", data.dataSheet.auValorNuevo);
 
       isOk = true;
     } catch (err: any) {
@@ -130,7 +135,11 @@ const CreatePolicyHelper = () => {
       .then((res) => {
         if (res) updateWizardSteps(false);
       })
-      .finally(() => loadingRef.current?.show(false));
+      .finally(() => {
+        console.log("asdaskldj");
+
+        loadingRef.current?.show(false);
+      });
   };
   //#endregion
 

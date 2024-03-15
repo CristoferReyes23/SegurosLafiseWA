@@ -35,25 +35,24 @@ export class PolicyService {
       formData
     ) as any;
 
+    const values = buildObject(["valn", "anio", "usoo", "cate", "nasiento"], formData) as any;
+
     const bodyCreatePolicy: CreatePolicyRequestModel = {
       planId: formData["planId"],
       agenciaId: 1,
       inicioVigencia: new Date().toISOString(),
       uso: formData["usoo"],
-
       dataViewModel,
       enteViewModel,
-      values: {
-        valn: "0",
-        anio: formData["anio"],
-        usoo: formData["usoo"],
-        cate: formData["cate"],
-        nasiento: formData["nasiento"],
-      },
+      values,
     };
+
+    console.log("bodyCreatePolicy", bodyCreatePolicy);
 
     // create policy
     const policyId = await PolicyApi.createPolicy(bodyCreatePolicy);
+
+    console.log("pass here");
 
     // confirm policy =
     const isOk = await PolicyApi.confirmPolicy(policyId);
