@@ -22,7 +22,7 @@ export enum EnumUrlCatalogsPaths {
 
   createPolicy = "polizas/create",
   confirmPolicy = "polizas/confirmation?polizaId=",
-  getPdfPolicy = "polizas/GetPDF",
+  getPdfPolicy = "polizas/GetPDF?polizaId=",
 
   getPolicies = "",
 }

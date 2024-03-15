@@ -16,7 +16,7 @@ export const PlanSelect = ({ form }: FormikComponentProps) => {
     data
       ?.map((i) => ({
         text: i.nombre,
-        id: i.id.toString(),
+        id: i.id,
       }))
       .filter((item, index, self) => index === self.findIndex((t) => t.id === item.id)) ?? []; //avoid duplicated
 

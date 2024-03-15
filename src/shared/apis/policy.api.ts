@@ -5,6 +5,15 @@ import { fetchCall } from "@/shared/utils/fetchApi";
 import { EnumUrlCatalogsPaths } from "@/shared/utils/urlPaths";
 
 export class PolicyApi {
+  static async getPdf(policyId: number): Promise<Blob> {
+    const response = await fetchCall({
+      path: EnumUrlCatalogsPaths.getPdfPolicy + policyId,
+      providerName: "LAFISE",
+    });
+
+    return response.blob();
+  }
+
   static getPoliciesByClientId(_clientId: string): Promise<PolicyListResponseModel> {
     return new Promise((res) => {
       setTimeout(() => {

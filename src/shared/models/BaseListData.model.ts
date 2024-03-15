@@ -1,4 +1,4 @@
 export interface BaseListDataModel {
-  id: string;
+  id: string | number;
   text: string;
 }

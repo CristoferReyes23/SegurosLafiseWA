@@ -1,58 +1,71 @@
 import { PolicyApi } from "@/shared/apis/policy.api";
-import { CreatePolicyRequestModel } from "@/shared/models/request/CreatePolicyRequest.model";
+import {
+  CreatePolicyRequestModel,
+  DataViewModel,
+  EnteViewModel,
+  ValuesViewModel,
+} from "@/shared/models/request/CreatePolicyRequest.model";
 import { CreatePolicyResponseModel } from "@/shared/models/response/CreatePolicyResponse.model";
 
 export class PolicyService {
   static async createPolicy(formData: any): Promise<CreatePolicyResponseModel> {
-    const dataViewModel = buildObject(
-      ["marcaId", "modeloId", "anio", "valorNuevo", "placa", "chasis", "color", "motor", "puertas"],
-      formData
-    ) as any;
+    //#region set body data
+    const dataViewModel: DataViewModel = {
+      marcaId: Number(formData["marcaId"]),
+      modeloId: Number(formData["modeloId"]),
+      anio: Number(formData["anio"]),
+      valorNuevo: Number(formData["valorNuevo"]),
+      placa: formData["placa"],
+      chasis: formData["chasis"],
+      color: formData["color"],
+      motor: formData["motor"],
+      puertas: Number(formData["puertas"]),
+    };
 
-    const enteViewModel = buildObject(
-      [
-        "tipoId",
-        "documentoIdentificacion",
-        "nombre",
-        "apellido",
-        "sexo",
-        "fechaNacimiento",
-        "email",
-        "telefono",
-        "celular",
-        "paisOrigen",
-        "provincia",
-        "canton",
-        "distrito",
-        "direccion",
-        "profesion",
-        "nombreConyuge",
-        "xpaisOrigen",
-        "xprovincia",
-        "xcanton",
-        "xdistrito",
-      ],
-      formData
-    ) as any;
+    const enteViewModel: EnteViewModel = {
+      tipoId: formData["tipoId"],
+      documentoIdentificacion: formData["documentoIdentificacion"],
+      nombre: formData["nombre"],
+      apellido: formData["apellido"],
+      sexo: formData["sexo"],
+      fechaNacimiento: formData["fechaNacimiento"],
+      email: formData["email"],
+      telefono: formData["telefono"],
+      celular: formData["celular"],
+      paisOrigen: Number(formData["paisOrigen"]),
+      provincia: Number(formData["provincia"]),
+      canton: Number(formData["canton"]),
+      distrito: Number(formData["distrito"]),
+      direccion: formData["direccion"],
+      profesion: Number(formData["profesion"]),
+      nombreConyuge: formData["nombreConyuge"],
+      xpaisOrigen: formData["xpaisOrigen"],
+      xprovincia: formData["xprovincia"],
+      xcanton: formData["xcanton"],
+      xdistrito: formData["xdistrito"],
+    };
 
-    const values = buildObject(["valn", "anio", "usoo", "cate", "nasiento"], formData) as any;
+    const values: ValuesViewModel = {
+      valn: String(formData["valn"]),
+      anio: formData["anio"],
+      usoo: formData["usoo"],
+      cate: String(formData["cate"]),
+      nasiento: String(formData["nasiento"]),
+    };
 
     const bodyCreatePolicy: CreatePolicyRequestModel = {
-      planId: formData["planId"],
+      planId: Number(formData["planId"]),
       agenciaId: 1,
       inicioVigencia: new Date().toISOString(),
-      uso: formData["usoo"],
+      uso: Number(formData["usoo"]),
       dataViewModel,
       enteViewModel,
       values,
     };
-
-    console.log("bodyCreatePolicy", bodyCreatePolicy);
+    //#endregion
 
     // create policy
     const policyId = await PolicyApi.createPolicy(bodyCreatePolicy);
-
-    console.log("pass here");
 
     // confirm policy =
     const isOk = await PolicyApi.confirmPolicy(policyId);
@@ -61,13 +74,9 @@ export class PolicyService {
       success: isOk,
     };
   }
-}
 
-function buildObject(properties: string[], formData: any) {
-  const obj: { [key: string]: string } = {};
-
-  properties.forEach((property) => {
-    obj[property] = formData[property];
-  });
-  return obj;
+  static async getPdf(policyId: number): Promise<string> {
+    const pdfObject = await PolicyApi.getPdf(policyId);
+    return URL.createObjectURL(pdfObject);
+  }
 }

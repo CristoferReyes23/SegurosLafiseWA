@@ -5,7 +5,7 @@ export interface CreatePolicyRequestModel {
   uso: number;
   dataViewModel: DataViewModel;
   enteViewModel: EnteViewModel;
-  values: Values;
+  values: ValuesViewModel;
 }
 
 export interface DataViewModel {
@@ -43,7 +43,7 @@ export interface EnteViewModel {
   xdistrito: string;
 }
 
-export interface Values {
+export interface ValuesViewModel {
   valn: string;
   anio: string;
   usoo: string;
