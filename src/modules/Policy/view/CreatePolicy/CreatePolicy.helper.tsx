@@ -49,6 +49,10 @@ const CreatePolicyHelper = () => {
     onSubmit: handleSubmit,
     validateOnMount: true,
     validationSchema,
+    initialTouched: {
+      tipoId: true,
+      documentoIdentificacion: true,
+    },
     validate: (values) => customValidation(values, currentIndex),
   });
 

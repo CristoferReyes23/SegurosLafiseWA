@@ -15,3 +15,9 @@ export enum EnumDocumentMaskTemplateValues {
   RUC = "a00000000000000",
   CEDULA = "000-000000-0000a",
 }
+
+export enum EnumConstFormValues {
+  typeDocumentation = 1,
+  planId = 477,
+  niCountry = 505,
+}

@@ -1,4 +1,5 @@
 import { TypeStep } from "@/modules/Policy/utils/multiStepFormUtils";
+import { EnumConstFormValues } from "@/shared/utils/constValues";
 import { MESSAGES } from "@/shared/utils/formMessages";
 import { string, number, object, date } from "yup";
 
@@ -17,7 +18,7 @@ const maxBirthday = () => {
 export const stepsCreatePolicy: TypeStep[] = [
   {
     titleHeaderStep: "Complete la información del vehículo",
-    initialValues: {},
+    initialValues: { planId: EnumConstFormValues.planId },
     validationSchema: object({
       planId: number().required(MESSAGES.required),
       marcaId: number().required(MESSAGES.required),
@@ -54,7 +55,10 @@ export const stepsCreatePolicy: TypeStep[] = [
       direccion: string().required(MESSAGES.required),
       profesion: string().required(MESSAGES.required),
     }),
-    initialValues: {},
+    initialValues: {
+      tipoId: EnumConstFormValues.typeDocumentation,
+      paisOrigen: EnumConstFormValues.niCountry,
+    },
   },
   {
     initialValues: {},
