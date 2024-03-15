@@ -17,7 +17,7 @@ export enum EnumDocumentMaskTemplateValues {
 }
 
 export enum EnumConstFormValues {
-  typeDocumentation = 1,
-  planId = 477,
-  niCountry = 505,
+  typeDocumentation = "1",
+  planId = "477",
+  niCountry = "505",
 }

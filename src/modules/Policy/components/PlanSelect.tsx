@@ -5,6 +5,8 @@ import useFetch from "@/shared/hooks/useFetch";
 import { SelectDataTemplate } from "@/shared/utils/formTypes";
 import { EnumUrlCatalogsPaths } from "@/shared/utils/urlPaths";
 import FormGroupTemplate from "@/shared/components/Forms/FormGroupTemplate";
+import { useInitialValueGetTextSelect } from "@/shared/hooks/useInitialValueGetTextSelect";
+import { useMemo } from "react";
 
 export const PlanSelect = ({ form }: FormikComponentProps) => {
   const { data } = useFetch<PlanModel[]>({
@@ -12,13 +14,18 @@ export const PlanSelect = ({ form }: FormikComponentProps) => {
     urlPath: EnumUrlCatalogsPaths.plans,
   });
 
-  const dataView: SelectDataTemplate[] =
-    data
-      ?.map((i) => ({
-        text: i.nombre,
-        id: i.id,
-      }))
-      .filter((item, index, self) => index === self.findIndex((t) => t.id === item.id)) ?? []; //avoid duplicated
+  const dataView: SelectDataTemplate[] = useMemo(
+    () =>
+      data
+        ?.map((i) => ({
+          text: i.nombre,
+          id: i.id,
+        }))
+        .filter((item, index, self) => index === self.findIndex((t) => t.id === item.id)) ?? [], //avoid duplicated
+    [data]
+  );
+
+  useInitialValueGetTextSelect({ form, data: dataView, name: "planId", nameText: "xplan" });
 
   const inputFormik = getFormikProps(form, "planId");
 

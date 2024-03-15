@@ -4,6 +4,7 @@ import FormSelectTemplate from "@/shared/components/Forms/FormSelectTemplate";
 import { BaseListDataModel } from "@/shared/models/baseListData.model";
 import { FormikProps } from "formik";
 import FormGroupTemplate from "@/shared/components/Forms/FormGroupTemplate";
+import { useInitialValueGetTextSelect } from "@/shared/hooks/useInitialValueGetTextSelect";
 
 interface Props {
   form: FormikProps<any>;
@@ -31,6 +32,8 @@ export const CommonSelectWithDependency = ({
     dependencyField,
     pathApi,
   });
+  useInitialValueGetTextSelect({ form, data, name, nameText });
+
   const { onChange, ...inputProps } = getFormikProps(form, name);
 
   const onChangeValue = (e: any) => {

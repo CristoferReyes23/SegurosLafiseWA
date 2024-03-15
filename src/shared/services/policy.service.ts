@@ -23,7 +23,7 @@ export class PolicyService {
     };
 
     const enteViewModel: EnteViewModel = {
-      tipoId: formData["tipoId"],
+      tipoId: String(formData["tipoId"]),
       documentoIdentificacion: formData["documentoIdentificacion"],
       nombre: formData["nombre"],
       apellido: formData["apellido"],

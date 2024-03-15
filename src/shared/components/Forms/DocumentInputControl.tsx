@@ -21,7 +21,7 @@ const DocumentInputControl = ({ formik, name, label, dependencyName }: Props) =>
   const [valueInput, setValueInput] = useState("");
 
   useEffect(() => {
-    const selectedType = formik.values[dependencyName];
+    const selectedType = String(formik.values[dependencyName]);
     formik.setFieldValue(name, "");
     setValueInput("");
     setIsDisabled(selectedType == "" || !selectedType);

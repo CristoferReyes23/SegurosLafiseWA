@@ -1,6 +1,7 @@
 import FormGroupTemplate from "@/shared/components/Forms/FormGroupTemplate";
 import FormSelectTemplate from "@/shared/components/Forms/FormSelectTemplate";
 import useFetch from "@/shared/hooks/useFetch";
+import { useInitialValueGetTextSelect } from "@/shared/hooks/useInitialValueGetTextSelect";
 import { BaseListDataModel } from "@/shared/models/baseListData.model";
 import { FormikComponentProps, getFormikErrorField, getFormikProps } from "@/shared/utils/getFormikProps";
 import { EnumUrlCatalogsPaths } from "@/shared/utils/urlPaths";
@@ -18,6 +19,7 @@ const CommonSelectGroup = ({ firsOption, form, label, name, urlPath, nameText }:
     to: "LAFISE",
     urlPath,
   });
+  useInitialValueGetTextSelect({ form, data, name, nameText });
 
   const { onChange, ...extraProps } = getFormikProps(form, name);
   const onChangeValue = (e: any) => {
