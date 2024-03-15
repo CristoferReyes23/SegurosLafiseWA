@@ -32,9 +32,3 @@ const QuoteTable = ({ covertures }: Props) => {
 };
 
 export default QuoteTable;
-
-const data = [
-  { title: "a. Muerte o lesiones causadas a una persona", value: "2500" },
-  { title: "b. Muerte o lesiones causadas a dos o más personas", value: "5000" },
-  { title: "c. Daños materiales causados a terceras personas", value: "2500" },
-];
