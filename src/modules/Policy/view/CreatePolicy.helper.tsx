@@ -91,8 +91,12 @@ const CreatePolicyHelper = () => {
     try {
       const data = await QuoteService.queryCoverages(values);
       setCoverages(data);
+      alertRef.current?.show(false);
+
       isOk = true;
     } catch (err: any) {
+      console.log(err);
+
       alertRef.current?.show(true, { message: err.type ? err.message : MESSAGES.unexpectedError });
       setCoverages(null);
     }

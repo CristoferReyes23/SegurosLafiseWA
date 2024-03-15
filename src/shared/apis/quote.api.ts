@@ -7,31 +7,6 @@ import { EnumUrlCatalogsPaths } from "@/shared/utils/urlPaths";
 
 export class QuoteApi {
   static async getCoverages(formData: any): Promise<QuoteResponseModel> {
-    // return {
-    //   coberturas: [
-    //     {
-    //       coaseguro: 0,
-    //       coberturaId: 0,
-    //       deducible: 0,
-    //       descuento: 0,
-    //       id: 0,
-    //       nombre: 0,
-    //       orden: 0,
-    //       prima: 0,
-    //       sumaAsegurada: 0,
-    //       total: 0,
-    //     },
-    //   ],
-    //   descuento: 0,
-    //   impuestos: 0,
-    //   prima: 0,
-    //   primaMensual: 0,
-    //   primaSemestral: 0,
-    //   primaTrimestral: 0,
-    //   sumaAsegurada: 0,
-    //   total: 0,
-    // };
-
     const path = getUrlWithValues(formData, EnumUrlCatalogsPaths.coverages);
     const body = JSON.stringify({
       valn: "0",

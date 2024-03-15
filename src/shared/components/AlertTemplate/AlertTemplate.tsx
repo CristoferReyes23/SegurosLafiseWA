@@ -13,7 +13,9 @@ const AlertTemplate = ({ childRef, message, variant = "danger" }: Props) => {
 
   const show = (show: boolean, props?: any) => {
     setIsVisible(show);
-    if (props["message"]) setMessageValue(props["message"]);
+    if (props) {
+      if ("message" in props) setMessageValue(props["message"]);
+    }
   };
 
   // Assign the function to the ref passed from the parent
