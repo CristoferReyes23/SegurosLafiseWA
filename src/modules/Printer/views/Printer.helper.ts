@@ -1,5 +1,5 @@
 import { customValidation } from "@/modules/Policy/utils/customValidationForm";
-import { formSchema } from "@/modules/Printer/utils/formPrinter.schema";
+import { formSchema, initialValue } from "@/modules/Printer/utils/formPrinter.schema";
 import { BaseViewModel } from "@/shared/models/baseView.model";
 import { PolicyListResponseModel } from "@/shared/models/policyListResponse.model";
 import { PrinterService } from "@/shared/services/printer.service";
@@ -30,7 +30,7 @@ const PrinterHelper = () => {
   };
 
   const formik = useFormik({
-    initialValues: {},
+    initialValues: initialValue,
     onSubmit: onSubmit,
     validate: (values) => customValidation(values, 1),
     validationSchema: formSchema,
