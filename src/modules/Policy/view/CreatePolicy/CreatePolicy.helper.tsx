@@ -75,11 +75,7 @@ const CreatePolicyHelper = () => {
       if (response.success) {
         navigate("/policy/successful", {
           replace: true,
-          state: {
-            policyId: "123123",
-            message: "testing message",
-            client: "test",
-          },
+          state: response,
         });
       }
     } catch (err) {
@@ -100,8 +96,6 @@ const CreatePolicyHelper = () => {
 
       isOk = true;
     } catch (err: any) {
-      console.log(err);
-
       alertRef.current?.show(true, { message: err.type ? err.message : MESSAGES.unexpectedError });
       setCoverages(null);
     }

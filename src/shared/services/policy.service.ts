@@ -5,7 +5,7 @@ import {
   EnteViewModel,
   ValuesViewModel,
 } from "@/shared/models/request/CreatePolicyRequest.model";
-import { CreatePolicyResponseModel } from "@/shared/models/response/CreatePolicyResponse.model";
+import { CreatePolicyResponseModel } from "@/shared/models/viewModels/CreatePolicyViewModel.model";
 
 export class PolicyService {
   static async createPolicy(formData: any): Promise<CreatePolicyResponseModel> {
@@ -68,10 +68,15 @@ export class PolicyService {
     const policyId = await PolicyApi.createPolicy(bodyCreatePolicy);
 
     // confirm policy =
-    const isOk = await PolicyApi.confirmPolicy(policyId);
+    const success = await PolicyApi.confirmPolicy(policyId);
+
+    // get pdf
+    const pdfUrl = await PolicyService.getPdf(policyId);
+
     return {
-      policyId: policyId,
-      success: isOk,
+      policyId,
+      success,
+      pdfUrl,
     };
   }
 

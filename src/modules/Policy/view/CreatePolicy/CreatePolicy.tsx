@@ -1,6 +1,6 @@
 import ClientForm from "@/modules/Policy/components/Steps/ClientForm";
 import PlanPolicy from "@/modules/Policy/components/Steps/PlanPolicy";
-import CreatePolicyHelper from "@/modules/Policy/view/CreatePolicy.helper";
+import CreatePolicyHelper from "@/modules/Policy/view/CreatePolicy/CreatePolicy.helper";
 import NavigationButtons from "@/modules/Policy/components/NavigationButtons";
 import TabWizard from "@/modules/Policy/components/TabWizard/TabWizard";
 import { useMemo } from "react";

@@ -1,4 +1,5 @@
 export interface CreatePolicyResponseModel {
-  policyId: Number;
+  policyId: number;
   success: boolean;
+  pdfUrl: string;
 }
