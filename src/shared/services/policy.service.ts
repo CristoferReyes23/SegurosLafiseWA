@@ -71,12 +71,12 @@ export class PolicyService {
     const success = await PolicyApi.confirmPolicy(policyId);
 
     // get pdf
-    const pdfUrl = await PolicyService.getPdf(policyId);
+    const voucherUrl = await PolicyService.getPdf(policyId);
 
     return {
       policyId,
       success,
-      pdfUrl,
+      voucherUrl,
     };
   }
 

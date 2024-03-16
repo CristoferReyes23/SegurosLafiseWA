@@ -2,30 +2,40 @@ import PaymentSuccessfulHelper from "@/modules/Policy/view/PaymentSuccessful/Pay
 import ViewModalPdf from "@/modules/Printer/components/ViewModalPdf";
 import Button from "react-bootstrap/esm/Button";
 import Card from "react-bootstrap/esm/Card";
-import { Navigate } from "react-router-dom";
+import Stack from "react-bootstrap/esm/Stack";
+import { Link, Navigate } from "react-router-dom";
 
 const PaymentSuccessful = () => {
-  const { isVisibleModal, hideModal, showModal, locationParams } = PaymentSuccessfulHelper();
-
+  const { isVisibleModal, hideModal, locationParams, pdfModalData, onPressButton } = PaymentSuccessfulHelper();
   if (!locationParams) return <Navigate to="/dashboard" replace={true} />;
 
   return (
     <div>
       <Card className={`w-auto rounded-0 m-0 py-5`}>
-        <div className="container text-center">
-          <h1>
+        <div className="container">
+          <h1 className="text-center">
             <i className="fa-solid fa-circle-check"></i> !Póliza realizado con éxito!
           </h1>
-          <Button variant="success" className="btn-lg mt-5 mb-3" onClick={showModal}>
-            Imprimir comprobante de pago
-          </Button>
-          <p className="lead">Puedes reimprimir la póliza accediendo al menú Reimprimir póliza</p>
+          <Stack direction="horizontal" className="justify-content-center gap-3">
+            <Link to="/dashboard">
+              <Button variant="secondary">Cerrar</Button>
+            </Link>
+
+            <Button variant="success" onClick={() => onPressButton("VOUCHER")}>
+              Imprimir comprobante
+            </Button>
+
+            <Button variant="primary" onClick={() => onPressButton("POLICY")}>
+              Imprimir póliza
+            </Button>
+          </Stack>
         </div>
       </Card>
 
       {isVisibleModal && (
         <ViewModalPdf
-          urlPdf={"https://web.stanford.edu/class/cs142/lectures/StateManagement.pdf"}
+          urlPdf={pdfModalData.pdfUrl}
+          title={pdfModalData.title}
           isVisiblePdf={isVisibleModal}
           hideModal={hideModal}
         />

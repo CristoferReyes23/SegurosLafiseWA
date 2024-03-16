@@ -39,7 +39,7 @@ export const PlanSelect = ({ form }: FormikComponentProps) => {
   return (
     <FormGroupTemplate label="Plan de póliza" name="planId">
       <FormSelectTemplate
-        firstOptionEmpty="Seleccione un plan de poliza"
+        firstOptionEmpty="Seleccione un plan de póliza"
         data={dataView}
         {...inputFormik}
         onChange={(e) => {
