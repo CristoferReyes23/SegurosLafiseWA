@@ -1,23 +1,24 @@
 import { formSchema, initialValue } from "@/modules/Quote/utils/form.schema";
+import { useLoading } from "@/shared/contexts/LoadingWrapper";
 import { QuoteResponseModel } from "@/shared/models/quoteResponse.model";
 import { QuoteService } from "@/shared/services/quote.service";
 import { MESSAGES } from "@/shared/utils/formMessages";
 import { useFormik } from "formik";
-import { useRef, useState } from "react";
+import { useState } from "react";
 
 const CreateQuoteHelper = () => {
   const [response, setResponse] = useState<QuoteResponseModel | null>(null);
   const [errorMessage, setErrorMessage] = useState("");
-  const loadingRef = useRef<any>();
+  const loading = useLoading();
 
   const onSubmitForm = (formData: any) => {
     setResponse(null);
 
-    loadingRef.current?.show(true);
+    loading.show();
 
     QuoteService.queryCoverages(formData)
       .then((resp) => {
-        setResponse(resp);
+        setResponse(resp.coverages);
         setErrorMessage("");
       })
       .catch((err) => {
@@ -25,7 +26,7 @@ const CreateQuoteHelper = () => {
         setResponse(null);
       })
       .finally(() => {
-        loadingRef.current?.show(false);
+        loading.hide();
       });
   };
 
@@ -41,7 +42,6 @@ const CreateQuoteHelper = () => {
     errorMessage,
     onCloseAlert,
     onSubmitForm,
-    loadingRef,
     response,
     formik,
   };

@@ -4,6 +4,7 @@ import FormCard from "@/shared/components/FormCard";
 import { EnumUrlCatalogsPaths } from "@/shared/utils/urlPaths";
 import CommonSelectGroup from "@/shared/components/Forms/Selects/CommonSelectGroup";
 import { CommonSelectWithDependency } from "@/shared/components/Forms/Selects/CommonSelectWithDependency";
+import GroupInputForm from "@/shared/components/Forms/GroupInputForm";
 
 interface Props extends FormikComponentProps {
   children?: any;
@@ -16,6 +17,10 @@ const FormTemplate = ({ form, children }: Props) => {
         <div className="row">
           <div className="col-sm-12 col-md-4">
             <PlanSelect form={form} />
+          </div>
+
+          <div className="col-sm-12 col-md-4">
+            <GroupInputForm disabled={true} label="Moneda" name="moneda" formik={form} />
           </div>
 
           <div className="col-sm-12 col-md-4">

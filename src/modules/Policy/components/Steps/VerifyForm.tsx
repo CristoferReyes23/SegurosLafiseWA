@@ -5,14 +5,14 @@ import { QuoteResponseModel } from "@/shared/models/quoteResponse.model";
 import { FormikComponentProps } from "@/shared/utils/getFormikProps";
 
 interface Props extends FormikComponentProps {
-  covertures: QuoteResponseModel | null;
+  coverages: QuoteResponseModel | null;
 }
 
-const VerifyForm = ({ form, covertures }: Props) => {
+const VerifyForm = ({ form, coverages }: Props) => {
   return (
     <div>
       <FormCard title="Confirme los datos registrados">
-        <PanelTemplate heading="Plan de póliza">{covertures && <QuoteTable covertures={covertures} />}</PanelTemplate>
+        <PanelTemplate heading="Plan de póliza">{coverages && <QuoteTable coverages={coverages} />}</PanelTemplate>
 
         <PanelTemplate heading="Vehículo">
           <div className="row">

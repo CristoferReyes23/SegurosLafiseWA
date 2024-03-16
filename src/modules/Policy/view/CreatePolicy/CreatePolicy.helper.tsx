@@ -9,7 +9,8 @@ import { QuoteResponseModel } from "@/shared/models/quoteResponse.model";
 import { QuoteService } from "@/shared/services/quote.service";
 import { MESSAGES } from "@/shared/utils/formMessages";
 import { EnumIndexPages } from "@/modules/Policy/utils/enumPages";
-import { customValidation } from "@/modules/Policy/utils/customValidationForm";
+import { PolicyService } from "@/shared/services/policy.service";
+import { useLoading } from "@/shared/contexts/LoadingWrapper";
 
 const CreatePolicyHelper = () => {
   // wizard state values and form props
@@ -19,13 +20,13 @@ const CreatePolicyHelper = () => {
   const validationSchema = steps[currentIndex].validationSchema;
 
   // component ref
-  const loadingRef = useRef<any>(null);
+  const loading = useLoading();
   const alertRef = useRef<IAlertTemplate>(null);
+  const modalAlertsRef = useRef<any>(null);
 
   // dashboard context
   const { setTitleHeader } = useHeaderLayout();
 
-  // navigation, components refs and saving data
   const navigate = useNavigate();
   const [coverageResponse, setCoverages] = useState<QuoteResponseModel | null>(null);
 
@@ -35,12 +36,12 @@ const CreatePolicyHelper = () => {
   }, [currentIndex]);
 
   const handleSubmit = (values: FormikValues) => {
-    loadingRef.current?.show(true);
+    loading.show();
     handlerEventSubmit(values)
       .then((res) => {
         if (res) updateWizardSteps(false);
       })
-      .finally(() => loadingRef.current?.show(false));
+      .finally(() => loading.hide());
   };
 
   const formik = useFormik({
@@ -48,50 +49,63 @@ const CreatePolicyHelper = () => {
     onSubmit: handleSubmit,
     validateOnMount: true,
     validationSchema,
-    validate: (values) => customValidation(values, currentIndex),
+    initialTouched: {
+      tipoId: true,
+      documentoIdentificacion: true,
+    },
   });
 
   const handlerEventSubmit = async (values: any) => {
     switch (currentIndex) {
       case EnumIndexPages.quote:
-        return await nextStepQuote(values);
+        return await getCoverages(values);
 
       case EnumIndexPages.client:
         return true;
 
       case EnumIndexPages.verify:
-        navigate("/policy/successful", {
-          replace: true,
-          state: {
-            policyId: "123123",
-            message: "testing message",
-            client: "test",
-          },
-        });
-        break;
+        return await createPolicy(values);
 
       default:
-        break;
+        return;
     }
   };
 
-  const nextStepQuote = async (values: any) => {
+  const createPolicy = async (values: any) => {
+    try {
+      const response = await PolicyService.createPolicy(values);
+
+      if (response.success) {
+        navigate("/policy/successful", {
+          replace: true,
+          state: response,
+        });
+      }
+    } catch (err: any) {
+      modalAlertsRef.current?.show(true, { message: err?.message ?? MESSAGES.unexpectedError, title: "Error" });
+    }
+  };
+
+  const getCoverages = async (values: any) => {
     let isOk = false;
     try {
       const data = await QuoteService.queryCoverages(values);
-      setCoverages(data);
+      setCoverages(data.coverages);
       alertRef.current?.show(false);
+
+      formik.setFieldValue("cate", data.dataSheet.auCategoria);
+      formik.setFieldValue("nasiento", data.dataSheet.auNumPasajeros);
+      formik.setFieldValue("valn", data.dataSheet.auValorNuevo);
 
       isOk = true;
     } catch (err: any) {
-      console.log(err);
-
       alertRef.current?.show(true, { message: err.type ? err.message : MESSAGES.unexpectedError });
       setCoverages(null);
     }
     return isOk;
   };
 
+  //#region tabs events
   const updateWizardSteps = (goBack: boolean) => {
     if (goBack) {
       setCurrentIndex((pre) => pre - 1);
@@ -104,7 +118,6 @@ const CreatePolicyHelper = () => {
     }
   };
 
-  //#region tabs events
   const onClickTab = (index: number) => {
     setCurrentIndex(index);
   };
@@ -114,12 +127,16 @@ const CreatePolicyHelper = () => {
   };
 
   const goNext = () => {
-    loadingRef.current?.show(true);
+    loading.show();
     handlerEventSubmit(formik.values)
       .then((res) => {
         if (res) updateWizardSteps(false);
       })
-      .finally(() => loadingRef.current?.show(false));
+      .finally(() => {
+        console.log("asdaskldj");
+
+        loading.hide();
+      });
   };
   //#endregion
 
@@ -130,10 +147,10 @@ const CreatePolicyHelper = () => {
     goNext,
     alertRef,
     onClickTab,
-    loadingRef,
     currentIndex,
     handleSubmit,
     initialValues,
+    modalAlertsRef,
     validationSchema,
     coverageResponse,
   };

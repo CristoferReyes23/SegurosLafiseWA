@@ -27,7 +27,7 @@ const Dashboard = () => {
       <Stack direction="horizontal" className="flex-wrap gap-5">
         <Card style={{ width: "18rem" }} className="m-0">
           <Card.Body>
-            <Card.Text className="h5 text-center mb-2">Reimprimir Polizas</Card.Text>
+            <Card.Text className="h5 text-center mb-2">Reimprimir pólizas</Card.Text>
             <div className="object-fit-cover rounded-0">
               <h1 className="display-4 text-center my-4 text-danger">
                 <i className="fa-solid fa-print"></i>

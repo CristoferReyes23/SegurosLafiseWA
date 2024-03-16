@@ -34,7 +34,7 @@ const NavigationButtons = (props: Props) => {
           className="btn btn-primary"
           onClick={() => (isLast ? handleSubmit() : props.onClickNext())}
         >
-          Continuar
+          {isLast ? "Confirmar" : "Continuar"}
         </Button>
       </Col>
     </Row>

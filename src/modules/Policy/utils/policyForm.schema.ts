@@ -1,5 +1,7 @@
 import { TypeStep } from "@/modules/Policy/utils/multiStepFormUtils";
+import { EnumConstFormValues } from "@/shared/utils/constValues";
 import { MESSAGES } from "@/shared/utils/formMessages";
+import { validationDocumentValue } from "@/shared/utils/validateDocumentType";
 import { string, number, object, date } from "yup";
 
 const minBirthday = () => {
@@ -17,7 +19,7 @@ const maxBirthday = () => {
 export const stepsCreatePolicy: TypeStep[] = [
   {
     titleHeaderStep: "Complete la información del vehículo",
-    initialValues: {},
+    initialValues: { planId: EnumConstFormValues.planId },
     validationSchema: object({
       planId: number().required(MESSAGES.required),
       marcaId: number().required(MESSAGES.required),
@@ -29,14 +31,17 @@ export const stepsCreatePolicy: TypeStep[] = [
       color: string().required(MESSAGES.required),
       motor: string().required(MESSAGES.required),
       usoo: string().required(MESSAGES.required),
-      puertas: number().required(MESSAGES.required),
+      puertas: number().required(MESSAGES.required).max(10, MESSAGES.maxDoors),
     }),
   },
   {
     titleHeaderStep: "Complete la información del cliente",
     validationSchema: object({
       tipoId: string().required(MESSAGES.required),
-      documentoIdentificacion: string().required(MESSAGES.required),
+      // documentoIdentificacion: string().required(MESSAGES.required),
+      documentoIdentificacion: string().when("tipoId", (typeIdValue, schema) => {
+        return validationDocumentValue(String(typeIdValue), schema);
+      }),
       nombre: string().required(MESSAGES.required),
       apellido: string().required(MESSAGES.required),
       sexo: string().required(MESSAGES.required),
@@ -50,11 +55,16 @@ export const stepsCreatePolicy: TypeStep[] = [
       paisOrigen: number().required(MESSAGES.required),
       provincia: number().required(MESSAGES.required),
       canton: number().required(MESSAGES.required),
-      distrito: number().required(MESSAGES.required),
+      distrito: string().when("paisOrigen", (countryValue, schema) => {
+        return String(countryValue) === EnumConstFormValues.niCountry ? schema.required() : schema.notRequired();
+      }),
       direccion: string().required(MESSAGES.required),
       profesion: string().required(MESSAGES.required),
     }),
-    initialValues: {},
+    initialValues: {
+      tipoId: EnumConstFormValues.typeDocumentation,
+      paisOrigen: EnumConstFormValues.niCountry,
+    },
   },
   {
     initialValues: {},

@@ -23,10 +23,4 @@ export class PrinterService {
       };
     }
   }
-
-  static async getPdfPath(policyId: string): Promise<string> {
-    console.log(policyId);
-
-    return "https://web.stanford.edu/class/cs142/lectures/StateManagement.pdf";
-  }
 }

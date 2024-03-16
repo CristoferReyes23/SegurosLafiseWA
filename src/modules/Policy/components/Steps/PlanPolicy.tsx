@@ -7,7 +7,7 @@ import { CommonSelectWithDependency } from "@/shared/components/Forms/Selects/Co
 import { EnumUrlCatalogsPaths } from "@/shared/utils/urlPaths";
 import CommonSelectGroup from "@/shared/components/Forms/Selects/CommonSelectGroup";
 import GroupInputForm from "@/shared/components/Forms/GroupInputForm";
-import { ConstRegex } from "@/shared/utils/constRegex";
+import { ConstRegex } from "@/shared/utils/constValues";
 import { useEffect, useState } from "react";
 import AlertTemplate from "@/shared/components/AlertTemplate/AlertTemplate";
 
@@ -98,7 +98,7 @@ const PlanPolicy = ({ form, alertRef }: Props) => {
               formik={form}
               label="Número de puertas"
               name="puertas"
-              type="text"
+              type="number"
               maxLength={2}
               regexValidation={ConstRegex.onlyNumberDigit}
             />
@@ -124,7 +124,7 @@ export const VehiclePrice = ({ form }: FormikComponentProps) => {
 
   return (
     <GroupInputForm
-      type="text"
+      type="number"
       formik={form}
       label={`Precio de compra del vehículo ${textComplement}`}
       name="valorNuevo"

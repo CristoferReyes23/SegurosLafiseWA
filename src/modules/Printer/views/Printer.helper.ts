@@ -1,8 +1,11 @@
-import { customValidation } from "@/modules/Policy/utils/customValidationForm";
-import { formSchema } from "@/modules/Printer/utils/formPrinter.schema";
+import { formSchema, initialValue } from "@/modules/Printer/utils/formPrinter.schema";
+import { IModalAlertRef } from "@/shared/components/ModalAlerts";
+import { useLoading } from "@/shared/contexts/LoadingWrapper";
 import { BaseViewModel } from "@/shared/models/baseView.model";
 import { PolicyListResponseModel } from "@/shared/models/policyListResponse.model";
+import { PolicyService } from "@/shared/services/policy.service";
 import { PrinterService } from "@/shared/services/printer.service";
+import { MESSAGES } from "@/shared/utils/formMessages";
 import { useFormik } from "formik";
 import { useRef, useState } from "react";
 
@@ -11,10 +14,11 @@ const PrinterHelper = () => {
   const [isVisibleAlert, setIsVisibleAlert] = useState(false);
   const [isVisiblePdf, setIsVisiblePdf] = useState(false);
   const [urlPdf, setUrlPdf] = useState("");
-  const loadingRef = useRef<any>(null);
+  const loading = useLoading();
+  const modalRef = useRef<IModalAlertRef>();
 
   const onSubmit = (formData: any) => {
-    loadingRef.current?.show(true);
+    loading.show();
 
     PrinterService.getAllPolicy(formData["documentoIdentificacion"])
       .then((res) => {
@@ -25,23 +29,31 @@ const PrinterHelper = () => {
         }
       })
       .finally(() => {
-        loadingRef.current?.show(false);
+        loading.hide();
       });
   };
 
   const formik = useFormik({
-    initialValues: {},
+    initialValues: initialValue,
     onSubmit: onSubmit,
-    validate: (values) => customValidation(values, 1),
     validationSchema: formSchema,
     validateOnMount: true,
   });
 
   const onClickPrint = (id: string) => {
-    PrinterService.getPdfPath(id).then((path) => {
-      setIsVisiblePdf(true);
-      setUrlPdf(path);
-    });
+    loading.show();
+
+    PolicyService.getPdf(Number(id))
+      .then((resp) => {
+        setIsVisiblePdf(true);
+        setUrlPdf(resp);
+      })
+      .catch((_) => {
+        modalRef.current?.show(true, { message: MESSAGES.errorPdf });
+      })
+      .finally(() => {
+        loading.hide();
+      });
   };
 
   const hidePdf = () => {
@@ -52,7 +64,7 @@ const PrinterHelper = () => {
     formik,
     urlPdf,
     hidePdf,
-    loadingRef,
+    modalRef,
     isVisiblePdf,
     onClickPrint,
     responseData,
