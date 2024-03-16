@@ -1,7 +1,7 @@
 import { useLoadSelect } from "@/shared/hooks/useLoadSelect";
 import { getFormikErrorField, getFormikProps } from "@/shared/utils/getFormikProps";
 import FormSelectTemplate from "@/shared/components/Forms/FormSelectTemplate";
-import { BaseListDataModel } from "@/shared/models/baseListData.model";
+import { BaseListDataModel } from "@/shared/models/BaseListData.model";
 import { FormikProps } from "formik";
 import FormGroupTemplate from "@/shared/components/Forms/FormGroupTemplate";
 import { useInitialValueGetTextSelect } from "@/shared/hooks/useInitialValueGetTextSelect";

@@ -1,4 +1,4 @@
-import { BaseListDataModel } from "@/shared/models/baseListData.model";
+import { BaseListDataModel } from "@/shared/models/BaseListData.model";
 import { FormikComponentProps } from "@/shared/utils/getFormikProps";
 import { useEffect } from "react";
 
