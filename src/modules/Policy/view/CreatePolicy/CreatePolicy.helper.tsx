@@ -9,7 +9,6 @@ import { QuoteResponseModel } from "@/shared/models/quoteResponse.model";
 import { QuoteService } from "@/shared/services/quote.service";
 import { MESSAGES } from "@/shared/utils/formMessages";
 import { EnumIndexPages } from "@/modules/Policy/utils/enumPages";
-import { customValidation } from "@/modules/Policy/utils/customValidationForm";
 import { PolicyService } from "@/shared/services/policy.service";
 import { useLoading } from "@/shared/contexts/LoadingWrapper";
 
@@ -54,7 +53,6 @@ const CreatePolicyHelper = () => {
       tipoId: true,
       documentoIdentificacion: true,
     },
-    validate: (values) => customValidation(values, currentIndex),
   });
 
   const handlerEventSubmit = async (values: any) => {

@@ -1,6 +1,7 @@
 import { TypeStep } from "@/modules/Policy/utils/multiStepFormUtils";
 import { EnumConstFormValues } from "@/shared/utils/constValues";
 import { MESSAGES } from "@/shared/utils/formMessages";
+import { validationDocumentValue } from "@/shared/utils/validateDocumentType";
 import { string, number, object, date } from "yup";
 
 const minBirthday = () => {
@@ -37,7 +38,10 @@ export const stepsCreatePolicy: TypeStep[] = [
     titleHeaderStep: "Complete la información del cliente",
     validationSchema: object({
       tipoId: string().required(MESSAGES.required),
-      documentoIdentificacion: string().required(MESSAGES.required),
+      // documentoIdentificacion: string().required(MESSAGES.required),
+      documentoIdentificacion: string().when("tipoId", (typeIdValue, schema) => {
+        return validationDocumentValue(String(typeIdValue), schema);
+      }),
       nombre: string().required(MESSAGES.required),
       apellido: string().required(MESSAGES.required),
       sexo: string().required(MESSAGES.required),

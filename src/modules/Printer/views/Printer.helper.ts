@@ -1,4 +1,3 @@
-import { customValidation } from "@/modules/Policy/utils/customValidationForm";
 import { formSchema, initialValue } from "@/modules/Printer/utils/formPrinter.schema";
 import { IModalAlertRef } from "@/shared/components/ModalAlerts";
 import { useLoading } from "@/shared/contexts/LoadingWrapper";
@@ -37,7 +36,6 @@ const PrinterHelper = () => {
   const formik = useFormik({
     initialValues: initialValue,
     onSubmit: onSubmit,
-    validate: (values) => customValidation(values, 1),
     validationSchema: formSchema,
     validateOnMount: true,
   });
