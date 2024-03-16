@@ -51,7 +51,9 @@ export const stepsCreatePolicy: TypeStep[] = [
       paisOrigen: number().required(MESSAGES.required),
       provincia: number().required(MESSAGES.required),
       canton: number().required(MESSAGES.required),
-      distrito: number().required(MESSAGES.required),
+      distrito: string().when("paisOrigen", (countryValue, schema) => {
+        return String(countryValue) === EnumConstFormValues.niCountry ? schema.required() : schema.notRequired();
+      }),
       direccion: string().required(MESSAGES.required),
       profesion: string().required(MESSAGES.required),
     }),
