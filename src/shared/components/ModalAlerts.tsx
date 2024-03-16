@@ -47,3 +47,7 @@ const ModalAlerts = ({ modalRef }: Props) => {
 };
 
 export default ModalAlerts;
+
+export interface IModalAlertRef {
+  show: (show: boolean, extra: { message?: string; title?: string }) => void;
+}

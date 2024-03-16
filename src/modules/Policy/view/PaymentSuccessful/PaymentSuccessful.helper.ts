@@ -1,3 +1,4 @@
+import { IModalAlertRef } from "@/shared/components/ModalAlerts";
 import { useLoading } from "@/shared/contexts/LoadingWrapper";
 import { PolicyService } from "@/shared/services/policy.service";
 import { MESSAGES } from "@/shared/utils/formMessages";
@@ -18,7 +19,7 @@ function PaymentSuccessfulHelper() {
   const [voucherPdfUrl, setVoucherPdf] = useState("");
 
   const loading = useLoading();
-  const modalRef = useRef<any>();
+  const modalRef = useRef<IModalAlertRef>();
 
   const [pdfModalData, setPdfModalData] = useState<{ title: string; pdfUrl: string }>({
     pdfUrl: "",

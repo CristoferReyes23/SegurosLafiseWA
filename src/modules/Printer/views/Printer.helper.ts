@@ -1,5 +1,6 @@
 import { customValidation } from "@/modules/Policy/utils/customValidationForm";
 import { formSchema, initialValue } from "@/modules/Printer/utils/formPrinter.schema";
+import { IModalAlertRef } from "@/shared/components/ModalAlerts";
 import { useLoading } from "@/shared/contexts/LoadingWrapper";
 import { BaseViewModel } from "@/shared/models/baseView.model";
 import { PolicyListResponseModel } from "@/shared/models/policyListResponse.model";
@@ -15,7 +16,7 @@ const PrinterHelper = () => {
   const [isVisiblePdf, setIsVisiblePdf] = useState(false);
   const [urlPdf, setUrlPdf] = useState("");
   const loading = useLoading();
-  const modalRef = useRef<any>();
+  const modalRef = useRef<IModalAlertRef>();
 
   const onSubmit = (formData: any) => {
     loading.show();
