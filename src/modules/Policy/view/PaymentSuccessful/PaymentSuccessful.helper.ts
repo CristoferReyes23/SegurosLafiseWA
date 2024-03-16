@@ -1,5 +1,6 @@
+import { useLoading } from "@/shared/contexts/LoadingWrapper";
 import { PolicyService } from "@/shared/services/policy.service";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 
 interface LocationStateParams {
@@ -15,10 +16,16 @@ function PaymentSuccessfulHelper() {
   const [policyPdfUrl, setPolicyPdf] = useState("");
   const [voucherPdfUrl, setVoucherPdf] = useState("");
 
+  const loading = useLoading();
+
   const [pdfModalData, setPdfModalData] = useState<{ title: string; pdfUrl: string }>({
     pdfUrl: "",
     title: "",
   });
+
+  useEffect(() => {
+    getPolicyPdfUrl();
+  }, []);
 
   const hideModal = () => {
     setIsVisibleModal(false);
@@ -35,21 +42,25 @@ function PaymentSuccessfulHelper() {
         title: "Póliza",
         pdfUrl: policyPdfUrl,
       });
+      setIsVisibleModal(true);
       return;
     }
 
-    //TODO:
+    //TODO: voucher second pdf
     if (!voucherPdfUrl) {
     }
   };
 
   const getPolicyPdfUrl = async () => {
+    loading.show();
     const pdfUrl = await PolicyService.getPdf(routeParams.policyId);
     setPolicyPdf(pdfUrl);
     setPdfModalData({
       title: "Póliza",
       pdfUrl: pdfUrl,
     });
+    setIsVisibleModal(true);
+    loading.hide();
   };
 
   return {

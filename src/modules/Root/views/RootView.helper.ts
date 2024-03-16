@@ -10,7 +10,6 @@ export const RootViewHelper = () => {
   const loading = useLoading();
 
   useEffect(() => {
-    loading.show();
     const a = searchParams.get("a");
     const b = searchParams.get("b");
 
@@ -21,6 +20,7 @@ export const RootViewHelper = () => {
       return;
     }
 
+    loading.show();
     RootService.authenticate(a, b)
       .then((res) => {
         setIsLogged(res.isLogged);
