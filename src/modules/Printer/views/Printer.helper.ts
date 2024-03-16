@@ -2,6 +2,7 @@ import { customValidation } from "@/modules/Policy/utils/customValidationForm";
 import { formSchema, initialValue } from "@/modules/Printer/utils/formPrinter.schema";
 import { BaseViewModel } from "@/shared/models/baseView.model";
 import { PolicyListResponseModel } from "@/shared/models/policyListResponse.model";
+import { PolicyService } from "@/shared/services/policy.service";
 import { PrinterService } from "@/shared/services/printer.service";
 import { useFormik } from "formik";
 import { useRef, useState } from "react";
@@ -38,10 +39,16 @@ const PrinterHelper = () => {
   });
 
   const onClickPrint = (id: string) => {
-    PrinterService.getPdfPath(id).then((path) => {
-      setIsVisiblePdf(true);
-      setUrlPdf(path);
-    });
+    loadingRef.current?.show(true);
+
+    PolicyService.getPdf(Number(id))
+      .then((resp) => {
+        setIsVisiblePdf(true);
+        setUrlPdf(resp);
+      })
+      .finally(() => {
+        loadingRef.current?.show(false);
+      });
   };
 
   const hidePdf = () => {

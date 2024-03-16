@@ -28,7 +28,7 @@ const Printer = () => {
           {isVisibleAlert && <AlertTemplate message={responseData?.message ?? ""} setVisible={setIsVisibleAlert} />}
           <TablePolicy dataSource={responseData?.response?.data} onClickPrint={onClickPrint} />
 
-          <ViewModalPdf urlPdf={urlPdf} hideModal={hidePdf} isVisiblePdf={isVisiblePdf} />
+          <ViewModalPdf urlPdf={urlPdf} title="Póliza" hideModal={hidePdf} isVisiblePdf={isVisiblePdf} />
         </FormCard>
       </div>
 
