@@ -5,8 +5,7 @@ import useFetch from "@/shared/hooks/useFetch";
 import { SelectDataTemplate } from "@/shared/utils/formTypes";
 import { EnumUrlCatalogsPaths } from "@/shared/utils/urlPaths";
 import FormGroupTemplate from "@/shared/components/Forms/FormGroupTemplate";
-import { useInitialValueGetTextSelect } from "@/shared/hooks/useInitialValueGetTextSelect";
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 
 export const PlanSelect = ({ form }: FormikComponentProps) => {
   const { data } = useFetch<PlanModel[]>({
@@ -25,7 +24,16 @@ export const PlanSelect = ({ form }: FormikComponentProps) => {
     [data]
   );
 
-  useInitialValueGetTextSelect({ form, data: dataView, name: "planId", nameText: "xplan" });
+  // save currency and name associated of initialized form value planId
+  useEffect(() => {
+    if (!data || data.length === 0) return;
+    const initialValue = form.initialValues["planId"];
+    if (!initialValue) return;
+
+    form.setFieldValue("moneda", data?.find((i) => i.id == initialValue)?.moneda);
+    form.setFieldValue("topAnio", data?.find((i) => i.id == initialValue)?.topAnio);
+    form.setFieldValue("xplan", dataView?.find((i) => i.id == initialValue)?.text);
+  }, [data]);
 
   const inputFormik = getFormikProps(form, "planId");
 
