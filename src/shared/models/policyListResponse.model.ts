@@ -1,11 +1,11 @@
 export interface PolicyListModel {
-  id: string;
+  id: number;
   placa: string;
   brand: string;
   model: string;
   year: string;
   createdAt: string;
-  [key: string]: string;
+  [key: string]: any;
 }
 
 export interface PolicyListResponseModel {

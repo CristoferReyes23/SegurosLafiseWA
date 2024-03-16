@@ -7,4 +7,6 @@ export enum MESSAGES {
   maxBirthday = "Minimo 18 anos de edad",
 
   unexpectedError = "Ocurrió un error inesperado",
+
+  errorPdf = "Ocurrió un error al intentar obtener el pdf",
 }

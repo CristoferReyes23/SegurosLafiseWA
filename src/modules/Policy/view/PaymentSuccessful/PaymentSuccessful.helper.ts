@@ -1,6 +1,7 @@
 import { useLoading } from "@/shared/contexts/LoadingWrapper";
 import { PolicyService } from "@/shared/services/policy.service";
-import { useEffect, useState } from "react";
+import { MESSAGES } from "@/shared/utils/formMessages";
+import { useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
 
 interface LocationStateParams {
@@ -17,6 +18,7 @@ function PaymentSuccessfulHelper() {
   const [voucherPdfUrl, setVoucherPdf] = useState("");
 
   const loading = useLoading();
+  const modalRef = useRef<any>();
 
   const [pdfModalData, setPdfModalData] = useState<{ title: string; pdfUrl: string }>({
     pdfUrl: "",
@@ -53,17 +55,23 @@ function PaymentSuccessfulHelper() {
 
   const getPolicyPdfUrl = async () => {
     loading.show();
-    const pdfUrl = await PolicyService.getPdf(routeParams.policyId);
-    setPolicyPdf(pdfUrl);
-    setPdfModalData({
-      title: "Póliza",
-      pdfUrl: pdfUrl,
-    });
-    setIsVisibleModal(true);
+    try {
+      const pdfUrl = await PolicyService.getPdf(routeParams.policyId);
+      setPolicyPdf(pdfUrl);
+      setPdfModalData({
+        title: "Póliza",
+        pdfUrl: pdfUrl,
+      });
+      setIsVisibleModal(true);
+    } catch (_) {
+      modalRef.current?.show(true, { message: MESSAGES.errorPdf, title: "Error" });
+    }
+
     loading.hide();
   };
 
   return {
+    modalRef,
     hideModal,
     pdfModalData,
     onPressButton,

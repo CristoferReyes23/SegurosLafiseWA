@@ -7,10 +7,10 @@ import "./CreatePolicy.css";
 import VerifyForm from "@/modules/Policy/components/Steps/VerifyForm";
 import { FormikProvider } from "formik";
 import { EnumIndexPages } from "@/modules/Policy/utils/enumPages";
-import ModalBadRequest from "@/modules/Policy/components/ModalBadRequest";
+import ModalAlerts from "@/shared/components/ModalAlerts";
 
 const CreatePolicy = () => {
-  const { formik, goBack, goNext, alertRef, onClickTab, currentIndex, coverageResponse, errorModal, hideModalError } =
+  const { formik, goBack, goNext, alertRef, onClickTab, currentIndex, coverageResponse, modalAlertsRef } =
     CreatePolicyHelper();
 
   return (
@@ -35,11 +35,8 @@ const CreatePolicy = () => {
 
         <NavigationButtons pageLength={3} onClickPrevious={goBack} currentPage={currentIndex} onClickNext={goNext} />
       </FormikProvider>
-      <ModalBadRequest
-        isVisible={errorModal.isVisibleModal}
-        message={errorModal.message}
-        hideModalEvent={hideModalError}
-      />
+
+      <ModalAlerts modalRef={modalAlertsRef} />
     </div>
   );
 };

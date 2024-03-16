@@ -5,8 +5,9 @@ import { BaseViewModel } from "@/shared/models/baseView.model";
 import { PolicyListResponseModel } from "@/shared/models/policyListResponse.model";
 import { PolicyService } from "@/shared/services/policy.service";
 import { PrinterService } from "@/shared/services/printer.service";
+import { MESSAGES } from "@/shared/utils/formMessages";
 import { useFormik } from "formik";
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 const PrinterHelper = () => {
   const [responseData, setResponseData] = useState<BaseViewModel<PolicyListResponseModel> | null>(null);
@@ -14,6 +15,7 @@ const PrinterHelper = () => {
   const [isVisiblePdf, setIsVisiblePdf] = useState(false);
   const [urlPdf, setUrlPdf] = useState("");
   const loading = useLoading();
+  const modalRef = useRef<any>();
 
   const onSubmit = (formData: any) => {
     loading.show();
@@ -47,6 +49,9 @@ const PrinterHelper = () => {
         setIsVisiblePdf(true);
         setUrlPdf(resp);
       })
+      .catch((_) => {
+        modalRef.current?.show(true, { message: MESSAGES.errorPdf });
+      })
       .finally(() => {
         loading.hide();
       });
@@ -60,6 +65,7 @@ const PrinterHelper = () => {
     formik,
     urlPdf,
     hidePdf,
+    modalRef,
     isVisiblePdf,
     onClickPrint,
     responseData,

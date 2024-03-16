@@ -23,10 +23,7 @@ const CreatePolicyHelper = () => {
   // component ref
   const loading = useLoading();
   const alertRef = useRef<IAlertTemplate>(null);
-  const [errorModal, setErrorModal] = useState<{ isVisibleModal: boolean; message: string }>({
-    isVisibleModal: false,
-    message: "",
-  });
+  const modalAlertsRef = useRef<any>(null);
 
   // dashboard context
   const { setTitleHeader } = useHeaderLayout();
@@ -87,19 +84,8 @@ const CreatePolicyHelper = () => {
         });
       }
     } catch (err: any) {
-      console.log("err", err);
-      setErrorModal({
-        isVisibleModal: true,
-        message: err?.message ?? "",
-      });
+      modalAlertsRef.current?.show(true, { message: err?.message ?? MESSAGES.unexpectedError, title: "Error" });
     }
-  };
-
-  const hideModalError = () => {
-    setErrorModal({
-      isVisibleModal: false,
-      message: "",
-    });
   };
 
   const getCoverages = async (values: any) => {
@@ -162,12 +148,11 @@ const CreatePolicyHelper = () => {
     goBack,
     goNext,
     alertRef,
-    errorModal,
     onClickTab,
     currentIndex,
     handleSubmit,
     initialValues,
-    hideModalError,
+    modalAlertsRef,
     validationSchema,
     coverageResponse,
   };

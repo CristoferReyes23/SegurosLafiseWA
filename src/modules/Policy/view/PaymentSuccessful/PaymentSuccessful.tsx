@@ -1,12 +1,13 @@
 import PaymentSuccessfulHelper from "@/modules/Policy/view/PaymentSuccessful/PaymentSuccessful.helper";
 import ViewModalPdf from "@/modules/Printer/components/ViewModalPdf";
+import ModalAlerts from "@/shared/components/ModalAlerts";
 import Button from "react-bootstrap/esm/Button";
 import Card from "react-bootstrap/esm/Card";
 import Stack from "react-bootstrap/esm/Stack";
 import { Link, Navigate } from "react-router-dom";
 
 const PaymentSuccessful = () => {
-  const { isVisibleModal, hideModal, pdfModalData, routeParams, onPressButton } = PaymentSuccessfulHelper();
+  const { isVisibleModal, hideModal, pdfModalData, routeParams, onPressButton, modalRef } = PaymentSuccessfulHelper();
   if (!routeParams) return <Navigate to="/dashboard" replace={true} />;
 
   return (
@@ -40,6 +41,8 @@ const PaymentSuccessful = () => {
           hideModal={hideModal}
         />
       )}
+
+      <ModalAlerts modalRef={modalRef} />
     </div>
   );
 };

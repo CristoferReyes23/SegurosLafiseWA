@@ -24,7 +24,7 @@ export class PolicyApi {
             {
               brand: "Prueba1",
               createdAt: "20-12-99",
-              id: "0",
+              id: 1462925,
               model: "Prueba2",
               placa: "Prueba3",
               year: "Prueba4",
