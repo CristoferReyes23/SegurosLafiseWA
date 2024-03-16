@@ -61,6 +61,9 @@ export class PolicyApi {
       providerName: "LAFISE",
     });
 
-    return response.ok;
+    if (response.ok) return true;
+
+    const messageResponse = await response.text();
+    throw new CustomException(messageResponse, "BAD_REQUEST");
   }
 }

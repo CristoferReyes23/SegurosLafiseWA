@@ -22,11 +22,14 @@ const CreatePolicyHelper = () => {
   // component ref
   const loadingRef = useRef<any>(null);
   const alertRef = useRef<IAlertTemplate>(null);
+  const [errorModal, setErrorModal] = useState<{ isVisibleModal: boolean; message: string }>({
+    isVisibleModal: false,
+    message: "",
+  });
 
   // dashboard context
   const { setTitleHeader } = useHeaderLayout();
 
-  // navigation and saving coverages data.
   const navigate = useNavigate();
   const [coverageResponse, setCoverages] = useState<QuoteResponseModel | null>(null);
 
@@ -82,9 +85,20 @@ const CreatePolicyHelper = () => {
           state: response,
         });
       }
-    } catch (err) {
+    } catch (err: any) {
       console.log("err", err);
+      setErrorModal({
+        isVisibleModal: true,
+        message: err?.message ?? "",
+      });
     }
+  };
+
+  const hideModalError = () => {
+    setErrorModal({
+      isVisibleModal: false,
+      message: "",
+    });
   };
 
   const getCoverages = async (values: any) => {
@@ -147,11 +161,13 @@ const CreatePolicyHelper = () => {
     goBack,
     goNext,
     alertRef,
+    errorModal,
     onClickTab,
     loadingRef,
     currentIndex,
     handleSubmit,
     initialValues,
+    hideModalError,
     validationSchema,
     coverageResponse,
   };
