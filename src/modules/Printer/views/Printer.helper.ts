@@ -1,21 +1,22 @@
 import { customValidation } from "@/modules/Policy/utils/customValidationForm";
 import { formSchema, initialValue } from "@/modules/Printer/utils/formPrinter.schema";
+import { useLoading } from "@/shared/contexts/LoadingWrapper";
 import { BaseViewModel } from "@/shared/models/baseView.model";
 import { PolicyListResponseModel } from "@/shared/models/policyListResponse.model";
 import { PolicyService } from "@/shared/services/policy.service";
 import { PrinterService } from "@/shared/services/printer.service";
 import { useFormik } from "formik";
-import { useRef, useState } from "react";
+import { useState } from "react";
 
 const PrinterHelper = () => {
   const [responseData, setResponseData] = useState<BaseViewModel<PolicyListResponseModel> | null>(null);
   const [isVisibleAlert, setIsVisibleAlert] = useState(false);
   const [isVisiblePdf, setIsVisiblePdf] = useState(false);
   const [urlPdf, setUrlPdf] = useState("");
-  const loadingRef = useRef<any>(null);
+  const loading = useLoading();
 
   const onSubmit = (formData: any) => {
-    loadingRef.current?.show(true);
+    loading.show();
 
     PrinterService.getAllPolicy(formData["documentoIdentificacion"])
       .then((res) => {
@@ -26,7 +27,7 @@ const PrinterHelper = () => {
         }
       })
       .finally(() => {
-        loadingRef.current?.show(false);
+        loading.hide();
       });
   };
 
@@ -39,7 +40,7 @@ const PrinterHelper = () => {
   });
 
   const onClickPrint = (id: string) => {
-    loadingRef.current?.show(true);
+    loading.show();
 
     PolicyService.getPdf(Number(id))
       .then((resp) => {
@@ -47,7 +48,7 @@ const PrinterHelper = () => {
         setUrlPdf(resp);
       })
       .finally(() => {
-        loadingRef.current?.show(false);
+        loading.hide();
       });
   };
 
@@ -59,7 +60,6 @@ const PrinterHelper = () => {
     formik,
     urlPdf,
     hidePdf,
-    loadingRef,
     isVisiblePdf,
     onClickPrint,
     responseData,

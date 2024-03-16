@@ -6,23 +6,12 @@ import TabWizard from "@/modules/Policy/components/TabWizard/TabWizard";
 import "./CreatePolicy.css";
 import VerifyForm from "@/modules/Policy/components/Steps/VerifyForm";
 import { FormikProvider } from "formik";
-import LoadingSpinner from "@/shared/components/LoadingSpinner/LoadingSpinner";
 import { EnumIndexPages } from "@/modules/Policy/utils/enumPages";
 import ModalBadRequest from "@/modules/Policy/components/ModalBadRequest";
 
 const CreatePolicy = () => {
-  const {
-    formik,
-    goBack,
-    goNext,
-    alertRef,
-    loadingRef,
-    onClickTab,
-    currentIndex,
-    coverageResponse,
-    errorModal,
-    hideModalError,
-  } = CreatePolicyHelper();
+  const { formik, goBack, goNext, alertRef, onClickTab, currentIndex, coverageResponse, errorModal, hideModalError } =
+    CreatePolicyHelper();
 
   return (
     <div>
@@ -51,7 +40,6 @@ const CreatePolicy = () => {
         message={errorModal.message}
         hideModalEvent={hideModalError}
       />
-      <LoadingSpinner childRef={loadingRef} />
     </div>
   );
 };

@@ -4,20 +4,10 @@ import TablePolicy from "@/modules/Printer/components/TablePolicy";
 import ViewModalPdf from "@/modules/Printer/components/ViewModalPdf";
 import PrinterHelper from "@/modules/Printer/views/Printer.helper";
 import FormCard from "@/shared/components/FormCard";
-import LoadingSpinner from "@/shared/components/LoadingSpinner/LoadingSpinner";
 
 const Printer = () => {
-  const {
-    formik,
-    responseData,
-    isVisibleAlert,
-    setIsVisibleAlert,
-    onClickPrint,
-    urlPdf,
-    hidePdf,
-    isVisiblePdf,
-    loadingRef,
-  } = PrinterHelper();
+  const { formik, responseData, isVisibleAlert, setIsVisibleAlert, onClickPrint, urlPdf, hidePdf, isVisiblePdf } =
+    PrinterHelper();
 
   return (
     <div>
@@ -31,8 +21,6 @@ const Printer = () => {
           <ViewModalPdf urlPdf={urlPdf} title="Póliza" hideModal={hidePdf} isVisiblePdf={isVisiblePdf} />
         </FormCard>
       </div>
-
-      <LoadingSpinner childRef={loadingRef} />
     </div>
   );
 };

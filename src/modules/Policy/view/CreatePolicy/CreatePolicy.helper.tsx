@@ -11,6 +11,7 @@ import { MESSAGES } from "@/shared/utils/formMessages";
 import { EnumIndexPages } from "@/modules/Policy/utils/enumPages";
 import { customValidation } from "@/modules/Policy/utils/customValidationForm";
 import { PolicyService } from "@/shared/services/policy.service";
+import { useLoading } from "@/shared/contexts/LoadingWrapper";
 
 const CreatePolicyHelper = () => {
   // wizard state values and form props
@@ -20,7 +21,7 @@ const CreatePolicyHelper = () => {
   const validationSchema = steps[currentIndex].validationSchema;
 
   // component ref
-  const loadingRef = useRef<any>(null);
+  const loading = useLoading();
   const alertRef = useRef<IAlertTemplate>(null);
   const [errorModal, setErrorModal] = useState<{ isVisibleModal: boolean; message: string }>({
     isVisibleModal: false,
@@ -39,12 +40,12 @@ const CreatePolicyHelper = () => {
   }, [currentIndex]);
 
   const handleSubmit = (values: FormikValues) => {
-    loadingRef.current?.show(true);
+    loading.show();
     handlerEventSubmit(values)
       .then((res) => {
         if (res) updateWizardSteps(false);
       })
-      .finally(() => loadingRef.current?.show(false));
+      .finally(() => loading.hide());
   };
 
   const formik = useFormik({
@@ -142,7 +143,7 @@ const CreatePolicyHelper = () => {
   };
 
   const goNext = () => {
-    loadingRef.current?.show(true);
+    loading.show();
     handlerEventSubmit(formik.values)
       .then((res) => {
         if (res) updateWizardSteps(false);
@@ -150,7 +151,7 @@ const CreatePolicyHelper = () => {
       .finally(() => {
         console.log("asdaskldj");
 
-        loadingRef.current?.show(false);
+        loading.hide();
       });
   };
   //#endregion
@@ -163,7 +164,6 @@ const CreatePolicyHelper = () => {
     alertRef,
     errorModal,
     onClickTab,
-    loadingRef,
     currentIndex,
     handleSubmit,
     initialValues,
