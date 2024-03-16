@@ -1,9 +1,20 @@
+import { PolicyService } from "@/shared/services/policy.service";
 import { useState } from "react";
-import { redirect, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
+
+interface LocationStateParams {
+  policyId: number;
+  success: boolean;
+}
 
 function PaymentSuccessfulHelper() {
+  const locationRoute = useLocation();
+  const routeParams = locationRoute.state as LocationStateParams;
+
   const [isVisibleModal, setIsVisibleModal] = useState(false);
-  const { state: locationParams } = useLocation();
+  const [policyPdfUrl, setPolicyPdf] = useState("");
+  const [voucherPdfUrl, setVoucherPdf] = useState("");
+
   const [pdfModalData, setPdfModalData] = useState<{ title: string; pdfUrl: string }>({
     pdfUrl: "",
     title: "",
@@ -13,36 +24,40 @@ function PaymentSuccessfulHelper() {
     setIsVisibleModal(false);
   };
 
-  const onPressButton = (btnKey: "VOUCHER" | "POLICY" | "CLOSE") => {
-    console.log(btnKey);
+  const onPressButton = (btnKey: "VOUCHER" | "POLICY") => {
+    if (btnKey == "POLICY") {
+      if (!policyPdfUrl) {
+        getPolicyPdfUrl();
+        return;
+      }
 
-    switch (btnKey) {
-      case "POLICY":
-        setPdfModalData({
-          pdfUrl: locationParams.voucherUrl,
-          title: "Póliza",
-        });
-        setIsVisibleModal(true);
-        break;
-      case "VOUCHER":
-        setPdfModalData({
-          pdfUrl: locationParams.voucherUrl,
-          title: "Comprobante",
-        });
-        setIsVisibleModal(true);
-        break;
+      setPdfModalData({
+        title: "Póliza",
+        pdfUrl: policyPdfUrl,
+      });
+      return;
+    }
 
-      default:
-        break;
+    //TODO:
+    if (!voucherPdfUrl) {
     }
   };
 
+  const getPolicyPdfUrl = async () => {
+    const pdfUrl = await PolicyService.getPdf(routeParams.policyId);
+    setPolicyPdf(pdfUrl);
+    setPdfModalData({
+      title: "Póliza",
+      pdfUrl: pdfUrl,
+    });
+  };
+
   return {
-    pdfModalData,
     hideModal,
+    pdfModalData,
     onPressButton,
     isVisibleModal,
-    locationParams,
+    routeParams,
   };
 }
 

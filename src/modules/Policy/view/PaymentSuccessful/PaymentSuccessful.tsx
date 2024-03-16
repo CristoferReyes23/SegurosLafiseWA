@@ -6,8 +6,8 @@ import Stack from "react-bootstrap/esm/Stack";
 import { Link, Navigate } from "react-router-dom";
 
 const PaymentSuccessful = () => {
-  const { isVisibleModal, hideModal, locationParams, pdfModalData, onPressButton } = PaymentSuccessfulHelper();
-  if (!locationParams) return <Navigate to="/dashboard" replace={true} />;
+  const { isVisibleModal, hideModal, pdfModalData, routeParams, onPressButton } = PaymentSuccessfulHelper();
+  if (!routeParams) return <Navigate to="/dashboard" replace={true} />;
 
   return (
     <div>
@@ -16,7 +16,7 @@ const PaymentSuccessful = () => {
           <h1 className="text-center">
             <i className="fa-solid fa-circle-check"></i> !Póliza realizado con éxito!
           </h1>
-          <Stack direction="horizontal" className="justify-content-center gap-3">
+          <Stack direction="horizontal" className="justify-content-center gap-3 flex-wrap">
             <Link to="/dashboard">
               <Button variant="secondary">Cerrar</Button>
             </Link>
