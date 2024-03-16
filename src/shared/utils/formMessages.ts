@@ -5,6 +5,7 @@ export enum MESSAGES {
   invalidFormatDocument = "Formato del documento incorrecto",
   minBirthday = "Fecha de nacimiento inválida",
   maxBirthday = "Minimo 18 anos de edad",
+  maxDoors = "Máximo puertas 10",
 
   unexpectedError = "Ocurrió un error inesperado",
 

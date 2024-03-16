@@ -31,7 +31,7 @@ export const stepsCreatePolicy: TypeStep[] = [
       color: string().required(MESSAGES.required),
       motor: string().required(MESSAGES.required),
       usoo: string().required(MESSAGES.required),
-      puertas: number().required(MESSAGES.required),
+      puertas: number().required(MESSAGES.required).max(10, MESSAGES.maxDoors),
     }),
   },
   {
