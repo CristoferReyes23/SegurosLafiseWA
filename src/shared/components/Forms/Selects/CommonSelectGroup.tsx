@@ -2,7 +2,7 @@ import FormGroupTemplate from "@/shared/components/Forms/FormGroupTemplate";
 import FormSelectTemplate from "@/shared/components/Forms/FormSelectTemplate";
 import useFetch from "@/shared/hooks/useFetch";
 import { useInitialValueGetTextSelect } from "@/shared/hooks/useInitialValueGetTextSelect";
-import { BaseListDataModel } from "@/shared/models/BaseListData.model";
+import { BaseListDataModel } from "@/shared/models/baseListData.model";
 import { FormikComponentProps, getFormikErrorField, getFormikProps } from "@/shared/utils/getFormikProps";
 import { EnumUrlCatalogsPaths } from "@/shared/utils/urlPaths";
 
