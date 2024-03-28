@@ -2,7 +2,6 @@ import { stepsCreatePolicy } from "@/modules/Policy/utils/policyForm.schema";
 import { TypeStep, generateInitialValues } from "@/modules/Policy/utils/multiStepFormUtils";
 import { FormikValues, useFormik } from "formik";
 import { useEffect, useRef, useState } from "react";
-import { useHeaderLayout } from "@/views/ProtectedLayout/ProtectedLayout";
 import { useNavigate } from "react-router-dom";
 import { IAlertTemplate } from "@/shared/components/AlertTemplate/AlertTemplate";
 import { QuoteResponseModel } from "@/shared/models/quoteResponse.model";
@@ -11,6 +10,7 @@ import { MESSAGES } from "@/shared/utils/formMessages";
 import { EnumIndexPages } from "@/modules/Policy/utils/enumPages";
 import { PolicyService } from "@/shared/services/policy.service";
 import { useLoading } from "@/shared/contexts/LoadingWrapper";
+import { useHeaderLayout } from "@/views/ProtectedLayout/hooks/useHeaderLayout";
 
 const CreatePolicyHelper = () => {
   // wizard state values and form props

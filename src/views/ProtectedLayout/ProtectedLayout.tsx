@@ -1,5 +1,5 @@
 import Navbar from "react-bootstrap/Navbar";
-import { Outlet, useOutletContext } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import "./protectedLayout.css";
 import Stack from "react-bootstrap/esm/Stack";
 import Card from "react-bootstrap/esm/Card";
@@ -42,7 +42,3 @@ const ProtectedLayout = () => {
 };
 
 export default ProtectedLayout;
-
-export function useHeaderLayout() {
-  return useOutletContext<{ setTitleHeader: (value: string) => void }>();
-}
