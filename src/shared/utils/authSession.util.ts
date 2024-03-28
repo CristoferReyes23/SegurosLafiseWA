@@ -1,10 +1,10 @@
 import { AuthApi } from "@/shared/apis/auth.api";
 import { ValidateSessionResponse } from "@/shared/models/validateSessionResponse.model";
 
-export class AuthSessionService {
+export class AuthSessionUtil {
   // if lafiseToken is expired get a new token
   static async renewLafiseToken() {
-    const expiredTime = AuthSessionService.getLifeTimeLafise();
+    const expiredTime = AuthSessionUtil.getLifeTimeLafise();
     if (!expiredTime) return;
 
     const currentDate = new Date();
@@ -12,7 +12,7 @@ export class AuthSessionService {
 
     if (currentDate > expiredDate) {
       const response = await AuthApi.queryLafiseToken();
-      AuthSessionService.saveSessionLaFise(response);
+      AuthSessionUtil.saveSessionLaFise(response);
     }
   }
 

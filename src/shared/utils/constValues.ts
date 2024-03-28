@@ -21,3 +21,14 @@ export enum EnumConstFormValues {
   planId = "477",
   niCountry = "505",
 }
+
+export enum EnumQueryTypeValues {
+  REPRINT = 1,
+  RENEW = 2,
+  TOKEN = 3,
+  CREATE_QUOTE = 4,
+}
+
+export enum EnumPolicyActions {
+  CREATE = 1,
+}

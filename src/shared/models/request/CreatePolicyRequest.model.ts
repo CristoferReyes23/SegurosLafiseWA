@@ -1,11 +1,8 @@
 export interface CreatePolicyRequestModel {
   planId: number;
-  agenciaId: number;
-  inicioVigencia: string;
   uso: number;
   dataViewModel: DataViewModel;
   enteViewModel: EnteViewModel;
-  values: ValuesViewModel;
 }
 
 export interface DataViewModel {
@@ -37,16 +34,4 @@ export interface EnteViewModel {
   direccion: string;
   profesion: number;
   nombreConyuge: string;
-  xpaisOrigen: string;
-  xprovincia: string;
-  xcanton: string;
-  xdistrito: string;
-}
-
-export interface ValuesViewModel {
-  valn: string;
-  anio: string;
-  usoo: string;
-  cate: string;
-  nasiento: string;
 }

@@ -1,5 +1,5 @@
-import { AuthSessionService } from "@/shared/services/authSession.service";
-import { TypeProviderApi } from "@/shared/utils/urlPaths";
+import { AuthSessionUtil } from "@/shared/utils/authSession.util";
+import { EnumUrlCatalogsPaths, TypeProviderApi } from "@/shared/utils/urlPaths";
 
 interface Props extends RequestInit {
   providerName: TypeProviderApi;
@@ -20,9 +20,12 @@ export async function fetchCall({ providerName, path, method, headers, ...extraP
 
     case "AIRPAK":
       domain = import.meta.env.VITE_API_AIRPAK;
-      complement = airPakComplement(extraProps.body, headersComplement);
-      extraProps.body = JSON.stringify(complement);
+      if (path == EnumUrlCatalogsPaths.airpakQuery) {
+        complement = airPakComplement(extraProps.body, headersComplement);
+        extraProps.body = JSON.stringify(complement);
+      }
       break;
+
     default:
       break;
   }
@@ -43,12 +46,12 @@ export async function fetchCall({ providerName, path, method, headers, ...extraP
 }
 
 function lafiseComplement(headersComplement: any) {
-  const tokenLafise = AuthSessionService.getLafiseToken();
+  const tokenLafise = AuthSessionUtil.getLafiseToken();
   if (tokenLafise) headersComplement["Authorization"] = `Bearer ${tokenLafise}`;
 }
 
 function airPakComplement(body: any, headersComplement: any) {
-  const sessionData = AuthSessionService.getAuthSession();
+  const sessionData = AuthSessionUtil.getAuthSession();
   if (!sessionData) return body;
 
   headersComplement["Authorization"] = `Bearer ${sessionData.token}`;

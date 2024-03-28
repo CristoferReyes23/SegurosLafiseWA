@@ -1,8 +1,8 @@
-import { AuthSessionService } from "@/shared/services/authSession.service";
+import { AuthSessionUtil } from "@/shared/utils/authSession.util";
 import { redirect } from "react-router-dom";
 
 export async function protectedLayoutLoader() {
-  const session = AuthSessionService.getLafiseToken();
+  const session = AuthSessionUtil.getLafiseToken();
   if (!session) return redirect("unauthorized");
 
   // example validating token session
@@ -13,7 +13,7 @@ export async function protectedLayoutLoader() {
   });
 
   if (!tokenIsValid) {
-    AuthSessionService.clearSession();
+    AuthSessionUtil.clearSession();
     return redirect("unauthorized");
   }
 

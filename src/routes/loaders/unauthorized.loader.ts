@@ -1,8 +1,8 @@
-import { AuthSessionService } from "@/shared/services/authSession.service";
+import { AuthSessionUtil } from "@/shared/utils/authSession.util";
 import { redirect } from "react-router-dom";
 
 export function unauthorizedLoader() {
-  const sessionData = AuthSessionService.getLafiseToken();
+  const sessionData = AuthSessionUtil.getLafiseToken();
   if (!sessionData) return null;
 
   return redirect("/dashboard");

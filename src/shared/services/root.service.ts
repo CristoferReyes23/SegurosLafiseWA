@@ -1,22 +1,23 @@
 import { AuthApi } from "@/shared/apis/auth.api";
 import { ValidateSessionResponse } from "@/shared/models/validateSessionResponse.model";
-import { AuthSessionService } from "@/shared/services/authSession.service";
+import { AuthSessionUtil } from "@/shared/utils/authSession.util";
 import { CustomException } from "@/shared/utils/customException.model";
 
 export class RootService {
-  static async authenticate(a: string, b: string) {
+  static async authenticate(_a: string, _b: string) {
+    console.log(_a);
     try {
       const tokenLafise = await AuthApi.queryLafiseToken();
-      AuthSessionService.saveSessionLaFise(tokenLafise);
+      AuthSessionUtil.saveSessionLaFise(tokenLafise);
 
       // const validationResponse = await validateBackendSession(a, b);
-      // AuthSessionService.saveSession(validationResponse);
+      // AuthSessionUtil.saveSession(validationResponse);
 
       return {
         isLogged: true,
       };
     } catch (err) {
-      AuthSessionService.saveSessionLaFise("hello world");
+      AuthSessionUtil.saveSessionLaFise("hello world");
 
       return {
         isLogged: true,
@@ -25,6 +26,7 @@ export class RootService {
   }
 }
 
+//@ts-expect-error
 async function validateBackendSession(a: string, b: string): Promise<ValidateSessionResponse> {
   // backend session validation
   const queryResponse = await AuthApi.queryValidateSession(a, b);

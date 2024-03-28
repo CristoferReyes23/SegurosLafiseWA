@@ -1,4 +1,4 @@
-export type TypeProviderApi = "LAFISE" | "AIRPAK";
+export type TypeProviderApi = "LAFISE" | "AIRPAK" | "OTHER";
 
 export type TypesUrlPath = "catalogs/plans" | "catalogs/plans/{planId}/models";
 
@@ -26,5 +26,6 @@ export enum EnumUrlCatalogsPaths {
 
   getPolicies = "",
 
-  airpakQuery = "/APIBusinessCoreBP/Transaction/Consulta",
+  airpakQuery = "/Transaction/Consulta",
+  airpakValidateSession = "/ValidarSesion",
 }

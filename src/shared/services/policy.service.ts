@@ -3,7 +3,6 @@ import {
   CreatePolicyRequestModel,
   DataViewModel,
   EnteViewModel,
-  ValuesViewModel,
 } from "@/shared/models/request/CreatePolicyRequest.model";
 import { CreatePolicyResponseModel } from "@/shared/models/viewModels/CreatePolicyViewModel.model";
 
@@ -39,40 +38,22 @@ export class PolicyService {
       direccion: formData["direccion"],
       profesion: Number(formData["profesion"]),
       nombreConyuge: formData["nombreConyuge"],
-      xpaisOrigen: formData["xpaisOrigen"],
-      xprovincia: formData["xprovincia"],
-      xcanton: formData["xcanton"],
-      xdistrito: formData["xdistrito"],
-    };
-
-    const values: ValuesViewModel = {
-      valn: String(formData["valn"]),
-      anio: formData["anio"],
-      usoo: formData["usoo"],
-      cate: String(formData["cate"]),
-      nasiento: String(formData["nasiento"]),
     };
 
     const bodyCreatePolicy: CreatePolicyRequestModel = {
       planId: Number(formData["planId"]),
-      agenciaId: 1,
-      inicioVigencia: new Date().toISOString(),
       uso: Number(formData["usoo"]),
       dataViewModel,
       enteViewModel,
-      values,
     };
     //#endregion
 
-    // create policy
-    const policyId = await PolicyApi.createPolicy(bodyCreatePolicy);
-
-    // confirm policy =
-    const success = await PolicyApi.confirmPolicy(policyId);
+    const response = await PolicyApi.createPolicyByAirpak(bodyCreatePolicy);
+    console.log(response);
 
     return {
-      policyId,
-      success,
+      policyId: 0,
+      success: false,
     };
   }
 

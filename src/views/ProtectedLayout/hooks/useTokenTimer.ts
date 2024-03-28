@@ -1,5 +1,5 @@
 import { AuthApi } from "@/shared/apis/auth.api";
-import { AuthSessionService } from "@/shared/services/authSession.service";
+import { AuthSessionUtil } from "@/shared/utils/authSession.util";
 import { CustomException } from "@/shared/utils/customException.model";
 import { useEffect, useState } from "react";
 
@@ -28,7 +28,7 @@ function useTokenTimer() {
     console.log("refreshing token");
     try {
       const token = await AuthApi.queryLafiseToken();
-      AuthSessionService.saveSessionLaFise(token);
+      AuthSessionUtil.saveSessionLaFise(token);
 
       const addMinutes = Number(import.meta.env.VITE_LAFISE_EXPIRED);
       setMinutesDelay(addMinutes);
@@ -41,7 +41,7 @@ function useTokenTimer() {
 export default useTokenTimer;
 
 function getMinutesDelay() {
-  const expiration = AuthSessionService.getLifeTimeLafise();
+  const expiration = AuthSessionUtil.getLifeTimeLafise();
   if (!expiration) throw new CustomException("", "UNAUTHORIZED");
 
   const expDate = new Date(Number(expiration));

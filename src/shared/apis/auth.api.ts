@@ -1,43 +1,40 @@
+import { EnumQueryTypeValues } from "@/shared/utils/constValues";
 import { CustomException } from "@/shared/utils/customException.model";
 import { fetchCall } from "@/shared/utils/fetchApi";
 import { EnumUrlCatalogsPaths } from "@/shared/utils/urlPaths";
 
 export class AuthApi {
   static async queryValidateSession(a: string, b: string) {
-    const url = import.meta.env.VITE_API_VALIDATE_SESSION_URL;
-
     const body = {
       cookie: a,
       session_token: b,
     };
 
-    const response = await fetch(url, {
-      method: "POST",
+    const response = await fetchCall({
+      providerName: "AIRPAK",
+      path: EnumUrlCatalogsPaths.airpakValidateSession,
       body: JSON.stringify(body),
-      headers: {
-        "Content-Type": "application/json",
-      },
+      method: "POST",
     });
 
     return response;
   }
 
-  static async queryLafiseToken() {
-    const body = JSON.stringify({
-      username: import.meta.env.VITE_LAFISE_USERNAME,
-      password: import.meta.env.VITE_LAFISE_PASSWORD,
-      expiryTime: Number(import.meta.env.VITE_LAFISE_EXPIRED),
-    });
+  static async queryLafiseToken(): Promise<string> {
+    const body = {
+      QueryType: EnumQueryTypeValues.TOKEN,
+    };
 
     try {
       const resp = await fetchCall({
-        path: EnumUrlCatalogsPaths.lafiseAuth,
-        body,
-        providerName: "LAFISE",
+        providerName: "AIRPAK",
+        path: EnumUrlCatalogsPaths.airpakQuery,
         method: "POST",
+        body: JSON.stringify(body),
       });
 
-      return await resp.text();
+      console.log(resp);
+      throw new Error("");
     } catch (err) {
       throw new CustomException("Error al iniciar sesión en lafise", "UNAUTHORIZED");
     }

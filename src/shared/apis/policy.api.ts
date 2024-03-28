@@ -1,7 +1,9 @@
 import { PolicyListResponseModel } from "@/shared/models/policyListResponse.model";
 import { CreatePolicyRequestModel } from "@/shared/models/request/CreatePolicyRequest.model";
+import { EnumPolicyActions, EnumQueryTypeValues } from "@/shared/utils/constValues";
 import { CustomException } from "@/shared/utils/customException.model";
 import { fetchCall } from "@/shared/utils/fetchApi";
+import { MESSAGES } from "@/shared/utils/formMessages";
 import { EnumUrlCatalogsPaths } from "@/shared/utils/urlPaths";
 
 export class PolicyApi {
@@ -14,27 +16,60 @@ export class PolicyApi {
     return response.blob();
   }
 
-  static getPoliciesByClientId(_clientId: string): Promise<PolicyListResponseModel> {
-    return new Promise((res) => {
-      setTimeout(() => {
-        res({
-          isOk: true,
-          clientExist: true,
-          data: [
-            {
-              brand: "Prueba1",
-              createdAt: "20-12-99",
-              id: 1462925,
-              model: "Prueba2",
-              placa: "Prueba3",
-              year: "Prueba4",
-            },
-          ],
-        });
-      }, 2000);
+  static async getPoliciesByClientId(_clientId: string): Promise<PolicyListResponseModel> {
+    const body = {
+      QueryType: EnumQueryTypeValues.REPRINT,
+      ReprintObject: {
+        Dni: _clientId,
+      },
+    };
+
+    try {
+      //TODO:
+      const resp = await fetchCall({
+        providerName: "AIRPAK",
+        path: EnumUrlCatalogsPaths.airpakQuery,
+        body: JSON.stringify(body),
+        method: "POST",
+      });
+      console.log(resp);
+
+      return {
+        isOk: true,
+        clientExist: true,
+        data: [
+          {
+            brand: "Prueba1",
+            createdAt: "20-12-99",
+            id: 1462925,
+            model: "Prueba2",
+            placa: "Prueba3",
+            year: "Prueba4",
+          },
+        ],
+      };
+    } catch (err) {
+      console.log(err);
+      throw new CustomException(MESSAGES.unexpectedError, "BAD_REQUEST");
+    }
+  }
+
+  static async createPolicyByAirpak(body: CreatePolicyRequestModel): Promise<any> {
+    //TODO:
+    const bodyComplement = {
+      PolicyAction: EnumPolicyActions.CREATE,
+      Create: body,
+    };
+
+    const response = await fetchCall({
+      providerName: "AIRPAK",
+      method: "POST",
+      path: EnumUrlCatalogsPaths.airpakQuery,
+      body: JSON.stringify(bodyComplement),
     });
 
-    // return fetchCall({ path: EnumUrlCatalogsPaths.getPolicies, providerName: "BACKEND" });
+    console.log(response);
+    throw new CustomException("", "BAD_REQUEST");
   }
 
   static async createPolicy(body: CreatePolicyRequestModel): Promise<number> {
