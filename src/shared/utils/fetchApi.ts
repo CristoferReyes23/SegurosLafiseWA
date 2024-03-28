@@ -10,17 +10,18 @@ interface Props extends RequestInit {
 export async function fetchCall({ providerName, path, method, headers, ...extraProps }: Props) {
   let domain = "";
   let headersComplement: { [key: string]: string } = {};
+  let complement: any = null;
 
   switch (providerName) {
     case "LAFISE":
       domain = import.meta.env.VITE_API_LAFISE_SERVICE;
-
-      const tokenLafise = AuthSessionService.getLafiseToken();
-      if (tokenLafise) headersComplement["Authorization"] = `Bearer ${tokenLafise}`;
+      lafiseComplement(headersComplement);
       break;
 
-    case "BACKEND":
-      // TODO:
+    case "AIRPAK":
+      domain = import.meta.env.VITE_API_AIRPAK;
+      complement = airPakComplement(extraProps.body, headersComplement);
+      extraProps.body = JSON.stringify(complement);
       break;
     default:
       break;
@@ -39,4 +40,33 @@ export async function fetchCall({ providerName, path, method, headers, ...extraP
   });
 
   return response;
+}
+
+function lafiseComplement(headersComplement: any) {
+  const tokenLafise = AuthSessionService.getLafiseToken();
+  if (tokenLafise) headersComplement["Authorization"] = `Bearer ${tokenLafise}`;
+}
+
+function airPakComplement(body: any, headersComplement: any) {
+  const sessionData = AuthSessionService.getAuthSession();
+  if (!sessionData) return body;
+
+  headersComplement["Authorization"] = `Bearer ${sessionData.token}`;
+
+  return {
+    usuario: sessionData.sesionUsuario.id,
+    codigoServicio: 439,
+    codigoServicioReferencia: "131760439",
+    puntoServicio: sessionData.datosToken.service_point_,
+    region: sessionData.sesionUsuario.regionID,
+    subAgente: sessionData.sesionUsuario.subAgentID,
+    type: "",
+    filtros: [
+      {
+        nombre: "metadata",
+        valor: body,
+      },
+    ],
+    fieldsPE: [],
+  };
 }

@@ -3,6 +3,7 @@ interface ImportMetaEnv {
   readonly VITE_API_LAFISE_SERVICE: string;
   readonly VITE_API_BILL_PAYMENT_URL: string;
   readonly VITE_API_VALIDATE_SESSION_URL: string;
+  readonly VITE_API_AIRPAK: string;
 
   readonly VITE_LAFISE_USERNAME: string;
   readonly VITE_LAFISE_PASSWORD: string;
